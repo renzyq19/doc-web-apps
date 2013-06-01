@@ -1,0 +1,51 @@
+01-Jun-2013 15:10:16 org.apache.catalina.startup.SetAllPropertiesRule begin
+WARNING: [SetAllPropertiesRule]{Server/Service/Connector} Setting property 'maxSpareThreads' to '75' did not find a matching property.
+01-Jun-2013 15:10:16 org.apache.tomcat.util.digester.SetPropertiesRule begin
+WARNING: [SetPropertiesRule]{Server/Service/Engine/Host} Setting property 'xmlValidation' to 'false' did not find a matching property.
+01-Jun-2013 15:10:16 org.apache.tomcat.util.digester.SetPropertiesRule begin
+WARNING: [SetPropertiesRule]{Server/Service/Engine/Host} Setting property 'xmlNamespaceAware' to 'false' did not find a matching property.
+01-Jun-2013 15:10:16 org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-51213"]
+01-Jun-2013 15:10:16 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 381 ms
+01-Jun-2013 15:10:16 org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+01-Jun-2013 15:10:16 org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.29
+01-Jun-2013 15:10:16 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /homes/mp4511/doc-web-apps/tomcat_main/webapps/ROOT
+01-Jun-2013 15:10:17 org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-51213"]
+01-Jun-2013 15:10:17 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 628 ms
+01-Jun-2013 15:11:26 org.apache.catalina.core.StandardServer await
+INFO: A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+01-Jun-2013 15:11:26 org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-bio-51213"]
+01-Jun-2013 15:11:26 org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+01-Jun-2013 15:11:26 org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["http-bio-51213"]
+01-Jun-2013 15:11:26 org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-bio-51213"]
+01-Jun-2013 15:11:26 org.apache.catalina.deploy.NamingResources destroyInternal
+WARNING: Failed to destroy MBean for naming resource [UserDatabase]
+javax.management.InstanceNotFoundException: Users:type=UserDatabase,database=UserDatabase
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.getMBean(DefaultMBeanServerInterceptor.java:1118)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.exclusiveUnregisterMBean(DefaultMBeanServerInterceptor.java:433)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.unregisterMBean(DefaultMBeanServerInterceptor.java:421)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.unregisterMBean(JmxMBeanServer.java:541)
+	at org.apache.catalina.mbeans.MBeanUtils.destroyMBeanUserDatabase(MBeanUtils.java:1621)
+	at org.apache.catalina.mbeans.MBeanUtils.destroyMBean(MBeanUtils.java:1207)
+	at org.apache.catalina.deploy.NamingResources.destroyInternal(NamingResources.java:1084)
+	at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:304)
+	at org.apache.catalina.core.StandardServer.destroyInternal(StandardServer.java:825)
+	at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:304)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:743)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:704)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:322)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:451)
