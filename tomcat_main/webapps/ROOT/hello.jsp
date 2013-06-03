@@ -1,12 +1,11 @@
 <html>
-<head>
-<title>Test page.</title>
-</head>
-<body>
+    <head>
+        <title>Test page.</title>
+    </head>
+    <body>
 
-<% 
- out.println("<p> Hello World </p>");
-%>
-
-</body>
+        <% 
+         out.println("<p> Hello World </p>");
+        %>
+    </body>
 </html>
