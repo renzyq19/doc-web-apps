@@ -2,45 +2,32 @@
 <html>
   <head>
     <title>Test page.</title>
-  </head>
-  <body>
-
-    <div id="u_info"> </div>
-    <button type="button" onclick="startRedir()">
-      Play Game
-    </button>
-    <button type="button" id='login'>
-      Login
-    </button>
-
-    <div id="test"></div>
-    
     <script>
       function startRedir() {
         //checks if the "username" is set
         //and changes page location accordingly
-        
         var login = getCookie("username");
         if(login == null) {
           document.location.href="/login.html"; 
         }
         else {
           document.getElementById("test").innerHTML 
-              += "Username set to " + login + "<br>";
-          var loginButton = document.getElementById("login");
-          loginButton.style.visibility = 'hidden';
-          loginButton.style.display = 'none';
+              = "Username set to " + login + "<br>";
         }
       }
 
       function setUserInfo() {
         var login = getCookie("username");
+        var targetButton;
         if(login == null) {
           document.getElementById("u_info").innerHTML = "User: guest";
+          targetButton = document.getElementById("logout");
         } else {
           document.getElementById("u_info").innerHTML = "User: " + login;
+          targetButton = document.getElementById("login");
         }
-       
+          targetButton.style.visibility = 'hidden';
+          targetButton.style.display = 'none';
       }
 
       function getCookie(c_name) {
@@ -60,5 +47,23 @@
         return cookies.substring(start_idx, end_idx);
       }
     </script>
+  </head>
+    
+  <body onload="setUserInfo()">
+
+    <div id="u_info"> </div>
+    <button type="button" onclick="startRedir()">
+      Play Game
+    </button>
+    <button type="button" id='login' onclick="document.location.href='/login.html';">
+      Login
+    </button>
+    <button type="button" id='logout' onclick="document.location.href='/logout';">
+      Logout
+    </button>
+
+
+    <div id="test"></div>
+    
   </body>
 </html>

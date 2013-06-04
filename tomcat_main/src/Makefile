@@ -1,8 +1,9 @@
 CONTEXT = ../webapps/ROOT
 CLASS_DIR = $(CONTEXT)/WEB-INF/classes
-CLASSES = ArrayListSpaceTracker.class PsqlQuery.class AuthServlet.class
-COMPILE_CLASSPATH = .:/usr/share/java/servlet-api.jar
+CLASSES = ArrayListSpaceTracker.class PsqlQuery.class AuthServlet.class LogoutServlet.class
 UNNEEDED = *.class
+
+.SUFFIXES: .class .java
 
 all: $(CLASSES)
 
@@ -11,6 +12,9 @@ install: $(CLASSES)
 
 clean:
 	rm $(CLASSES)
+
+%.class : %.java
+	javac $^
 
 # some funny class
 ArrayListSpaceTracker.class : ArrayListSpaceTracker.java
