@@ -55,17 +55,22 @@ input {
       font-size: 14px;
 }
 
+
 input#username, input#password {
-    margin: 10px 0 0;
     padding: 0 5px;
-    width: 90%;
+    width: 95%;
     height: 34px;
     color: #404040;
     background: white;
     border: 1px solid;
     border-radius : 2px;
 }
-
+input#username{
+    margin-top:25px;
+}
+input#password{
+    margin:auto;
+}
 input#submit{
     padding: 0 18px;
     height: 29px;
