@@ -1,0 +1,27 @@
+form
+{
+	color: black;
+    margin:auto;
+    position:relative;
+    border-radius: 10px;
+    padding: 10px;
+
+
+}
+
+body
+{
+	font-family: "Arial";
+}
+
+h1
+{
+	color: red;
+	text-align:center;
+}
+
+h2
+{
+	color: blue;
+	text-align:center;
+}
