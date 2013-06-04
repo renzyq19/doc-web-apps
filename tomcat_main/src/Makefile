@@ -1,6 +1,6 @@
 CONTEXT = ../webapps/ROOT
 CLASS_DIR = $(CONTEXT)/WEB-INF/classes
-CLASSES = HelloServlet.class
+CLASSES = HelloServlet.class ArrayListSpaceTracker.class
 COMPILE_CLASSPATH = .:/usr/share/java/servlet-api.jar
 
 all: $(CLASSES)
@@ -13,4 +13,8 @@ clean:
 
 HelloServlet.class: HelloServlet.java
 	javac -cp $(COMPILE_CLASSPATH) HelloServlet.java
+
+# some funny class
+ArrayListSpaceTracker.class : ArrayListSpaceTracker.java
+	javac $^
 
