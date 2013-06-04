@@ -10,8 +10,21 @@
       <load-on-startup>5</load-on-startup>
     </servlet>
 
+    <servlet>
+      <servlet-name>logout</servlet-name>
+      <servlet-class>LogoutServlet</servlet-class>
+      <load-on-startup>5</load-on-startup>
+    </servlet>
+
+
     <servlet-mapping>
       <servlet-name>auth</servlet-name>
       <url-pattern>/auth</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+      <servlet-name>logout</servlet-name>
+      <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
 </web-app>
