@@ -20,30 +20,29 @@ and open the template in the editor.
             $(document).ready(function(){
                 var stage = new Kinetic.Stage({
                     container: 'container',
-                    width: 500,
+                    width: screen.width,
                     height: 500
                 });
                 
                 var layer = new Kinetic.Layer();
-                var bullets = new Array();
+				var spaceSpeed = 4;
                 
                 function goDirection(gunship){
                     var rotation = gunship.getRotationDeg();
                     var x = gunship.getX();
                     var y = gunship.getY();
-                    var speed = 1;
                     switch (rotation){
                         case 0:
-                            gunship.setX(x+speed);
+                            gunship.setX(x+spaceSpeed);
                             break;
                         case 90:
-                            gunship.setY(y+speed);
+                            gunship.setY(y+spaceSpeed);
                             break;
                         case 180:
-                            gunship.setX(x-speed);
+                            gunship.setX(x-spaceSpeed);
                             break;
                         case 270:
-                            gunship.setY(y-speed);
+                            gunship.setY(y-spaceSpeed);
                             break;
                             
                     }
@@ -142,9 +141,6 @@ and open the template in the editor.
                 var anim = new Kinetic.Animation(function(frame) {
                     goDirection(gunship1);
                     boundaryCheck(gunship1);
-                    for (var bullet in bullets) {
-                        advance(bullet);
-                    }
                 },layer);
                 
                 anim.start();
@@ -174,21 +170,44 @@ and open the template in the editor.
                 function shootBullet (gunship) {
                     var gunEndCoordX = gunEndCoord(gunship)[0];
                     var gunEndCoordY = gunEndCoord(gunship)[1];
-                    var bullet = new Kinetic.Rect({
-                       x: gunEndCoordX,
-                       y: gunEndCoordY,
-                       rotationDeg: gunship.getRotationDeg(),
-                       fill: black
-                    });
-                    bullets.add(bullet);
-                    debugText.setText("SHOOT");
+					var rotation = gunship.getRotationDeg();
+                    var bullet = newBullet(gunEndCoordX, gunEndCoordY, rotation);
+                    layer.add(bullet);
+					var animation = new Kinetic.Animation(function (frame) {
+						advance(bullet);
+					}, layer);
+					animation.start();
                 }
+				
+				function newBullet(_x, _y, rotation) {
+					var bulletHeight = 8;
+					switch(rotation) {
+						case 0:
+							_y -= bulletHeight/2; break;
+						case 90:
+							_x += bulletHeight/2; break;
+						case 180:
+							_y += bulletHeight/2; break;
+						case 270:
+							_x -= bulletHeight/2; break;
+					}
+					return new Kinetic.Rect({
+					   x: _x,
+					   y: _y,
+					   width: 20,
+					   height: bulletHeight,
+					   stroke: 'none',
+					   rotationDeg: rotation,
+					   strokeWidth: 0,
+					   fill: 'cyan'
+					});
+				}
 
                 function advance (bullet) {
                     var rotation = bullet.getRotationDeg();
                     var x = bullet.getX();
                     var y = bullet.getY();
-                    var speed = 1;
+                    var speed = spaceSpeed*2;
                     switch (rotation){
                         case 0:
                             bullet.setX(x+speed);
@@ -210,7 +229,7 @@ and open the template in the editor.
 
                 window.addEventListener('keydown', function (e) {
                     switch(e.keyCode){
-                        case 13:
+                        case 32:
                             shootBullet(gunship1);
                             break;
                         case 37:
