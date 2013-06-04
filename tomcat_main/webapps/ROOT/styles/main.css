@@ -56,9 +56,9 @@ input {
 }
 
 input#username, input#password {
-    margin:5px 0 0;
+    margin: 10px 0 0;
     padding: 0 5px;
-    width: 200px;
+    width: 90%;
     height: 34px;
     color: #404040;
     background: white;
