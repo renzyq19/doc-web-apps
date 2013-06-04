@@ -3,8 +3,7 @@ form
 	color: black;
     margin:auto;
     position:relative;
-    width: 400px;
-    height: 400px;
+    width:50% ;
     border-radius: 10px;
     padding: 10px;
     line-height: 24px;
@@ -13,8 +12,11 @@ form
 input {
     margin: auto;
     width: 70%;
-    display:block;
+    display:inline;
+    position:absolute:
+
 }
+
 
 input.submit {
     width: 100px;
