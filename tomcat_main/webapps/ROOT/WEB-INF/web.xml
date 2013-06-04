@@ -5,23 +5,10 @@
     version="2.4">
 
     <servlet>
-      <servlet-name>hello</servlet-name>
-      <description> This is the hello servlet. </description>
-      <servlet-class>hello</servlet-class>
-      <load-on-startup>5</load-on-startup>
-    </servlet>
-
-    <servlet>
       <servlet-name>ipfind</servlet-name>
       <servlet-class>HelloServlet</servlet-class>
       <load-on-startup>5</load-on-startup>
     </servlet>
-
-
-    <servlet-mapping>
-      <servlet-name>hello</servlet-name>
-      <url-pattern>/hello</url-pattern>
-    </servlet-mapping>
 
     <servlet-mapping>
       <servlet-name>ipfind</servlet-name>
