@@ -13,24 +13,12 @@ body
 
 .login {
     position: relative;
-    margin: 0;
+    margin: auto;
     padding: 20px 20px 20px;
 	color: red;
     width: 310px;
     background: white;
     border-radius: 3px;
-}
-
-.login:before{
-    content: '';
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    bottom: -8px;
-    left:   -8px;
-    z-index: -1;
-    background: rgba(black,0.8);
-    border-radius: 4px;
 }
 
 .login h2 {
@@ -49,31 +37,38 @@ body
     margin: 20px 0 0;
 }
 
-.login p:first-child{
-    margin-top:0;
-} 
-.login input#username{
-    width:278px;
-}
-.login input#password{
-
-    width:278px;
-}
-.login p#submit {
-    text-align:right;
-}
-
 .not-registered {
     margin: 20px 0 0;
     font-size: 11px;
     color: white;
     text-align: center;
 }
-
-.login .not-registered a{
+.not-registered a{
     color: #cce7fa;
     text-decoration:none;
 }
-.login .not-registered a:hover{
+.not-registered a:hover{
     text-decoration:underline;
+}
+input {
+      font-family: Tahoma, Verdana, sans-serif;
+      font-size: 14px;
+}
+
+input#username, input#password {
+    margin:5px 0 0;
+    padding: 0 5px;
+    width: 200px;
+    height: 34px;
+    color: #404040;
+    background: white;
+    border: 1px solid;
+    border-radius : 2px;
+}
+
+input#submit{
+    padding: 0 18px;
+    height: 29px;
+    font-size:12px;
+    font-weight:bold;
 }
