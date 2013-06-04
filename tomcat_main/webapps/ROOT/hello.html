@@ -5,28 +5,47 @@
   <body>
 
 
-    <button type="button" onclick="startRedir();">
+    <button type="button" onclick="startRedir()">
       Play Game
     </button>
     <button type="button">
       Login
     </button>
+
+    <div id="test"></div>
     
     <script>
       function startRedir() {
-        <!-- 
-          checks if the "userlogin" is set
-          and changes page location accordingly
-        -->
+        //checks if the "username" is set
+        //and changes page location accordingly
+        
+        var login = getCookie("username");
+        if(login == null) {
+          document.location.href="/login.html"; 
+        }
+        else {
+          document.getElementById("test").innerHTML += "Usename set to" + login;
+        }
 
       }
 
-      function getCookie(cookie_name) {
-        <!--
-          Either finds the corresponding value 
-          in document.cookie or returns null
-        -->
+      function getCookie(c_name) {
+        var cookies = document.cookie;
+        var index = cookies.indexOf(" " + c_name + "=");
+        if(index == -1) { <!-- Cookie might be at the beginning -->
+          index = cookies.indexOf(c_name + "=");
+          if(index == -1) {
+            return null;
+          }
+        }
+        var start_idx = cookies.indexOf('=',index)+1;
+        var end_idx = cookies.indexOf(';',index);
+        if(end_idx == -1) {
+          end_idx = cookies.length;
+        }
+        return cookies.substring(start_idx, end_idx);
       }
+
     </script>
   </body>
 </html>
