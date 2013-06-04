@@ -5,13 +5,13 @@
     version="2.4">
 
     <servlet>
-      <servlet-name>ipfind</servlet-name>
-      <servlet-class>HelloServlet</servlet-class>
+      <servlet-name>auth</servlet-name>
+      <servlet-class>AuthServlet</servlet-class>
       <load-on-startup>5</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-      <servlet-name>ipfind</servlet-name>
-      <url-pattern>/yourip</url-pattern>
+      <servlet-name>auth</servlet-name>
+      <url-pattern>/auth</url-pattern>
     </servlet-mapping>
 </web-app>
