@@ -1,2 +1,6 @@
 tomcat_main/logs/*
+<<<<<<< HEAD
 HTML5Application/nbproject/*
+=======
+tomcat_main/conf/PID
+>>>>>>> 0b11c8251ae274a03f8cd04c24bdbbddbaa1705b

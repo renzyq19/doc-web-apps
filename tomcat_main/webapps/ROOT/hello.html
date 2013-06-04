@@ -1,14 +1,15 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Test page.</title>
   </head>
   <body>
 
-
+    <div id="u_info"> </div>
     <button type="button" onclick="startRedir()">
       Play Game
     </button>
-    <button type="button">
+    <button type="button" id='login'>
       Login
     </button>
 
@@ -24,9 +25,22 @@
           document.location.href="/login.html"; 
         }
         else {
-          document.getElementById("test").innerHTML += "Usename set to" + login;
+          document.getElementById("test").innerHTML 
+              += "Username set to " + login + "<br>";
+          var loginButton = document.getElementById("login");
+          loginButton.style.visibility = 'hidden';
+          loginButton.style.display = 'none';
         }
+      }
 
+      function setUserInfo() {
+        var login = getCookie("username");
+        if(login == null) {
+          document.getElementById("u_info").innerHTML = "User: guest";
+        } else {
+          document.getElementById("u_info").innerHTML = "User: " + login;
+        }
+       
       }
 
       function getCookie(c_name) {
@@ -45,7 +59,6 @@
         }
         return cookies.substring(start_idx, end_idx);
       }
-
     </script>
   </body>
 </html>

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login</title>
+        <title>Register</title>
         <link rel='stylesheet' type='text/css' href='styles/main.css'>
-  <body>
-    <form name='login' action='/auth' method='post'>
-        <fieldset>
-            <legend>Login</legend>
-            <label><span>Username:</span>
-                <input type='text' name='username' id='username'>
-            </label><br>
-            <label><span>Password:</span>
-                <input type='password' name='password' id='password'>
-            </label><br>
-            <label><span>Confirm Password:</span>
-                <input type='confirmpass' name='confirmpass' id='confirmpass'>
-            </label><br>
-            <input type='submit' value='Submit'>
-        </fieldset>
-    </form>
-  </body>
+    </head>
+    <body>
+        <section class='container'> 
+            <div class='login'>
+                <form name='login' action='/auth' method='post'>
+                    <h2>Register</h2>
+                    <p><input id='username' type='text' name='username' value='' placeholder='Username'></p>
+                    <div id='after-username'></div>
+                    <p><input id='password' type='password' name='password' value='' placeholder='Password'></p>
+                    <div id='after-password'></div>
+                    <p><input id='password' type='password' name='password2' value='' placeholder='Confirm Password'></p>
+                    <div id='after-password2'></div>
+                    <p><input id='submit' type='submit' value='Register'></p>
+                </form>
+            </div>
+        </section>
+   </body>
 </html>

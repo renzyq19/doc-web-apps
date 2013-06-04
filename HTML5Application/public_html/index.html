@@ -16,6 +16,7 @@
             $(document).ready(function(){
                 var stage = new Kinetic.Stage({
                     container: 'container',
+<<<<<<< HEAD
                     width: 1000,
                     height: 600
                 });
@@ -31,6 +32,14 @@
                 });
                 layer.add(border);
                 var bullets = new Array();
+=======
+                    width: screen.width,
+                    height: 500
+                });
+                
+                var layer = new Kinetic.Layer();
+				var spaceSpeed = 4;
+>>>>>>> 0b11c8251ae274a03f8cd04c24bdbbddbaa1705b
                 
                 var gunship1 = placeGunship(50,50,"red");
                 var gunship2 = placeGunship(200,200,"green");
@@ -54,19 +63,18 @@
                     var rotation = gunship.getRotationDeg();
                     var x = gunship.getX();
                     var y = gunship.getY();
-                    var speed = 1;
                     switch (rotation){
                         case 0:
-                            gunship.setX(x+speed);
+                            gunship.setX(x+spaceSpeed);
                             break;
                         case 90:
-                            gunship.setY(y+speed);
+                            gunship.setY(y+spaceSpeed);
                             break;
                         case 180:
-                            gunship.setX(x-speed);
+                            gunship.setX(x-spaceSpeed);
                             break;
                         case 270:
-                            gunship.setY(y-speed);
+                            gunship.setY(y-spaceSpeed);
                             break;
                             
                     }
@@ -152,10 +160,13 @@
                     goDirection(gunship1);
                     goDirection(gunship2);
                     boundaryCheck(gunship1);
+<<<<<<< HEAD
                     boundaryCheck(gunship2);
                     for (var bullet in bullets) {
                         advance(bullet);
                     }
+=======
+>>>>>>> 0b11c8251ae274a03f8cd04c24bdbbddbaa1705b
                 },layer);
                 
                 anim.start();
@@ -183,21 +194,44 @@
                 function shootBullet (gunship) {
                     var gunEndCoordX = gunEndCoord(gunship)[0];
                     var gunEndCoordY = gunEndCoord(gunship)[1];
-                    var bullet = new Kinetic.Rect({
-                       x: gunEndCoordX,
-                       y: gunEndCoordY,
-                       rotationDeg: gunship.getRotationDeg(),
-                       fill: black
-                    });
-                    bullets.add(bullet);
-                    debugText.setText("SHOOT");
+					var rotation = gunship.getRotationDeg();
+                    var bullet = newBullet(gunEndCoordX, gunEndCoordY, rotation);
+                    layer.add(bullet);
+					var animation = new Kinetic.Animation(function (frame) {
+						advance(bullet);
+					}, layer);
+					animation.start();
                 }
+				
+				function newBullet(_x, _y, rotation) {
+					var bulletHeight = 8;
+					switch(rotation) {
+						case 0:
+							_y -= bulletHeight/2; break;
+						case 90:
+							_x += bulletHeight/2; break;
+						case 180:
+							_y += bulletHeight/2; break;
+						case 270:
+							_x -= bulletHeight/2; break;
+					}
+					return new Kinetic.Rect({
+					   x: _x,
+					   y: _y,
+					   width: 20,
+					   height: bulletHeight,
+					   stroke: 'none',
+					   rotationDeg: rotation,
+					   strokeWidth: 0,
+					   fill: 'cyan'
+					});
+				}
 
                 function advance (bullet) {
                     var rotation = bullet.getRotationDeg();
                     var x = bullet.getX();
                     var y = bullet.getY();
-                    var speed = 1;
+                    var speed = spaceSpeed*2;
                     switch (rotation){
                         case 0:
                             bullet.setX(x+speed);
@@ -214,8 +248,37 @@
                             
                     }
                 }
+<<<<<<< HEAD
                                 
                 
+=======
+
+
+
+                window.addEventListener('keydown', function (e) {
+                    switch(e.keyCode){
+                        case 32:
+                            shootBullet(gunship1);
+                            break;
+                        case 37:
+                            gunship1.setRotationDeg(180);
+                            layer.draw();
+                            break;
+                        case 38 :
+                            gunship1.setRotationDeg(270);
+                            layer.draw();
+                            break;
+                        case 39 :
+                            gunship1.setRotationDeg(0);
+                            layer.draw();
+                            break;
+                        case 40 :
+                            gunship1.setRotationDeg(90);
+                            layer.draw();
+                            break;
+                    }
+                });
+>>>>>>> 0b11c8251ae274a03f8cd04c24bdbbddbaa1705b
                 
               //var controlxMappings = [shoot,left,right,up,down];
                 var control1Mappings = [32,37,39,38,40];
