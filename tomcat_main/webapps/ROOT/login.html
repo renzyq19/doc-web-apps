@@ -3,26 +3,17 @@
         <title>Login</title>
         <link rel='stylesheet' type='text/css' href='styles/main.css'>
   <body>
-    <div id='loginArea'>
-        <form name='login' action='/auth'
-              onsubmit='checkForm();' method='post'>
-              
-            <fieldset>
-                <label for='username'><span>Username:</span></label>
-                    <input type='text' name='username' id='username'>
-                <label for='password'>Password:</label>
-                    <input type='password' name='password' id='password'>
-                <input type='submit' value='Submit'>
-                <span> Haven't registered? You can <a href='register.html'>sign up here.</a></span>
-            </fieldset>
-        </form>
-    </div>
-
-    <script>
-       function checkForm() {
-         <!-- Basic check for errors. returns true if everything is okay -->
-         return true;
-       }
-    </script>
+    <form name='login' action='/auth' method='post'>
+        <fieldset>
+            <label><span>Username:</span>
+                <input type='text' name='username' id='username'>
+            </label>
+            <label><span>Password:</span>
+                <input type='password' name='password' id='password'>
+            </label>
+            <input type='submit' value='Submit'>
+            <span> Haven't registered? You can <a href='register.html'>sign up here.</a></span>
+        </fieldset>
+    </form>
   </body>
 </html>
