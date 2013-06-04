@@ -1,9 +1,10 @@
-/* Thanks to http://www.cssflow.com/snippets/login-form/demo/scss */
-body
-{
-    font-family:Tahoma, Verdana, sans-serif;
-    color: #404040;
+/* Inspiration from http://www.cssflow.com/snippets/login-form/demo/scss */
+body {
+    font-family: Tahoma, Verdana, sans-serif;
     background: #0ca3d2;
+    font-size: 14px;
+    color: white;
+    text-align: center;
 }
 
 .container {
@@ -11,7 +12,7 @@ body
     width:640px;
 }
 
-.login {
+.container .login {
     position: relative;
     margin: auto;
     padding: 20px 20px 20px;
@@ -21,7 +22,7 @@ body
     border-radius: 3px;
 }
 
-.login h2 {
+.container .login h2 {
     margin: -20px -20px -20px;
     line-height: 40px;
     font-size:   15px;
@@ -33,30 +34,31 @@ body
     border-radius: 3px 3px 0 0;
 } 
 
-.login p {
+.container .login p {
     margin: 20px 0 0;
 }
 
 .not-registered {
     margin: 20px 0 0;
     font-size: 11px;
-    color: white;
-    text-align: center;
 }
-.not-registered a{
+
+body a {
     color: #cce7fa;
     text-decoration:none;
 }
-.not-registered a:hover{
+
+body a:hover{
     text-decoration:underline;
 }
-input {
+
+.login input {
       font-family: Tahoma, Verdana, sans-serif;
       font-size: 14px;
 }
 
 
-input#username, input#password {
+.login input#username,.login input#password {
     padding: 0 5px;
     width: 95%;
     height: 34px;
@@ -65,13 +67,16 @@ input#username, input#password {
     border: 1px solid;
     border-radius : 2px;
 }
-input#username{
+
+.login input#username{
     margin-top:25px;
 }
-input#password{
+
+.login input#password{
     margin:auto;
 }
-input#submit{
+
+.login input#submit{
     padding: 0 18px;
     height: 29px;
     font-size:12px;

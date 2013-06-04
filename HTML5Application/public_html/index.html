@@ -1,7 +1,3 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +5,7 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <div id="container" style="border: 1px dashed"></div>
+        <div id="container"></div>
         <script
         src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
         </script>
@@ -20,30 +16,58 @@ and open the template in the editor.
             $(document).ready(function(){
                 var stage = new Kinetic.Stage({
                     container: 'container',
-                    width: 500,
-                    height: 500
+                    width: 1000,
+                    height: 600
                 });
                 
                 var layer = new Kinetic.Layer();
+                var border = new Kinetic.Rect({
+                    x:0,
+                    y:0,
+                    width:stage.getWidth(),
+                    height:stage.getHeight(),
+                    stroke:"black",
+                    strokeWidth:"1"
+                });
+                layer.add(border);
                 var bullets = new Array();
+                
+		var spaceSpeed = 4;
+                
+                var gunship1 = placeGunship(50,50,"red");
+                var gunship2 = placeGunship(200,200,"green");
+                
+                var gunships = [gunship1,gunship2];
+
+                
+                var debugText = new Kinetic.Text({
+                    x: stage.getWidth() / 2,
+                    y: 15,
+                    text: "NOTHING TO SHOW",
+                    fontSize: 30,
+                    fontFamily: 'Calibri',
+                    fill: 'green'
+                });
+                
+                layer.add(debugText);
+                layer.draw();
                 
                 function goDirection(gunship){
                     var rotation = gunship.getRotationDeg();
                     var x = gunship.getX();
                     var y = gunship.getY();
-                    var speed = 1;
                     switch (rotation){
                         case 0:
-                            gunship.setX(x+speed);
+                            gunship.setX(x+spaceSpeed);
                             break;
                         case 90:
-                            gunship.setY(y+speed);
+                            gunship.setY(y+spaceSpeed);
                             break;
                         case 180:
-                            gunship.setX(x-speed);
+                            gunship.setX(x-spaceSpeed);
                             break;
                         case 270:
-                            gunship.setY(y-speed);
+                            gunship.setY(y-spaceSpeed);
                             break;
                             
                     }
@@ -124,31 +148,18 @@ and open the template in the editor.
                     
                 }
                 
-                var gunship1 = placeGunship(50,50,"red");
-                var gunship2 = placeGunship(200,200,"green");
-                
-                var debugText = new Kinetic.Text({
-                    x: stage.getWidth() / 2,
-                    y: 15,
-                    text: "NOTHING TO SHOW",
-                    fontSize: 30,
-                    fontFamily: 'Calibri',
-                    fill: 'green'
-                });
-                
-                layer.add(debugText);
-                layer.draw();
-                
                 var anim = new Kinetic.Animation(function(frame) {
+                    //advanceShips(ships);
                     goDirection(gunship1);
+                    goDirection(gunship2);
                     boundaryCheck(gunship1);
+                    boundaryCheck(gunship2);
                     for (var bullet in bullets) {
                         advance(bullet);
                     }
                 },layer);
                 
                 anim.start();
-                
                 
                 function boundaryCheck(gunship){
                     var gunEndCoordX = gunEndCoord(gunship)[0];
@@ -157,8 +168,7 @@ and open the template in the editor.
                     var rotation = gunship.getRotationDeg();
                     if (gunEndCoordX < 0 || gunEndCoordY <0
                         || gunEndCoordX >stage.getWidth() || gunEndCoordY >stage.getHeight())
-                                 gunship.setRotationDeg((rotation + 180)%360);
-
+                              gunship.setRotationDeg((rotation + 180)%360);
                 }
                 
                 function gunEndCoord (gunship) {
@@ -174,21 +184,44 @@ and open the template in the editor.
                 function shootBullet (gunship) {
                     var gunEndCoordX = gunEndCoord(gunship)[0];
                     var gunEndCoordY = gunEndCoord(gunship)[1];
-                    var bullet = new Kinetic.Rect({
-                       x: gunEndCoordX,
-                       y: gunEndCoordY,
-                       rotationDeg: gunship.getRotationDeg(),
-                       fill: black
-                    });
-                    bullets.add(bullet);
-                    debugText.setText("SHOOT");
+					var rotation = gunship.getRotationDeg();
+                    var bullet = newBullet(gunEndCoordX, gunEndCoordY, rotation);
+                    layer.add(bullet);
+                    var animation = new Kinetic.Animation(function (frame) {
+                            advance(bullet);
+                        }, layer);
+                    animation.start();
+                }
+				
+                function newBullet(_x, _y, rotation) {
+                        var bulletHeight = 8;
+                        switch(rotation) {
+                                case 0:
+                                        _y -= bulletHeight/2; break;
+                                case 90:
+                                        _x += bulletHeight/2; break;
+                                case 180:
+                                        _y += bulletHeight/2; break;
+                                case 270:
+                                        _x -= bulletHeight/2; break;
+                        }
+                        return new Kinetic.Rect({
+                           x: _x,
+                           y: _y,
+                           width: 20,
+                           height: bulletHeight,
+                           stroke: 'none',
+                           rotationDeg: rotation,
+                           strokeWidth: 0,
+                           fill: 'cyan'
+                        });
                 }
 
                 function advance (bullet) {
                     var rotation = bullet.getRotationDeg();
                     var x = bullet.getX();
                     var y = bullet.getY();
-                    var speed = 1;
+                    var speed = spaceSpeed*2;
                     switch (rotation){
                         case 0:
                             bullet.setX(x+speed);
@@ -204,35 +237,40 @@ and open the template in the editor.
                             break;
                             
                     }
-                }
-
-
-
-                window.addEventListener('keydown', function (e) {
-                    switch(e.keyCode){
-                        case 13:
-                            shootBullet(gunship1);
-                            break;
-                        case 37:
-                            gunship1.setRotationDeg(180);
-                            layer.draw();
-                            break;
-                        case 38 :
-                            gunship1.setRotationDeg(270);
-                            layer.draw();
-                            break;
-                        case 39 :
-                            gunship1.setRotationDeg(0);
-                            layer.draw();
-                            break;
-                        case 40 :
-                            gunship1.setRotationDeg(90);
-                            layer.draw();
-                            break;
-                    }
-                });
+                }            
+              //var controlxMappings = [shoot,left,right,up,down];
+                var control1Mappings = [32,37,39,38,40];
+                var control2Mappings = [69,65,68,87,83];
                 
+                var controlMappings = [control1Mappings, control2Mappings];
                 
+                controlInit(1);
+                controlInit(2);
+                
+                function controlInit(playerNum){
+                    var mapping = controlMappings[playerNum-1];
+                    var gunship = gunships[playerNum-1];
+                    window.addEventListener('keydown', function(e){
+                        switch(e.keyCode){
+                            case mapping[0]:
+                                shootBullet(gunship);
+                                break;
+                            case mapping[1]:
+                                gunship.setRotationDeg(180);
+                                break;
+                            case mapping[2]:
+                                gunship.setRotationDeg(0);
+                                break;
+                            case mapping[3]:
+                                gunship.setRotationDeg(270);
+                                break;
+                            case mapping[4]:
+                                gunship.setRotationDeg(90);
+                                break;
+                        }
+                        layer.draw();
+                    });
+                }                               
             });
         </script>
     </body>
