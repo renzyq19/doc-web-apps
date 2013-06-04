@@ -1,0 +1,239 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Canvas sandbox</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div id="container" style="border: 1px dashed"></div>
+        <script
+        src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
+        </script>
+        <script 
+        src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.5.3.min.js">
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var stage = new Kinetic.Stage({
+                    container: 'container',
+                    width: 500,
+                    height: 500
+                });
+                
+                var layer = new Kinetic.Layer();
+                var bullets = new Array();
+                
+                function goDirection(gunship){
+                    var rotation = gunship.getRotationDeg();
+                    var x = gunship.getX();
+                    var y = gunship.getY();
+                    var speed = 1;
+                    switch (rotation){
+                        case 0:
+                            gunship.setX(x+speed);
+                            break;
+                        case 90:
+                            gunship.setY(y+speed);
+                            break;
+                        case 180:
+                            gunship.setX(x-speed);
+                            break;
+                        case 270:
+                            gunship.setY(y-speed);
+                            break;
+                            
+                    }
+                    
+                }
+                function placeGunship(_x,_y,colour) {
+                    var gHullSize = 40;
+                    
+                    var prongWidth = gHullSize*0.4;
+                    var prongHeight = gHullSize/5;
+                    var topProngX = _x+gHullSize;
+                    var topProngY = _y;
+                    var bottomProngX = _x+gHullSize;
+                    var bottomProngY = _y+gHullSize-prongHeight;
+                    
+                    var gunWidth = gHullSize*0.7;
+                    var gunHeight = gHullSize/3;
+                    var gunX = _x+gHullSize;
+                    var gunY = _y+gHullSize/3;
+                    
+                    function drawHull(){
+                        return new Kinetic.Rect({
+                            x:_x,
+                            y:_y,
+                            width:gHullSize,
+                            height:gHullSize,
+                            fill: colour,
+                            stroke:'none',
+                            strokeWidth: 0 
+                        });
+                    }
+                    function drawProng(mx,my){
+                        return new Kinetic.Rect({
+                            x:mx,
+                            y:my,
+                            width:prongWidth,
+                            height:prongHeight,
+                            fill: colour,
+                            stroke:'none',
+                            strokeWidth: 0 
+                        });
+                    }
+                    function drawGun(){
+                        return new Kinetic.Rect({
+                            x:gunX,
+                            y:gunY,
+                            width:gunWidth,
+                            height:gunHeight,
+                            fill: colour,
+                            stroke:'none',
+                            strokeWidth: 0 
+                        });
+                    }
+                    
+                    var hull = drawHull();
+                    var topProng = drawProng(topProngX,topProngY);
+                    var bottomProng = drawProng(bottomProngX,bottomProngY);
+                    var gun = drawGun();
+
+                    var gunship = new Kinetic.Group({
+                        x:_x,
+                        y:_y,
+                        rotationDeg: 0,
+                        offsetX: _x+gHullSize/2,
+                        offsetY: _y+gHullSize/2
+                    });
+                    
+                    gunship.add(hull);
+                    gunship.add(topProng);
+                    gunship.add(bottomProng);
+                    gunship.add(gun);
+                    
+                    
+                    layer.add(gunship);
+                    stage.add(layer);
+                    
+                    return gunship;
+                    
+                }
+                
+                var gunship1 = placeGunship(50,50,"red");
+                var gunship2 = placeGunship(200,200,"green");
+                
+                var debugText = new Kinetic.Text({
+                    x: stage.getWidth() / 2,
+                    y: 15,
+                    text: "NOTHING TO SHOW",
+                    fontSize: 30,
+                    fontFamily: 'Calibri',
+                    fill: 'green'
+                });
+                
+                layer.add(debugText);
+                layer.draw();
+                
+                var anim = new Kinetic.Animation(function(frame) {
+                    goDirection(gunship1);
+                    boundaryCheck(gunship1);
+                    for (var bullet in bullets) {
+                        advance(bullet);
+                    }
+                },layer);
+                
+                anim.start();
+                
+                
+                function boundaryCheck(gunship){
+                    var gunEndCoordX = gunEndCoord(gunship)[0];
+                    var gunEndCoordY = gunEndCoord(gunship)[1];
+                    layer.draw();
+                    var rotation = gunship.getRotationDeg();
+                    if (gunEndCoordX < 0 || gunEndCoordY <0
+                        || gunEndCoordX >stage.getWidth() || gunEndCoordY >stage.getHeight())
+                                 gunship.setRotationDeg((rotation + 180)%360);
+
+                }
+                
+                function gunEndCoord (gunship) {
+                   var gunLength = gunship.get('Rect')[3].getWidth();
+                   gunLength += gunship.get('Rect')[0].getWidth()/2;
+                   var x = gunship.getX();
+                   var y = gunship.getY();
+                   x += Math.round(Math.cos(gunship.getRotation())) * gunLength;
+                   y += Math.round(Math.sin(gunship.getRotation())) * gunLength;
+                   return [x,y];
+                }
+                
+                function shootBullet (gunship) {
+                    var gunEndCoordX = gunEndCoord(gunship)[0];
+                    var gunEndCoordY = gunEndCoord(gunship)[1];
+                    var bullet = new Kinetic.Rect({
+                       x: gunEndCoordX,
+                       y: gunEndCoordY,
+                       rotationDeg: gunship.getRotationDeg(),
+                       fill: black
+                    });
+                    bullets.add(bullet);
+                    debugText.setText("SHOOT");
+                }
+
+                function advance (bullet) {
+                    var rotation = bullet.getRotationDeg();
+                    var x = bullet.getX();
+                    var y = bullet.getY();
+                    var speed = 1;
+                    switch (rotation){
+                        case 0:
+                            bullet.setX(x+speed);
+                            break;
+                        case 90:
+                            bullet.setY(y+speed);
+                            break;
+                        case 180:
+                            bullet.setX(x-speed);
+                            break;
+                        case 270:
+                            bullet.setY(y-speed);
+                            break;
+                            
+                    }
+                }
+
+
+
+                window.addEventListener('keydown', function (e) {
+                    switch(e.keyCode){
+                        case 13:
+                            shootBullet(gunship1);
+                            break;
+                        case 37:
+                            gunship1.setRotationDeg(180);
+                            layer.draw();
+                            break;
+                        case 38 :
+                            gunship1.setRotationDeg(270);
+                            layer.draw();
+                            break;
+                        case 39 :
+                            gunship1.setRotationDeg(0);
+                            layer.draw();
+                            break;
+                        case 40 :
+                            gunship1.setRotationDeg(90);
+                            layer.draw();
+                            break;
+                    }
+                });
+                
+                
+            });
+        </script>
+    </body>
+</html>
