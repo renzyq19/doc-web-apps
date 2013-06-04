@@ -1,40 +1,79 @@
-form
-{
-	color: black;
-    margin:auto;
-    position:relative;
-    width:50% ;
-    border-radius: 10px;
-    padding: 10px;
-    line-height: 24px;
-}
-
-input {
-    margin: auto;
-    width: 70%;
-    display:inline;
-    position:absolute:
-
-}
-
-
-input.submit {
-    width: 100px;
-}
-
+/* Thanks to http://www.cssflow.com/snippets/login-form/demo/scss */
 body
 {
-	font-family: "Arial";
+    font-family:Tahoma, Verdana, sans-serif;
+    color: #404040;
+    background: #0ca3d2;
 }
 
-h1
-{
+.container {
+    margin:auto;
+    width:640px;
+}
+
+.login {
+    position: relative;
+    margin: 0;
+    padding: 20px 20px 20px;
 	color: red;
-	text-align:center;
+    width: 310px;
+    background: white;
+    border-radius: 3px;
 }
 
-h2
-{
-	color: blue;
-	text-align:center;
+.login:before{
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    bottom: -8px;
+    left:   -8px;
+    z-index: -1;
+    background: rgba(black,0.8);
+    border-radius: 4px;
+}
+
+.login h2 {
+    margin: -20px -20px -20px;
+    line-height: 40px;
+    font-size:   15px;
+    font-weight: bold;
+    color:      #555;
+    text-align: center;
+    background: #f3f3f3;
+    border-bottom: 1px solid #cfcfcf;
+    border-radius: 3px 3px 0 0;
+} 
+
+.login p {
+    margin: 20px 0 0;
+}
+
+.login p:first-child{
+    margin-top:0;
+} 
+.login input#username{
+    width:278px;
+}
+.login input#password{
+
+    width:278px;
+}
+.login p#submit {
+    text-align:right;
+}
+
+.not-registered {
+    margin: 20px 0 0;
+    font-size: 11px;
+    color: white;
+    text-align: center;
+}
+
+.login .not-registered a{
+    color: #cce7fa;
+    text-decoration:none;
+}
+.login .not-registered a:hover{
+    text-decoration:underline;
 }

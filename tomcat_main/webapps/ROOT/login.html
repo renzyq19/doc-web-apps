@@ -5,18 +5,18 @@
         <link rel='stylesheet' type='text/css' href='styles/main.css'>
     </head>
     <body>
-        <form name='login' action='/auth' method='post'>
-            <fieldset>
-                <legend>Login</legend>
-                <label><span>Username:</span>
-                    <input type='text' name='username' id='username'>
-                </label><br>
-                <label><span>Password:</span>
-                    <input type='password' name='password' id='password'>
-                </label><br>
-                <input type='submit' value='Login'>
-                <span> Haven't registered? You can <a href='register.html'>sign up here.</a></span>
-            </fieldset>
-        </form>
-    </body>
+        <section class='container'> 
+            <div class='login'>
+                <form name='login' action='/auth' method='post'>
+                    <h2>Login</h2>
+                    <p><input id='username' type='text' name='username' value='' placeholder='Username'></p>
+                    <p><input id='password' type='password' name='password' value='' placeholder='Password'></p>
+                    <p><input id='submit' type='submit' value='Login'></p>
+                </form>
+            </div>
+            <div class='not-registered'>
+                <p>Haven't registered? You can <a href='register.html'>sign up here.</a></p>
+            </div>
+        </section>
+   </body>
 </html>
