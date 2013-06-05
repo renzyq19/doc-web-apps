@@ -82,3 +82,6 @@ body a:hover{
     font-size:12px;
     font-weight:bold;
 }
+.container #after-password2 {
+    margin: 5px 0 0;
+}
