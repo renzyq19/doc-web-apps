@@ -11,7 +11,7 @@
                     <h2>Register</h2>
                     <p><input id='username' type='text' name='username' value='' placeholder='Username' required></p>
                     <div id='after-username'></div>
-                    <p><input id='password' type='password' name='password' value='' placeholder='Password' required></p>
+                    <p><input id='password' type='password' name='password1' value='' placeholder='Password' required></p>
                     <div id='after-password'></div>
                     <p><input id='password' type='password' name='password2' value='' placeholder='Confirm Password' required></p>
                     <div id='after-password2'></div>
@@ -21,11 +21,14 @@
         </section>
         <script type='text/javascript'>
             function checkForm(form){
-                if(form.password.value != form.password2.value){
-                    alert("Your passwords don't match!");
+                if(form.password1.value == form.password2.value){
+                    return true;
+                }else {
+                    document.getElementById('after-password2').innerHTML= "Your passwords don't match!";
                     form.password2.focus();
                     return false;
-                };
+                }
+                
             };
         </script>
    </body>
