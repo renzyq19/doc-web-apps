@@ -25,7 +25,7 @@ public class AuthServlet extends HttpServlet {
         return;
       }
       // The response is right so we redirect it to the homepage with an added cookie
-      authenticateUser(response, user);
+      authenticateUser(authQuery, response, user);
     } catch (SQLException e) {
       sendInternalError(response, e.getMessage());
     }
@@ -42,8 +42,10 @@ public class AuthServlet extends HttpServlet {
     } catch(IOException ioe) {}
   }
 
-  private void authenticateUser(HttpServletResponse res, String user) {
+  private void authenticateUser(PsqlQuery query,HttpServletResponse res, String user) throws SQLException{
     try {
+      String update = "UPDATE Users SET loggedIn='t' WHERE username="+"'"+user+"';";
+      query.executeUpdate(update);
       res.addCookie(new Cookie("username",user));
       res.sendRedirect("/hello.html");
     } catch (IOException ioe) {}

@@ -21,9 +21,13 @@ public class PsqlQuery {
 
   }
 
-  public ResultSet executeQuery(String req) throws SQLException{
+  public ResultSet executeQuery(String req) throws SQLException {
     // non-atomic query
     return stmt.executeQuery(req);
+  }
+
+  public void executeUpdate(String insert) throws SQLException {
+    stmt.executeUpdate(insert);
   }
 
   public void finish() throws SQLException{

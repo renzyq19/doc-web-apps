@@ -1,6 +1,6 @@
 CONTEXT = ../webapps/ROOT
 CLASS_DIR = $(CONTEXT)/WEB-INF/classes
-CLASSES = ArrayListSpaceTracker.class PsqlQuery.class AuthServlet.class LogoutServlet.class
+CLASSES = ArrayListSpaceTracker.class PsqlQuery.class AuthServlet.class LogoutServlet.class RegisterServlet.class
 UNNEEDED = *.class
 
 .SUFFIXES: .class .java
@@ -11,7 +11,7 @@ install: $(CLASSES)
 	install -m600 $(CLASSES) $(CLASS_DIR)
 
 clean:
-	rm $(CLASSES)
+	rm -f $(CLASSES)
 
 %.class : %.java
 	javac $^
