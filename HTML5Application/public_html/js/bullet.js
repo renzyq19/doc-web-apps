@@ -3,19 +3,33 @@
  * and open the template in the editor.
  */
 
+var bullets = new Array();
 
 function shootBullet (gunship) {
+    debugText.setText("SHOOOOOT");
     var gunEndCoordX = gunEndCoord(gunship)[0];
     var gunEndCoordY = gunEndCoord(gunship)[1];
-                        var rotation = gunship.getRotationDeg();
+    var rotation = gunship.getRotationDeg();
     var bullet = newBullet(gunEndCoordX, gunEndCoordY, rotation);
     layer.add(bullet);
+    bullets.push(bullet);
     var animation = new Kinetic.Animation(function (frame) {
             advance(bullet);
+            //checkInBounds(bullet);
+          //  debugText.setText(bullets.length);
         }, layer);
     animation.start();
 }
 
+var debugText = new Kinetic.Text({
+    x: stage.getWidth() / 2,
+    y: 15,
+    text: "NOTHING TO SHOW",
+    fontSize: 30,
+    fontFamily: 'Calibri',
+    fill: 'green'
+});
+layer.add(debugText);
 function newBullet(_x, _y, rotation) {
         var bulletHeight = 8;
         switch(rotation) {
@@ -60,5 +74,13 @@ function advance (bullet) {
             bullet.setY(y-speed);
             break;
 
+    }
+}
+
+function checkInBounds(bullet) {
+    if (bullet.getX() < 0 || bullet.getY() < 0 || bullet.getX() > stage.getWidth() || bullet.getY() > stage.getHeight()) {
+        bullet.destroy();
+        layer.draw();
+        debugText.setText("BULLET DELETED");
     }
 }

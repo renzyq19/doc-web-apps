@@ -19,7 +19,8 @@ function gunEndCoord (gunship) {
    gunLength += gunship.get('Rect')[0].getWidth()/2;
    var x = gunship.getX();
    var y = gunship.getY();
-   x += Math.round(Math.cos(gunship.getRotation())) * gunLength;
-   y += Math.round(Math.sin(gunship.getRotation())) * gunLength;
+   var rotation = gunship.getRotation();
+   x += Math.round(Math.cos(rotation)) * gunLength;
+   y += Math.round(Math.sin(rotation)) * gunLength;
    return [x,y];
 }

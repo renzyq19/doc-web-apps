@@ -32,9 +32,14 @@ var border = new Kinetic.Rect({
     stroke:"black",
     strokeWidth:"1"
 });
-var bullets = new Array();
 
 var spaceSpeed = 4;
+
+//var pixel1 = debugPixel(0,0);
+//var pixel2 = debugPixel(0,0);
+
+//layer.add(pixel1);
+//layer.add(pixel2);
 
 var gunship1 = placeGunship(50,50,"red");
 var gunship2 = placeGunship(200,200,"green");
@@ -146,14 +151,54 @@ function placeGunship(_x,_y,colour) {
 }
 
 var anim = new Kinetic.Animation(function(frame) {
-    //advanceShips(ships);
+    //advanceShips(gunships);
     goDirection(gunship1);
     goDirection(gunship2);
     boundaryCheck(gunship1);
     boundaryCheck(gunship2);
-    for (var bullet in bullets) {
-        advance(bullet);
-    }
+
 },layer);
 
 
+function advanceShips(gunships){
+    for (var ship in gunships){
+        goDirection(ship);
+        boundaryCheck(ship);
+    }
+    //collisionCheck(gunships);
+}
+//
+//function collisionCheck(gunships){
+//    var coords = new Array();
+//    for (var ship in gunships){
+//        coords.push(getTopPoints(ship));
+//    }
+//}
+//
+//function debugPixel(_x,_y){
+//    var pixel = new Kinetic.Rect({
+//        x:_x,
+//        y:_y,
+//        width:1,
+//        height:1,
+//        fill:"black",
+//        strokeWidth:1
+//    });
+//    
+//    return pixel;
+//}
+//
+//function getTopPoints(gunship){
+//    var rotation = gunship.getRotationDeg();
+//    var xcos = Math.round(Math.cos(rotation));
+//    var ysin = Math.round(Math.sin(rotation));
+//    var gunEndCoord = gunEndCoord(gunship);
+//    var topLeftX = gunEndCoord[0]-(gHullSize/2)*ysin;
+//    var topLeftY = gunEndCoord[1]-(gHullSize/2)*xcos;
+//    var topRightX = gunEndCoord[0]+(gHullSize/2)*ysin;
+//    var topRightY = gunEndCoord[1]+(gHullSize/2)*xcos;
+//    pixel1 = debugPixel(topLeftX, topLeftY);
+//    pixel2 = debugPixel(topRightX, topRightY);
+//    layer.draw();
+//    return [[topLeftX, topLeftY], [topRightX, topRightY]];
+//}
