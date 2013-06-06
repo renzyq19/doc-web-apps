@@ -11,12 +11,26 @@ function shootBullet (gunship) {
     var gunEndCoordY = gunEndCoord(gunship)[1];
     var rotation = gunship.getRotationDeg();
     var bullet = newBullet(gunEndCoordX, gunEndCoordY, rotation);
+	var speed = spaceSpeed * 2;
+	var hasHit = false;
     layer.add(bullet);
     bullets.push(bullet);
     var animation = new Kinetic.Animation(function (frame) {
-            advance(bullet);
-            //checkInBounds(bullet);
-          //  debugText.setText(bullets.length);
+            advance(bullet, speed);
+           // checkInBounds(bullet);
+			if (!inBounds(bullet)) {
+				if (hasHit) {
+					stopBullet(bullet, animation);
+				}
+				else {
+					hasHit = true;
+					rotation += 180;
+					rotation %= 360;
+					bullet.setRotationDeg(bullet.getRotationDeg() + 180);
+					bullet.setY(bullet.getY() + bullet.getHeight());
+					speed *= 2;
+				}
+			}
         }, layer);
     animation.start();
 }
@@ -29,7 +43,18 @@ var debugText = new Kinetic.Text({
     fontFamily: 'Calibri',
     fill: 'green'
 });
+
+
 layer.add(debugText);
+
+function stopBullet (bullet, animation) {
+	debugText.setText(bullet.getX() + "," + bullet.getY() + "/" + bullet.getRotationDeg());
+	bullet.destroy();
+	bullet = null;
+	delete bullet;
+	animation.stop();
+}
+
 function newBullet(_x, _y, rotation) {
         var bulletHeight = 8;
         switch(rotation) {
@@ -54,12 +79,10 @@ function newBullet(_x, _y, rotation) {
         });
 }
 
-function advance (bullet) {
+function advance (bullet, speed) {
     var rotation = bullet.getRotationDeg();
     var x = bullet.getX();
-
     var y = bullet.getY();
-    var speed = spaceSpeed*2;
     switch (rotation){
         case 0:
             bullet.setX(x+speed);
@@ -77,10 +100,6 @@ function advance (bullet) {
     }
 }
 
-function checkInBounds(bullet) {
-    if (bullet.getX() < 0 || bullet.getY() < 0 || bullet.getX() > stage.getWidth() || bullet.getY() > stage.getHeight()) {
-        bullet.destroy();
-        layer.draw();
-        debugText.setText("BULLET DELETED");
-    }
+function inBounds(bullet) {
+    return !(bullet.getX() < -bullet.getWidth() || bullet.getY() < -bullet.getHeight() || bullet.getX() > stage.getWidth() || bullet.getY() > stage.getHeight());
 }
