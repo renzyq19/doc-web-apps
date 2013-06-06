@@ -17,7 +17,6 @@ function shootBullet (gunship) {
     bullets.push(bullet);
     var animation = new Kinetic.Animation(function (frame) {
             advance(bullet, speed);
-           // checkInBounds(bullet);
 			if (!inBounds(bullet)) {
 				if (hasHit) {
 					stopBullet(bullet, animation);
@@ -26,8 +25,7 @@ function shootBullet (gunship) {
 					hasHit = true;
 					rotation += 180;
 					rotation %= 360;
-					bullet.setRotationDeg(bullet.getRotationDeg() + 180);
-					bullet.setY(bullet.getY() + bullet.getHeight());
+					bullet.setRotationDeg(rotation);
 					speed *= 2;
 				}
 			}
@@ -57,25 +55,18 @@ function stopBullet (bullet, animation) {
 
 function newBullet(_x, _y, rotation) {
         var bulletHeight = 8;
-        switch(rotation) {
-                case 0:
-                        _y -= bulletHeight/2; break;
-                case 90:
-                        _x += bulletHeight/2; break;
-                case 180:
-                        _y += bulletHeight/2; break;
-                case 270:
-                        _x -= bulletHeight/2; break;
-        }
+		var bulletWidth = 20;
         return new Kinetic.Rect({
            x: _x,
-           y: _y,
-           width: 20,
+           y: _y ,
+           width: bulletWidth,
            height: bulletHeight,
            stroke: 'none',
            rotationDeg: rotation,
            strokeWidth: 0,
-           fill: 'cyan'
+           fill: 'cyan',
+		   offsetX: bulletWidth/2,
+		   offsetY: bulletHeight/2
         });
 }
 
