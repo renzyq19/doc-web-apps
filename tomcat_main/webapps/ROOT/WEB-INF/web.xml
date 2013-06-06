@@ -4,6 +4,10 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     version="2.4">
 
+    <listener>
+      <listener-class>TimeoutListener</listener-class>
+    </listener>
+
     <servlet>
       <servlet-name>auth</servlet-name>
       <servlet-class>AuthServlet</servlet-class>
@@ -16,6 +20,14 @@
       <load-on-startup>5</load-on-startup>
     </servlet>
 
+    <servlet>
+      <servlet-name>register</servlet-name>
+      <servlet-class>RegisterServlet</servlet-class>
+      <load-on-startup>5</load-on-startup>
+    </servlet>
+
+
+
 
     <servlet-mapping>
       <servlet-name>auth</servlet-name>
@@ -26,5 +38,11 @@
       <servlet-name>logout</servlet-name>
       <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+      <servlet-name>register</servlet-name>
+      <url-pattern>/reg</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

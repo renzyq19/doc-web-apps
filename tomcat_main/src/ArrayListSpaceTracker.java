@@ -16,11 +16,12 @@ public class ArrayListSpaceTracker<E> implements Iterable<E>{
     return used.size()-1;
   }
 
-  public synchronized void erase(int pos) {
+  public synchronized E erase(int pos) {
     try {
-      used.set(pos, null);
+      E elem = used.set(pos, null);
       free.push(pos);
-    } catch (IndexOutOfBoundsException be) {}
+      return elem;
+    } catch (IndexOutOfBoundsException be) { return null; }
   }
 
   public E get(int pos) {

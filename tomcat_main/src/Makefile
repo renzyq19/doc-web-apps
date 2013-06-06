@@ -1,7 +1,8 @@
 CONTEXT = ../webapps/ROOT
 CLASS_DIR = $(CONTEXT)/WEB-INF/classes
-CLASSES = ArrayListSpaceTracker.class PsqlQuery.class AuthServlet.class LogoutServlet.class
-UNNEEDED = *.class
+#LIB_DIR = $(CONTEXT)/WEB-INF/lib
+CLASSES = ArrayListSpaceTracker.class PsqlQuery.class AuthServlet.class LogoutServlet.class RegisterServlet.class TimeoutListener.class
+#JARS = UserInfo.jar
 
 .SUFFIXES: .class .java
 
@@ -11,17 +12,8 @@ install: $(CLASSES)
 	install -m600 $(CLASSES) $(CLASS_DIR)
 
 clean:
-	rm $(CLASSES)
+	rm -f $(CLASSES) $(JARS)
 
 %.class : %.java
 	javac $^
 
-# some funny class
-ArrayListSpaceTracker.class : ArrayListSpaceTracker.java
-	javac $^
-
-PsqlQuery.class: PsqlQuery.java
-	javac $^
-
-AuthServlet.class: AuthServlet.java
-	javac $^
