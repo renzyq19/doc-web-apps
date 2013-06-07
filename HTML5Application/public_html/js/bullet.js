@@ -6,7 +6,6 @@
 var bullets = new Array();
 
 function shootBullet (gunship) {
-    debugText.setText("SHOOOOOT");
     var gunEndCoordX = gunEndCoord(gunship)[0];
     var gunEndCoordY = gunEndCoord(gunship)[1];
     var rotation = gunship.getRotationDeg();
@@ -15,6 +14,7 @@ function shootBullet (gunship) {
 	var hasHit = false;
     layer.add(bullet);
 	bullet.moveToBottom();
+	border.moveToBottom();
     bullets.push(bullet);
     var animation = new Kinetic.Animation(function (frame) {
             advance(bullet, speed);
@@ -27,6 +27,11 @@ function shootBullet (gunship) {
 					rotation += 180;
 					rotation %= 360;
 					bullet.setRotationDeg(rotation);
+					bullet.setFillRGB({
+						r: 95,
+						g: 95,
+						b: 95
+					});
 					speed *= 2;
 				}
 			}
@@ -47,7 +52,6 @@ var debugText = new Kinetic.Text({
 layer.add(debugText);
 
 function stopBullet (bullet, animation) {
-	debugText.setText(bullet.getX() + "," + bullet.getY() + "/" + bullet.getRotationDeg());
 	bullet.destroy();
 	bullet = null;
 	delete bullet;

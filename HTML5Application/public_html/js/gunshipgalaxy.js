@@ -11,6 +11,7 @@ $(document).ready(function(){
     controlInit(2);
     
     layer.add(border);
+	border.moveToBottom();
 
     layer.add(debugText);
     layer.draw();
@@ -20,17 +21,18 @@ $(document).ready(function(){
 var stage = new Kinetic.Stage({
     container: 'container',
     width: 800,
-    height: 600
+    height: 600,
 });
 
 var layer = new Kinetic.Layer();
 var border = new Kinetic.Rect({
     x:0,
     y:0,
-    width:stage.getWidth(),
-    height:stage.getHeight(),
-    stroke:"black",
-    strokeWidth:"1"
+    width: stage.getWidth(),
+    height: stage.getHeight(),
+    stroke: 'grey',
+    strokeWidth: 6,
+	fill: 'black'
 });
 
 var spaceSpeed = 4;
