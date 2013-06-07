@@ -156,7 +156,10 @@ var anim = new Kinetic.Animation(function(frame) {
     goDirection(gunship2);
     boundaryCheck(gunship1);
     boundaryCheck(gunship2);
-
+	for (var i = 0;i < 4;i++) {
+		if (waitTimes[i] > 0)
+			waitTimes[i]--;
+	}
 },layer);
 
 

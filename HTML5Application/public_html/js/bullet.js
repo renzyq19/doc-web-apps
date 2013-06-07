@@ -14,6 +14,7 @@ function shootBullet (gunship) {
 	var speed = spaceSpeed * 2;
 	var hasHit = false;
     layer.add(bullet);
+	bullet.moveToBottom();
     bullets.push(bullet);
     var animation = new Kinetic.Animation(function (frame) {
             advance(bullet, speed);
