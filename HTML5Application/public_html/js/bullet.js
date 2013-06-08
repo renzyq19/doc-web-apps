@@ -5,14 +5,14 @@
 
 var bullets = new Array();
 
-function shootBullet (gunship) {
+function shootBullet (model) {
     debugText.setText("SHOOOOOT");
-    var gunEndCoordX = gunEndCoord(gunship)[0];
-    var gunEndCoordY = gunEndCoord(gunship)[1];
-    var rotation = gunship.getRotationDeg();
+    var gunEndCoordX = gunEndCoord(model)[0];
+    var gunEndCoordY = gunEndCoord(model)[1];
+    var rotation = model.getRotationDeg();
     var bullet = newBullet(gunEndCoordX, gunEndCoordY, rotation);
-	var speed = spaceSpeed * 2;
-	var hasHit = false;
+    var speed = spaceSpeed * 2;
+    var hasHit = false;
     layer.add(bullet);
     bullets.push(bullet);
     var animation = new Kinetic.Animation(function (frame) {
@@ -55,7 +55,7 @@ function stopBullet (bullet, animation) {
 
 function newBullet(_x, _y, rotation) {
         var bulletHeight = 8;
-		var bulletWidth = 20;
+        var bulletWidth = 20;
         return new Kinetic.Rect({
            x: _x,
            y: _y ,
@@ -74,6 +74,7 @@ function advance (bullet, speed) {
     var rotation = bullet.getRotationDeg();
     var x = bullet.getX();
     var y = bullet.getY();
+    
     switch (rotation){
         case 0:
             bullet.setX(x+speed);

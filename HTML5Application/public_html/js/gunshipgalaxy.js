@@ -7,6 +7,7 @@
 
 
 $(document).ready(function(){
+    
     controlInit(1);
     controlInit(2);
     
@@ -45,6 +46,7 @@ var gunship1 = placeGunship(50,50,"red");
 var gunship2 = placeGunship(200,200,"green");
 
 var gunships = [gunship1,gunship2];
+
 var debugText = new Kinetic.Text({
     x: stage.getWidth() / 2,
     y: 15,
@@ -54,41 +56,47 @@ var debugText = new Kinetic.Text({
     fill: 'green'
 });
 
-function goDirection(gunship){
-    var rotation = gunship.getRotationDeg();
-    var x = gunship.getX();
-    var y = gunship.getY();
+function goDirection(model){
+    var rotation = model.getRotationDeg();
+    var x = model.getX();
+    var y = model.getY();
     switch (rotation){
         case 0:
-            gunship.setX(x+spaceSpeed);
+            model.setX(x+spaceSpeed);
             break;
         case 90:
-            gunship.setY(y+spaceSpeed);
+            model.setY(y+spaceSpeed);
             break;
         case 180:
-            gunship.setX(x-spaceSpeed);
+            model.setX(x-spaceSpeed);
             break;
         case 270:
-            gunship.setY(y-spaceSpeed);
+            model.setY(y-spaceSpeed);
             break;
 
     }
 
 }
 function placeGunship(_x,_y,colour) {
+    
+    //gunship geometry
     var gHullSize = 40;
-
     var prongWidth = gHullSize*0.4;
     var prongHeight = gHullSize/5;
     var topProngX = _x+gHullSize;
     var topProngY = _y;
     var bottomProngX = _x+gHullSize;
     var bottomProngY = _y+gHullSize-prongHeight;
-
     var gunWidth = gHullSize*0.7;
     var gunHeight = gHullSize/3;
     var gunX = _x+gHullSize;
     var gunY = _y+gHullSize/3;
+    
+    //gunship lives
+    var lives = 5;
+    
+    //gunship fire rate
+    var fireRate = 5;
 
     function drawHull(){
         return new Kinetic.Rect({
@@ -129,21 +137,23 @@ function placeGunship(_x,_y,colour) {
     var bottomProng = drawProng(bottomProngX,bottomProngY);
     var gun = drawGun();
 
-    var gunship = new Kinetic.Group({
+    var model = new Kinetic.Group({
         x:_x,
         y:_y,
         rotationDeg: 0,
         offsetX: _x+gHullSize/2,
         offsetY: _y+gHullSize/2
     });
+    
+    model.add(hull);
+    model.add(topProng);
+    model.add(bottomProng);
+    model.add(gun);
+    
+    var gunship = new Gunship(model,fireRate,lives);
+    
 
-    gunship.add(hull);
-    gunship.add(topProng);
-    gunship.add(bottomProng);
-    gunship.add(gun);
-
-
-    layer.add(gunship);
+    layer.add(gunship.model);
     stage.add(layer);
 
     return gunship;
@@ -152,18 +162,18 @@ function placeGunship(_x,_y,colour) {
 
 var anim = new Kinetic.Animation(function(frame) {
     //advanceShips(gunships);
-    goDirection(gunship1);
-    goDirection(gunship2);
-    boundaryCheck(gunship1);
-    boundaryCheck(gunship2);
+    goDirection(gunship1.model);
+    goDirection(gunship2.model);
+    boundaryCheck(gunship1.model);
+    boundaryCheck(gunship2.model);
 
 },layer);
 
 
 function advanceShips(gunships){
-    for (var ship in gunships){
-        goDirection(ship);
-        boundaryCheck(ship);
+    for (var gunship in gunships){
+        goDirection(gunship.model);
+        boundaryCheck(gunship.model);
     }
     //collisionCheck(gunships);
 }

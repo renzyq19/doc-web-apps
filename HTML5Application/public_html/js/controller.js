@@ -15,7 +15,7 @@ var controlMappings = [control1Mappings, control2Mappings];
 
 function controlInit(playerNum){
     var mapping = controlMappings[playerNum-1];
-    var gunship = gunships[playerNum-1];
+    var gunship = gunships[playerNum-1].model;
     window.addEventListener('keydown', function(e){
         switch(e.keyCode){
             case mapping[0]:
