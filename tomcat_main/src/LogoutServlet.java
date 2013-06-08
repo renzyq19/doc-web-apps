@@ -1,54 +1,65 @@
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class LogoutServlet extends HttpServlet {
   
+  private static final String DB_LOGOUT_SEGM = "UPDATE users SET sessionid=NULL WHERE username='%s'; ";
+  
+  @Override
+  public void doPost(HttpServletRequest req, HttpServletResponse res) {
+      sendMessage(res, "", HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+  }
+
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse res) {
-    
-    if(userAuthenticated(req)) {
-      try {
-        dbUpdate(req, res);
-        Cookie killerCookie = new Cookie("username", null);
-        killerCookie.setMaxAge(0);
-        res.addCookie(killerCookie);
-        try {
-          res.sendRedirect("/logoutproc.html");
-        } catch(IOException ioe) {}
-      } catch (SQLException sqle) {
-        sendInternalError(res, sqle.getMessage());
+    HttpSession session = req.getSession(true);
+    try {
+      if(!sessionAuthenticated(session)) {
+        forwardTo(req,res, "/protected/guestLogout.jsp");
       }
+      dbUpdate((String)session.getAttribute("username"));
+      resetSessionInfo(session);
+      forwardTo(req, res, "/hello.html");
+    } catch (SQLException sqle) {
+      sendMessage(res, sqle.getMessage(),
+          HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
   }
 
-  private void sendInternalError(HttpServletResponse res, String msg) {
+  private boolean sessionAuthenticated(HttpSession session) {
+    return session.getAttribute("username") != null ;
+  }
+
+  private void forwardTo(HttpServletRequest req,
+      HttpServletResponse res, String URL) {
     try {
-      res.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, msg);
+      RequestDispatcher rd = req.getRequestDispatcher(URL);
+      rd.forward(req,res);
+    } catch(IOException ioe) {}
+      catch(ServletException se) {
+      sendMessage(res, "", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    }
+  }
+
+
+  private void sendMessage(HttpServletResponse res, String msg, int status) {
+    try {
+      res.sendError(status, msg);
     } catch(IOException ioe) {}
   }
 
-  private void dbUpdate(HttpServletRequest req, HttpServletResponse res) throws SQLException {
+  private void dbUpdate(String user) throws SQLException {
     PsqlQuery updater = new PsqlQuery();
-    String user = findCookie(req.getCookies(), "username");
-    String change ="UPDATE Users SET loggedIn='f' WHERE username="+"'"+user+"';";
-    updater.executeUpdate(change);
+    updater.executeUpdate(String.format(DB_LOGOUT_SEGM, user));
   }
 
-  private boolean userAuthenticated(HttpServletRequest req) {
-    return true;
+  private void resetSessionInfo(HttpSession session){
+    session.removeAttribute("username");
   }
-
-
-  private static String findCookie(Cookie[] cookies, String name) {
-      for(Cookie c : cookies) {
-        if(c.getName().equals(name)) { return c.getValue(); }
-      }
-      return null;
-    }
-
-
 }

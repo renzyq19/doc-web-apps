@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+
+<%
+  final String u_name = (String)session.getAttribute("username"),
+               u_name_arg = u_name==null ? null : "\"" + u_name + "\"";
+  if(u_name != null) {
+%>
+    <jsp:forward page="/protected/alreadyLogged.jsp"/>
+<%
+  }
+%>
+ 
 <html>
     <head>
         <title>Register</title>

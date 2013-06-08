@@ -2,23 +2,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.RequestDispatcher;
 import java.sql.ResultSet;
-import java.io.PrintWriter;
+import javax.servlet.ServletException;
 import java.io.IOException;
 import java.sql.SQLException;
 
 
 public class AuthServlet extends HttpServlet {
 
-  private static final String QUERY_SEGMENT 
-      = "SELECT password FROM users WHERE username = ",
-                              UPDATE_SEGMENT
-      = "UPDATE users SET sessionid = ";
+  private static final String Q_FORM 
+      = "SELECT password FROM users WHERE username = '%s';",
+                              U_FORM
+      = "UPDATE users SET sessionid ='%s' WHERE username = '%s';";
 
   @Override
-public void doGet(HttpServletRequest req, HttpServletResponse res) {
-  sendMessage(res, "", HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-}
+  public void doGet(HttpServletRequest req, HttpServletResponse res) {
+    sendMessage(res, "", HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+  }
 
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse res) {
@@ -26,35 +27,43 @@ public void doGet(HttpServletRequest req, HttpServletResponse res) {
            pass = req.getParameter("password");
     HttpSession session = req.getSession(true);
     try {
+      if(sessionAuthenticated(session)) {
+        forwardTo(req, res, "/protected/alreadyLogged.jsp");
+        return;
+      }
       if(inconsistentValues(user,pass)) {
         sendMessage(res, "", HttpServletResponse.SC_BAD_REQUEST);
         return;
       }
-      if(session.getAttribute("username") != null) {
-        redirectTo(res,"/alreadyLogged.jsp");
-        return;
-      }
       if(!authenticateUser(res, user, pass, session.getId())) {
-        redirectTo(res,"/invalidLogin.html");
+        forwardTo(req, res,"/protected/invalidLogin.html");
         return;
       }
       setSessionInfo(session,user);
-      redirectTo(res,"/hello.jsp");
-      return;
+      forwardTo(req, res,"/hello.jsp");
     } catch (SQLException e) {
       sendMessage(res, e.getMessage(), 
           HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     } 
   }
 
+  private boolean sessionAuthenticated(HttpSession session) {
+    return session.getAttribute("username") != null ;
+  }
+
   private boolean inconsistentValues(String user, String pass) {
     return (user == null || pass == null);
   }
 
-  private void redirectTo(HttpServletResponse res, String resource) {
+  private void forwardTo(HttpServletRequest req,
+      HttpServletResponse res, String URL) {
     try {
-      res.sendRedirect(resource);
+      RequestDispatcher rd = req.getRequestDispatcher(URL);
+      rd.forward(req,res);
     } catch(IOException ioe) {}
+      catch(ServletException se) {
+      sendMessage(res, "", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    }
   }
 
   private void sendMessage(HttpServletResponse res, String msg, int st) {
@@ -66,18 +75,15 @@ public void doGet(HttpServletRequest req, HttpServletResponse res) {
   private boolean authenticateUser(HttpServletResponse res, 
       String user, String pass, String sessionId) throws SQLException {
       PsqlQuery authQuery = new PsqlQuery();
-      ResultSet rs = authQuery.executeQuery(QUERY_SEGMENT + "'" + user + "';");
+      ResultSet rs = authQuery.executeQuery(String.format(Q_FORM, user));
       if(!rs.next() || !rs.getString("password").equals(pass)) {
         return false;
       }
-      String update = UPDATE_SEGMENT + "'" + sessionId + "'" + 
-          "WHERE username = " + "'" + user + "'";
-      authQuery.executeUpdate(update);
+      authQuery.executeUpdate(String.format(U_FORM, sessionId, user));
       return true;
   }
 
   private void setSessionInfo(HttpSession session, String user) {
     session.setAttribute("username", user);
-    session.setMaxInactiveInterval(900);
   }
 }

@@ -5,7 +5,8 @@ import java.sql.SQLException;
 
 public class TimeoutListener implements HttpSessionListener {
 
-  private static final String DB_LOGOUT_SEGM = "UPDATE users SET sessionid = NULL WHERE sessionid = ";
+  private static final String DB_LOGOUT_FORM
+      = "UPDATE users SET sessionid = NULL WHERE sessionid = '%s';";
 
   @Override
   public void sessionCreated(HttpSessionEvent se) {}
@@ -19,7 +20,7 @@ public class TimeoutListener implements HttpSessionListener {
 
   private void logoutDB(String sessionId) throws SQLException {
     PsqlQuery logoutQuery = new PsqlQuery();
-    logoutQuery.executeUpdate(DB_LOGOUT_SEGM + "'" + sessionId + "';");
+    logoutQuery.executeUpdate(String.format(DB_LOGOUT_FORM, sessionId));
   }
 
 }

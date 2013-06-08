@@ -4,6 +4,7 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     version="2.4">
 
+
     <listener>
       <listener-class>TimeoutListener</listener-class>
     </listener>
@@ -43,6 +44,13 @@
       <servlet-name>register</servlet-name>
       <url-pattern>/reg</url-pattern>
     </servlet-mapping>
+
+    <security-constraint>
+      <web-resource-collection>
+        <web-resource-name> Protected files </web-resource-name>
+        <url-pattern>/protected/*</url-pattern>
+      </web-resource-collection>
+    </security-constraint>
 
 
 </web-app>
