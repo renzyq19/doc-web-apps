@@ -4,22 +4,21 @@
  */
 
 
-function boundaryCheck(model){
-    var gunEndCoordX = gunEndCoord(model)[0];
-    var gunEndCoordY = gunEndCoord(model)[1];
+function boundaryCheck(gunship){
+    var gunEndCoordX = gunEndCoord(gunship)[0];
+    var gunEndCoordY = gunEndCoord(gunship)[1];
     layer.draw();
-    var rotation = model.getRotationDeg();
+    var rotation = gunship.model.getRotationDeg();
     if (gunEndCoordX < 0 || gunEndCoordY <0
         || gunEndCoordX >stage.getWidth() || gunEndCoordY >stage.getHeight())
-              model.setRotationDeg((rotation + 180)%360);
+              gunship.model.setRotationDeg((rotation + 180)%360);
 }
 
-function gunEndCoord (model) {
-   var gunLength = model.get('Rect')[3].getWidth();
-   gunLength += model.get('Rect')[0].getWidth()/2;
-   var x = model.getX();
-   var y = model.getY();
-   var rotation = model.getRotation();
+function gunEndCoord (gunship) {
+   var gunLength = 48;
+   var x = gunship.model.getX();
+   var y = gunship.model.getY();
+   var rotation = gunship.model.getRotation();
    x += Math.round(Math.cos(rotation)) * gunLength;
    y += Math.round(Math.sin(rotation)) * gunLength;
    return [x,y];
