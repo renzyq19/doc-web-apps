@@ -30,6 +30,7 @@ function Bullet(shooter){
 
 function shootBullet (gunship) {
     debugText.setText(gunship.model.getX() + "," + gunship.model.getY());
+    gunship.timeToFire = gunship.fireRate;
     var bullet = new Bullet(gunship);
     layer.add(bullet.model);
     gunship.model.moveToTop();
@@ -39,23 +40,19 @@ function shootBullet (gunship) {
 
 function updateBullet (bullet){
     var animation = new Kinetic.Animation(function (frame) {
-            advance(bullet.model, bullet.speed);
-            if (!inBounds(bullet.model)) {
-                if (bullet.hasHit) {
-                    stopBullet(bullet, animation);
-                }
-                else {
-                    bullet.hasHit = true;
-                    bullet.model.setRotationDeg((bullet.model.getRotationDeg() + 180) % 360);
-                    bullet.model.setFillRGB({
-                    r: 95,
-                    g: 95,
-                    b: 95
-                    });
-                    bullet.speed *= 2;
-                }
+        advance(bullet.model, bullet.speed);
+        if (!inBounds(bullet.model)) {
+            if (bullet.hasHit) {
+                stopBullet(bullet, animation);
             }
-        }, layer);
+            else {
+                bullet.hasHit = true;
+                bullet.model.setRotationDeg((bullet.model.getRotationDeg() + 180) % 360);
+                bullet.model.setFill("#5F5F5F");
+                bullet.speed *= 2;
+            }
+        }
+    }, layer);
     animation.start();
 }
 

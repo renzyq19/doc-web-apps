@@ -37,8 +37,6 @@ var border = new Kinetic.Rect({
     fill:"black"
 });
 
-var spaceSpeed = 2;
-
 var gunship1 = new Gunship(50,50,1);
 var gunship2 = new Gunship(200,200,2);
 
@@ -56,25 +54,11 @@ var gunships = [gunship1,gunship2];
 
 
 function goDirection(model){
-    var rotation = model.getRotationDeg();
+    var rotation = model.getRotation();
     var x = model.getX();
     var y = model.getY();
-    switch (rotation){
-        case 0:
-            model.setX(x+spaceSpeed);
-            break;
-        case 90:
-            model.setY(y+spaceSpeed);
-            break;
-        case 180:
-            model.setX(x-spaceSpeed);
-            break;
-        case 270:
-            model.setY(y-spaceSpeed);
-            break;
-
-    }
-
+    model.setX(x + Math.round(Math.cos(rotation)*config.spaceSpeed));
+    model.setY(y + Math.round(Math.sin(rotation)*config.spaceSpeed));
 }
 
 var anim = new Kinetic.Animation(function(frame) {
@@ -84,6 +68,8 @@ var anim = new Kinetic.Animation(function(frame) {
 
 
 function advanceShip(gunship){
+    if (gunship.timeToFire>0)
+        gunship.timeToFire--;
     goDirection(gunship.model);
     boundaryCheck(gunship);
  }
