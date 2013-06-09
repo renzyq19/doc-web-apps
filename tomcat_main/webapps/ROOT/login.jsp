@@ -5,7 +5,7 @@
                u_name_arg = u_name==null ? null : "\"" + u_name + "\"";
   if(u_name != null) {
 %>
-    <jsp:forward page="/alreadyLogged.jsp"/>
+    <jsp:forward page="/protected/alreadyLogged.jsp"/>
 <%
   }
 %>
@@ -28,7 +28,7 @@
                 </form>
             </div>
             <div class='not-registered'>
-                <p>Haven't registered? You can <a href='register.html'>sign up here.</a></p>
+                <p>Haven't registered? You can <a href='register.jsp'>sign up here.</a></p>
             </div>
         </section>
    </body>
