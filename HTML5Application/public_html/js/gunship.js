@@ -14,7 +14,12 @@ function Gunship(_x,_y,playerNum, rotation) {
     this.bulletSpeed  = config.bulletSpeed;
 	this.relativeOffsetX = 20;
 	this.relativeOffsetY = 20;
-    var model = new Kinetic.Polygon({
+	this.mainColor = colourMappings[playerNum - 1];
+	this.invincibleColor = colourInvincibleMappings[playerNum - 1];
+	this.invincibleTimeLeft = 0;
+	this.timeToNextChangeOfColour = 0;
+    
+	var model = new Kinetic.Polygon({
         points:[_x,_y,
         _x+56,_y,
         _x+56,_y+8,
@@ -29,7 +34,7 @@ function Gunship(_x,_y,playerNum, rotation) {
         _x,_y+40],
         x: _x,
         y: _y,
-        fill: colourMappings[playerNum-1],
+        fill: this.mainColor,
         strokeWidth:0,
         offsetX: _x+20,
         offsetY: _y+20,
@@ -57,8 +62,9 @@ function Gunship(_x,_y,playerNum, rotation) {
 	
 };
 
-function decrementLives(gunship) {
-	gunship.lives--;
+function hitByBullet(gunship) {
+	if (gunship.invincibleTimeLeft == 0)
+		gunship.lives--;
 	if (gunship.lives == 0)
 		destroy(gunship);
 }

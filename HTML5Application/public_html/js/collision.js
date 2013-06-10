@@ -24,15 +24,19 @@ function gunEndCoord (gunship) {
    return [x,y];
 }
 
-function detectCollision (gunship, bullet) {
+function detectCollisionGunshipAndBullet (gunship, bullet) {
 	//Array of 4: [left, bottom, right, top]
-	var gunshipExtremeCoordinates = workOutExtremeCoordinates(gunship);
-	var bulletExtremeCoordinates = workOutExtremeCoordinates(bullet);
-	if (intersects(gunshipExtremeCoordinates, bulletExtremeCoordinates)) {
-		decrementLives(gunship);
-		stopBullet(bullet);
+	if (detectCollisionBetweenTwoRectangles(gunship, bullet)) {
+		hitByBullet(gunship);
+		hitAShip(bullet);
 	}
-	
+}
+
+//rectangle must be a variable containing a model and a relative offset on x and y
+function detectCollisionBetweenTwoRectangles (r1, r2) {
+	var extremeCoordinates1 = workOutExtremeCoordinates(r1);
+	var extremeCoordinates2 = workOutExtremeCoordinates(r2);
+	return intersects(extremeCoordinates1, extremeCoordinates2);
 }
 
 //Arrays of 4: [left, bottom, right, top]
@@ -43,8 +47,9 @@ function intersects (shipCoors, bulletCoors) {
 		  || bulletCoors[1] < shipCoors[3]);
 }
 
-function workOutExtremeCoordinates(gunship) {
-	var model = gunship.model;
+//rectangle must be a variable containing a model and a relative offset on x and y
+function workOutExtremeCoordinates(rectangle) {
+	var model = rectangle.model;
 	var right = 0;
 	var left = 0;
 	var top = 0;
@@ -52,26 +57,26 @@ function workOutExtremeCoordinates(gunship) {
 	var rotation = model.getRotationDeg();
 	switch (rotation) {
 		case 0:
-			left = model.getX() - gunship.relativeOffsetX;
-			top = model.getY() - gunship.relativeOffsetY;
+			left = model.getX() - rectangle.relativeOffsetX;
+			top = model.getY() - rectangle.relativeOffsetY;
 			right = left + model.getWidth();
 			bottom = top + model.getHeight();
 			break;
 		case 90:
-			left = model.getX() + gunship.relativeOffsetY - model.getHeight();
-			top = model.getY() - gunship.relativeOffsetX;
+			left = model.getX() + rectangle.relativeOffsetY - model.getHeight();
+			top = model.getY() - rectangle.relativeOffsetX;
 			right = left + model.getHeight();
 			bottom = top + model.getWidth();
 			break;
 		case 180:
-			left = model.getX() + gunship.relativeOffsetX - model.getWidth();
-			top = model.getY() + gunship.relativeOffsetY - model.getHeight();
+			left = model.getX() + rectangle.relativeOffsetX - model.getWidth();
+			top = model.getY() + rectangle.relativeOffsetY - model.getHeight();
 			right = left + model.getWidth();
 			bottom = top + model.getHeight();
 			break;
 		case 270:
-			left = model.getX() - gunship.relativeOffsetY;
-			top = model.getY() + gunship.relativeOffsetX - model.getWidth();
+			left = model.getX() - rectangle.relativeOffsetY;
+			top = model.getY() + rectangle.relativeOffsetX - model.getWidth();
 			right = left + model.getHeight();
 			bottom = top + model.getWidth();
 			break;

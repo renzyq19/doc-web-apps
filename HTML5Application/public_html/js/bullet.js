@@ -2,6 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+ 
+var allBullets = new Array();
 
 function Bullet(shooter){
     this.shooter = shooter;
@@ -17,7 +19,7 @@ function Bullet(shooter){
 	
 	/* The bullet needs to advance a bit on the local scale X to
 	 * prevent from exploding rightaway due to the collision with
-	 * the sender
+	 * the shooter
 	 */
 	var actualX = gunEndCoordX + (bulletWidth * 3/5 * Math.cos(shooter.model.getRotation()));
 	var actualY = gunEndCoordY + (bulletWidth * 3/5 * Math.sin(shooter.model.getRotation()));
@@ -45,15 +47,16 @@ function shootBullet (gunship) {
     layer.add(bullet.model);
     gunship.model.moveToTop();
 	gunship.liveDisplay.moveToTop();
+	allBullets.push(bullet);
     updateBullet(bullet);
 }
 
 
 function updateBullet (bullet){
     var animation = new Kinetic.Animation(function (frame) {
-        advance(bullet.model, bullet.speed);
+        advance(bullet.model, bullet.speed * frame.timeDiff/1000);
 		for (var i = 0; i < gunships.length;i++)
-			detectCollision(gunships[i], bullet);
+			detectCollisionGunshipAndBullet(gunships[i], bullet);
         if (!inBounds(bullet.model)) {
             if (bullet.hasHit) {
                 stopBullet(bullet);
@@ -70,7 +73,13 @@ function updateBullet (bullet){
     animation.start();
 }
 
+function hitAShip(bullet) {
+	stopBullet(bullet);
+}
+
 function stopBullet (bullet) {
+	var index = allBullets.indexOf(bullet);
+	allBullets.splice(index, 1);
 	bullet.anim.stop();
 	removeObjectWithModel(bullet);
 }
@@ -81,23 +90,23 @@ function removeObjectWithModel(object) {
 	object = null;
 }
 
-function advance (model, speed) {
+function advance (model, distance) {
     var rotation = model.getRotationDeg();
     var x = model.getX();
     var y = model.getY();
     
     switch (rotation){
         case 0:
-            model.setX(x+speed);
+            model.setX(x+distance);
             break;
         case 90:
-            model.setY(y+speed);
+            model.setY(y+distance);
             break;
         case 180:
-            model.setX(x-speed);
+            model.setX(x-distance);
             break;
         case 270:
-            model.setY(y-speed);
+            model.setY(y-distance);
             break;
 
     }
