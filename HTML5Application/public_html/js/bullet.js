@@ -67,19 +67,19 @@ function advance (model, speed) {
     var rotation = model.getRotationDeg();
     var x = model.getX();
     var y = model.getY();
-    
+    var combined_speed = speed + _default.spaceSpeed;
     switch (rotation){
         case 0:
-            model.setX(x+speed);
+            model.setX(x+combined_speed);
             break;
         case 90:
-            model.setY(y+speed);
+            model.setY(y+combined_speed);
             break;
         case 180:
-            model.setX(x-speed);
+            model.setX(x-combined_speed);
             break;
         case 270:
-            model.setY(y-speed);
+            model.setY(y-combined_speed);
             break;
 
     }

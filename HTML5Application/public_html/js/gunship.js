@@ -11,7 +11,7 @@ function Gunship(_x,_y,playerNum) {
     this.timeToFire   = config.fireRate;
     this.lives        = config.lives;
     this.bulletSpeed  = config.bulletSpeed;
-    var model = new Kinetic.Polygon({
+    this.model = new Kinetic.Polygon({
         points:[_x,_y,
         _x+56,_y,
         _x+56,_y+8,
@@ -33,9 +33,15 @@ function Gunship(_x,_y,playerNum) {
         width: 68,
         height:40
     });
-
-    this.model = model;
-
-    layer.add(model);
+    this.lifeText = new Kinetic.Text({
+        x: _x,
+        y: _y,
+        text: this.lives,
+        fontSize: 30,
+        fontFamily: 'Helvetica',
+        fill: 'white'
+    });
+    layer.add(this.model);
+    layer.add(this.lifeText);
     layer.draw();
 };
