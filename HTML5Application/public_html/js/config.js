@@ -9,7 +9,7 @@ bulletSpeed: 300, //300 pixels per second
 fireRate: 500, //500ms at least between each shot
 gunEnabled: true,
 lives: 5,
-minimumTimeBetweenBonuses: 6000 //6 seconds at least between 2 bonuses
+minimumTimeBetweenBonuses: 1000 //6 seconds at least between 2 bonuses
 };
 
 
