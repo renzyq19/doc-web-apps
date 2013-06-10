@@ -18,7 +18,7 @@ var bonusAnimation = new Kinetic.Animation (function (frame) {
 		 * a new bonus. This probability is increasing exponentially, following an x^2-like 
 		 * curve, and is equal to 10% at 9 seconds (over the whole second) after the last bonus
 		 */
-		if (randomNumber < (probability(timeSinceLastBonus / 1000) * frame.timeDiff / 1000) {
+		if (randomNumber < (probability(timeSinceLastBonus / 1000) * frame.timeDiff / 1000)) {
 			debugText.setText("BONUS!");
 			timeSinceLastBonus = 0;
 			instantiateBonus();

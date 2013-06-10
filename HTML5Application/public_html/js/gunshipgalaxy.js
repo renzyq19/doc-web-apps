@@ -8,6 +8,8 @@ var timeSinceLastBonus = 0;
 
 $(document).ready(function(){
     
+    
+    
 	for (var i = 1; i <= 4; i++)
 		controlInit(i);
     
@@ -82,27 +84,28 @@ function goDirection(model, timeSinceLastFrame){
 
 var anim = new Kinetic.Animation(function(frame) {
     for (var i = 0; i < gunships.length;i++)
-		updateShip(gunships[i], frame.timeDiff);
-	timeSinceLastBonus += frame.timeDiff;
-	/*if (timeSinceLastBonus > config.minimumTimeBetweenBonuses) {
-		var randomNumber = Math.random() * 1000;
-		/* The next formula is such that each second, there is a certain probability to create
-		 * a new bonus. This probability is increasing exponentially, following an x^2-like 
-		 * curve, and is equal to 10% at 9 seconds (over the whole second) after the last bonus
-		 *
-		 //(probabilityFunction(timeSinceLastBonus / 1000) * frame.timeDiff / 1000)
-		if (randomNumber < 100) {
-			debugText.setText("BONUS!");
-			timeSinceLastBonus = 0;
-			instantiateBonus();
-		}
-	}*/
-	if (gameOver()) {
-		this.stop();
-		finalDisplay.setText("GAME OVER!\nTHE WINNER IS... PLAYER " + gunships[0].playerNum + "!\nCONGRATULATIONS");
-		finalDisplay.setFill(gunships[0].model.getFill());
-		layer.add(finalDisplay);
-	}
+	updateShip(gunships[i], frame.timeDiff);
+    timeSinceLastBonus += frame.timeDiff;
+    /*if (timeSinceLastBonus > config.minimumTimeBetweenBonuses) {
+            var randomNumber = Math.random() * 1000;
+            /* The next formula is such that each second, there is a certain probability to create
+             * a new bonus. This probability is increasing exponentially, following an x^2-like 
+             * curve, and is equal to 10% at 9 seconds (over the whole second) after the last bonus
+             *
+             //(probabilityFunction(timeSinceLastBonus / 1000) * frame.timeDiff / 1000)
+            if (randomNumber < 100) {
+                    debugText.setText("BONUS!");
+                    timeSinceLastBonus = 0;
+                    instantiateBonus();
+            }
+    }*/
+    if (gameOver()) {
+            this.stop();
+            createjs.Sound.play("victory");
+            finalDisplay.setText("GAME OVER!\nTHE WINNER IS... PLAYER " + gunships[0].playerNum + "!\nCONGRATULATIONS");
+            finalDisplay.setFill(gunships[0].model.getFill());
+            layer.add(finalDisplay);
+    }
 },layer);
 
 function gameOver () {

@@ -61,10 +61,15 @@ function Gunship(_x,_y,playerNum, rotation) {
 };
 
 function hitByBullet(gunship) {
-	if (gunship.invincibleTimeLeft == 0)
+        
+	if (gunship.invincibleTimeLeft == 0){
+                createjs.Sound.play("impact");
 		gunship.lives--;
-	if (gunship.lives == 0)
+        }
+	if (gunship.lives == 0){
+                createjs.Sound.play("destruction");
 		destroy(gunship);
+        }
 }
 
 function destroy (gunship) {

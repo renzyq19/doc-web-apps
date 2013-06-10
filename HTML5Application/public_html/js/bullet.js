@@ -42,6 +42,7 @@ function Bullet(shooter){
 }
 
 function shootBullet (gunship) {
+    createjs.Sound.play("shot");
     gunship.timeToFire = gunship.fireRate;
     var bullet = new Bullet(gunship);
     layer.add(bullet.model);
@@ -94,19 +95,18 @@ function advance (model, speed) {
     var rotation = model.getRotationDeg();
     var x = model.getX();
     var y = model.getY();
-    var combined_speed = speed + _default.spaceSpeed;
     switch (rotation){
         case 0:
-            model.setX(x+combined_speed);
+            model.setX(x+speed);
             break;
         case 90:
-            model.setY(y+combined_speed);
+            model.setY(y+speed);
             break;
         case 180:
-            model.setX(x-combined_speed);
+            model.setX(x-speed);
             break;
         case 270:
-            model.setY(y-combined_speed);
+            model.setY(y-speed);
             break;
 
     }
