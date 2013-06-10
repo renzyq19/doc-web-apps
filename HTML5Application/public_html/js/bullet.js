@@ -7,16 +7,27 @@ function Bullet(shooter){
     this.shooter = shooter;
     this.speed = shooter.bulletSpeed;
     this.hasHit = false;
+	this.anim = null;
     
     var bulletHeight = 8;
     var bulletWidth = 20;
     var gunEndCoordX = gunEndCoord(shooter)[0];
     var gunEndCoordY = gunEndCoord(shooter)[1];
     var rotation = shooter.model.getRotationDeg();
+	
+	/* The bullet needs to advance a bit on the local scale X to
+	 * prevent from exploding rightaway due to the collision with
+	 * the sender
+	 */
+	var actualX = gunEndCoordX + (bulletWidth * 3/5 * Math.cos(shooter.model.getRotation()));
+	var actualY = gunEndCoordY + (bulletWidth * 3/5 * Math.sin(shooter.model.getRotation()));
+	
+	this.relativeOffsetX = bulletWidth/2;
+	this.relativeOffsetY = bulletHeight/2;
     
     this.model = new Kinetic.Rect({
-        x: gunEndCoordX,
-        y: gunEndCoordY ,
+        x: actualX,
+        y: actualY,
         width: bulletWidth,
         height: bulletHeight,
         stroke: 'none',
@@ -29,11 +40,11 @@ function Bullet(shooter){
 }
 
 function shootBullet (gunship) {
-    debugText.setText(gunship.model.getX() + "," + gunship.model.getY());
     gunship.timeToFire = gunship.fireRate;
     var bullet = new Bullet(gunship);
     layer.add(bullet.model);
     gunship.model.moveToTop();
+	gunship.liveDisplay.moveToTop();
     updateBullet(bullet);
 }
 
@@ -41,9 +52,11 @@ function shootBullet (gunship) {
 function updateBullet (bullet){
     var animation = new Kinetic.Animation(function (frame) {
         advance(bullet.model, bullet.speed);
+		for (var i = 0; i < gunships.length;i++)
+			detectCollision(gunships[i], bullet);
         if (!inBounds(bullet.model)) {
             if (bullet.hasHit) {
-                stopBullet(bullet, animation);
+                stopBullet(bullet);
             }
             else {
                 bullet.hasHit = true;
@@ -53,14 +66,19 @@ function updateBullet (bullet){
             }
         }
     }, layer);
+	bullet.anim = animation;
     animation.start();
 }
 
-function stopBullet (bullet, animation) {
-	bullet.model.hide();
-        bullet.model.destroy();
-	bullet = null;
-	animation.stop();
+function stopBullet (bullet) {
+	bullet.anim.stop();
+	removeObjectWithModel(bullet);
+}
+
+function removeObjectWithModel(object) {
+	object.model.hide();
+	object.model.destroy();
+	object = null;
 }
 
 function advance (model, speed) {

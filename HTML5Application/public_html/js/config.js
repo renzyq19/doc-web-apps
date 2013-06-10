@@ -4,19 +4,19 @@
  */
 
 var _default = {
-spaceSpeed: 2,
+spaceSpeed: 1,
 bulletSpeed: 4,
 fireRate: 30,
 gunEnabled: true,
 lives: 5
 };
 
-document.write(_default.bulletSpeed);
+//document.write(_default.bulletSpeed);
 
 var suddenDeath = _default;
-suddenDeath.lives = 1;
+//suddenDeath.lives = 1;
 
-var colourMappings = ["red","green","yellow","blue"];
+var colourMappings = ["red","green","orange","blue"];
 
 //var controlxMappings = [shoot,left,right,up,down];
 var control1Mappings = [32,37,39,38,40];
