@@ -6,6 +6,8 @@ function controlInit(playerNum){
     var mapping = controlMappings[playerNum-1];
     var gunship = gunships[playerNum-1];
     window.addEventListener('keydown', function(e){
+		if (gameOver())
+			return;
         switch(e.keyCode){
             case mapping[0]:
                 if (gunship.gunEnabled && (gunship.timeToFire === 0)){

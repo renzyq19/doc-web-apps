@@ -4,16 +4,18 @@
  */
 
 var _default = {
-spaceSpeed: 2,
-bulletSpeed: 4,
-fireRate: 30,
+spaceSpeed: 150, //150 pixels per second
+bulletSpeed: 300, //300 pixels per second
+fireRate: 500, //500ms at least between each shot
 gunEnabled: true,
-lives: 5
+lives: 5,
+minimumTimeBetweenBonuses: 6000 //6 seconds at least between 2 bonuses
 };
-//var suddenDeath = _default;
-//suddenDeath.lives = 1;
 
-var colourMappings = ["red","green","yellow","blue"];
+
+
+var colourMappings = ["#FF0000", "#339933", "#FF9900", "#0000CC"];
+var colourInvincibleMappings = ["#FF9999", "#00CC00", "#FFC266", "#6666E0"];
 
 //var controlxMappings = [shoot,left,right,up,down];
 var control1Mappings = [32,37,39,38,40];

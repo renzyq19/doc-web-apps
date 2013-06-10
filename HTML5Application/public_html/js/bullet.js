@@ -2,21 +2,34 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+ 
+var allBullets = new Array();
 
 function Bullet(shooter){
     this.shooter = shooter;
     this.speed = shooter.bulletSpeed;
     this.hasHit = false;
+	this.anim = null;
     
     var bulletHeight = 8;
     var bulletWidth = 20;
     var gunEndCoordX = gunEndCoord(shooter)[0];
     var gunEndCoordY = gunEndCoord(shooter)[1];
     var rotation = shooter.model.getRotationDeg();
+	
+	/* The bullet needs to advance a bit on the local scale X to
+	 * prevent from exploding rightaway due to the collision with
+	 * the shooter
+	 */
+	var actualX = gunEndCoordX + (bulletWidth * 3/5 * Math.cos(shooter.model.getRotation()));
+	var actualY = gunEndCoordY + (bulletWidth * 3/5 * Math.sin(shooter.model.getRotation()));
+	
+	this.relativeOffsetX = bulletWidth/2;
+	this.relativeOffsetY = bulletHeight/2;
     
     this.model = new Kinetic.Rect({
-        x: gunEndCoordX,
-        y: gunEndCoordY ,
+        x: actualX,
+        y: actualY,
         width: bulletWidth,
         height: bulletHeight,
         stroke: 'none',
@@ -29,21 +42,24 @@ function Bullet(shooter){
 }
 
 function shootBullet (gunship) {
-    debugText.setText(gunship.model.getX() + "," + gunship.model.getY());
     gunship.timeToFire = gunship.fireRate;
     var bullet = new Bullet(gunship);
     layer.add(bullet.model);
     gunship.model.moveToTop();
+	gunship.liveDisplay.moveToTop();
+	allBullets.push(bullet);
     updateBullet(bullet);
 }
 
 
 function updateBullet (bullet){
     var animation = new Kinetic.Animation(function (frame) {
-        advance(bullet.model, bullet.speed);
+        advance(bullet.model, bullet.speed * frame.timeDiff/1000);
+		for (var i = 0; i < gunships.length;i++)
+			detectCollisionGunshipAndBullet(gunships[i], bullet);
         if (!inBounds(bullet.model)) {
             if (bullet.hasHit) {
-                stopBullet(bullet, animation);
+                stopBullet(bullet);
             }
             else {
                 bullet.hasHit = true;
@@ -53,14 +69,25 @@ function updateBullet (bullet){
             }
         }
     }, layer);
+	bullet.anim = animation;
     animation.start();
 }
 
-function stopBullet (bullet, animation) {
-	bullet.model.hide();
-        bullet.model.destroy();
-	bullet = null;
-	animation.stop();
+function hitAShip(bullet) {
+	stopBullet(bullet);
+}
+
+function stopBullet (bullet) {
+	var index = allBullets.indexOf(bullet);
+	allBullets.splice(index, 1);
+	bullet.anim.stop();
+	removeObjectWithModel(bullet);
+}
+
+function removeObjectWithModel(object) {
+	object.model.hide();
+	object.model.destroy();
+	object = null;
 }
 
 function advance (model, speed) {
