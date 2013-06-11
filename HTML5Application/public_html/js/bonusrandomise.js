@@ -30,6 +30,12 @@ function instantiateBonus () {
 	
 }
 
+function checkLastBonus (gunship) {
+    if (lastBonus == invincibility)
+        invincibility_pickup(gunship);
+    
+}
+
 function isPlacementOK (bonus) {
 	for (var i = 0; i < gunships.length; i++) {
 		if (detectCollisionBetweenTwoRectangles(gunships[i], bonus)) {
@@ -78,4 +84,22 @@ function InvincibilityBonus () {
      });
 	  
 	
+}
+function invincibilityPickup(gunship){
+    if (gunship.invincibleTimeLeft == 0 && gunship.model.getFill() != gunship.mainColor) {
+            gunship.model.setFill(gunship.mainColor);
+    }
+    else if (gunship.invincibleTimeLeft > 0) {
+        gunship.invincibleTimeLeft -= Math.min(timeSinceLastFrameMS, gunship.invincibleTimeLeft);
+        if (gunship.timeToNextChangeOfColour > 0)
+                gunship.timeToNextChangeOfColour--;
+        else {
+                gunship.timeToNextChangeOfColour = 5;
+                if (gunship.model.getFill() == gunship.mainColor)
+                        gunship.model.setFill(gunship.invincibleColor);
+                else
+                        gunship.model.setFill(gunship.mainColor);
+        }
+    }
+    
 }

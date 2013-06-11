@@ -52,6 +52,7 @@ function Gunship(_x,_y,playerNum, rotation) {
             fontFamily: 'Calibri',
             fill: 'white'
     });
+    
     this.liveDisplay = liveDisplay;
 
     layer.add(model);

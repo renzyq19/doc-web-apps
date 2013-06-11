@@ -124,20 +124,6 @@ function updateShip(gunship, timeSinceLastFrameMS){
         gunship.timeToFire -= Math.min(timeSinceLastFrameMS, gunship.timeToFire);
     goDirection(gunship.model, timeSinceLastFrameMS/1000);
     boundaryCheck(gunship);
-	drawLives(gunship);
-	if (gunship.invincibleTimeLeft == 0 && gunship.model.getFill() != gunship.mainColor) {
-		gunship.model.setFill(gunship.mainColor);
-	}
-	else if (gunship.invincibleTimeLeft > 0) {
-		gunship.invincibleTimeLeft -= Math.min(timeSinceLastFrameMS, gunship.invincibleTimeLeft);
-		if (gunship.timeToNextChangeOfColour > 0)
-			gunship.timeToNextChangeOfColour--;
-		else {
-			gunship.timeToNextChangeOfColour = 5;
-			if (gunship.model.getFill() == gunship.mainColor)
-				gunship.model.setFill(gunship.invincibleColor);
-			else
-				gunship.model.setFill(gunship.mainColor);
-		}
-	}
+    drawLives(gunship);
+    checkLastBonus(gunship);
 }
