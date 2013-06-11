@@ -4,12 +4,12 @@
  */
 
 var _default = {
-spaceSpeed: 150, //150 pixels per second
-bulletSpeed: 300, //300 pixels per second
-fireRate: 500, //500ms at least between each shot
+spaceSpeed: 150, //pixels per second
+bulletSpeed: 300, // pixels per second
+fireRate: 500, //minimum ms between each shot
 gunEnabled: true,
 lives: 5,
-minimumTimeBetweenBonuses: 1000 //6 seconds at least between 2 bonuses
+minimumTimeBetweenBonuses: 1000 // minimum ms between 2 bonuses
 };
 
 

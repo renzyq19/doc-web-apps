@@ -46,39 +46,36 @@ function isPlacementOK (bonus) {
 
 function InvincibilityBonus () {
 
-	// Random X and Y inside the stage
-	var randomX = Math.floor(Math.random() * (stage.getWidth() - 100) + 50);
-	var randomY = Math.floor(Math.random() * (stage.getHeight() - 100) + 50);
+    // Random X and Y inside the stage
+    var randomX = Math.floor(Math.random() * (stage.getWidth() - 100) + 50);
+    var randomY = Math.floor(Math.random() * (stage.getHeight() - 100) + 50);
 
-	this.relativeOffsetX = 0;
-	this.relativeOffsetY = 0;
-	
-	this.model = new Kinetic.Rect({
+    this.relativeOffsetX = 0;
+    this.relativeOffsetY = 0;
+
+    this.model = new Kinetic.Rect({
+    x: randomX,
+    y: randomY,
+    width: 50,
+    height: 50,
+    fill: 'black',
+            strokeWidth: 2,
+            stroke: 'white'
+    });
+    
+    var iR = 25*((3-Math.sqrt(5))/2);
+    this.star = new Kinetic.Star({
         x: randomX,
         y: randomY,
-        width: 50,
-        height: 50,
-        fill: 'black',
-		strokeWidth: 2,
-		stroke: 'white'
-      });
-	  
-	this.star = new Kinetic.Polygon({
-		points: [25, 0,
-				 18, 18,
-				 0 , 18,
-				 15, 30,
-				 5 , 50,
-				 25, 35,
-				 45, 50,
-				 35, 30,
-				 50, 18,
-				 32, 18],
-		x: randomX,
-		y: randomY,
-		fill: 'yellow',
-        strokeWidth:0
-	  });
+        numPoints:5,
+        innerRadius: 10,
+        outerRadius: 26.18,
+        fill: 'yellow',
+        strokeWidth:0,
+        offsetX: -25,
+        offsetY: -26
+        
+     });
 	  
 	
 }

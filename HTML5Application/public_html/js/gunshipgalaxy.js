@@ -5,33 +5,41 @@
 
 var timeSinceLastBonus = 0;
 var isThereABonus = false;
-
-
-$(document).ready(function(){
-    
-    
-    
-	for (var i = 1; i <= 4; i++)
-		controlInit(i);
-    
-    stage.add(layer);
-    
-    layer.add(border);
-    border.moveToBottom();
-    //layer.add(debugText);
-    layer.draw();
-    
-    anim.start();
-});
-
 var stage = new Kinetic.Stage({
     container: 'container',
     width: 800,
     height: 600
 });
+var playerNum = 1;
+$(document).ready(function(){
+    
 
+  //  var menuInit();
+    
+    
+    if (true){
+        initGame();
+    }
+    
+});
+
+
+
+
+function initGame(){
+    for (var i = 1; i <= playerNum; i++)
+        controlInit(i);
+    stage.add(layer);
+    layer.add(backdrop);
+    backdrop.moveToBottom();
+    layer.draw();
+    anim.start();
+}
+
+var menu = new Kinetic.Layer();
 var layer = new Kinetic.Layer();
-var border = new Kinetic.Rect({
+
+var backdrop = new Kinetic.Rect({
     x:0,
     y:0,
     width: stage.getWidth(),
@@ -40,7 +48,6 @@ var border = new Kinetic.Rect({
     strokeWidth:"1",
     fill:"black"
 });
-
 var gunship1 = new Gunship(50,  50,  1, 0);
 var gunship2 = new Gunship(750, 50,  2, 180);
 var gunship3 = new Gunship(50,  550, 3, 0);
