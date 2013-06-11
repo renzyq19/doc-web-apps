@@ -108,14 +108,18 @@ var anim = new Kinetic.Animation(function(frame) {
     if (gameOver()) {
             this.stop();
             createjs.Sound.play("victory");
-            finalDisplay.setText("GAME OVER!\nTHE WINNER IS... PLAYER " + gunships[0].playerNum + "!\nCONGRATULATIONS");
-            finalDisplay.setFill(gunships[0].model.getFill());
+			if (gunships.length == 1) {
+				finalDisplay.setText("GAME OVER!\nTHE WINNER IS... PLAYER " + gunships[0].playerNum + "!\nCONGRATULATIONS");
+				finalDisplay.setFill(gunships[0].model.getFill());
+			}
+			else
+				finalDisplay.setText("THIS IS A DRAW");
             layer.add(finalDisplay);
     }
 },layer);
 
 function gameOver () {
-	return gunships.length == 1;
+	return gunships.length <= 1;
 }
 
 
