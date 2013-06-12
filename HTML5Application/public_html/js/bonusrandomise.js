@@ -4,12 +4,14 @@ var isThereABonus = false;
 var timeLeftForCurrentBonus = 0;
 
 function instantiateBonus () {
-	var random = Math.floor(Math.random() * 2);
-	var bonus = new LifeBonus();
-	/*if (random == 0)
+	var random = Math.floor(Math.random() * 3);
+	var bonus;
+	if (random == 0)
 		bonus = new GunDisabledBonus();
 	else if (random == 1)
-		bonus = new InvincibilityBonus();*/
+		bonus = new InvincibilityBonus();
+	else
+		bonus = new LifeBonus();
 	layer.add(bonus.model);
 	layer.add(bonus.display);
 	bonus.display.moveToTop();
