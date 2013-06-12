@@ -3,14 +3,13 @@
  * and open the template in the editor.
  */
 
-var timeSinceLastBonus = 0;
-var isThereABonus = false;
+
 var stage = new Kinetic.Stage({
     container: 'container',
     width: 800,
     height: 600
 });
-var playerNum = 1;
+var playerNum = 4;
 $(document).ready(function(){
     initMenu();
     
@@ -27,6 +26,7 @@ function initGame(){
     layer.add(backdrop);
     layer.moveToBottom();
     backdrop.moveToBottom();
+	layer.add(debugText);
     layer.draw();
     anim.start();
 }
@@ -96,6 +96,7 @@ function goDirection(model, timeSinceLastFrame){
 var anim = new Kinetic.Animation(function(frame) {
     for (var i = 0; i < gunships.length;i++)
 	updateShip(gunships[i], frame.timeDiff);
+<<<<<<< HEAD
     bonusRandomise(frame.timeDiff);
     if (gameOver()) {
         createjs.Sound.play("victory");
@@ -107,6 +108,18 @@ var anim = new Kinetic.Animation(function(frame) {
 
         layer.add(finalDisplay);
         this.stop();
+=======
+	bonusRandomise(frame.timeDiff);
+    if (gameOver()) {
+            createjs.Sound.play("victory");
+			if (gunships.length == 1) {
+				finalDisplay.setText("GAME OVER!\nTHE WINNER IS... PLAYER " + gunships[0].playerNum + "!\nCONGRATULATIONS");
+				finalDisplay.setFill(gunships[0].model.getFill());
+			}
+			else
+				finalDisplay.setText("THIS IS A DRAW");
+            layer.add(finalDisplay);
+			this.stop();
     }
 },layer);
 

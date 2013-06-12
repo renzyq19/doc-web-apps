@@ -4,12 +4,14 @@ var isThereABonus = false;
 var timeLeftForCurrentBonus = 0;
 
 function instantiateBonus () {
-	var random = Math.floor(Math.random() * 2);
+	var random = Math.floor(Math.random() * 3);
 	var bonus;
 	if (random == 0)
 		bonus = new GunDisabledBonus();
 	else if (random == 1)
 		bonus = new InvincibilityBonus();
+	else
+		bonus = new LifeBonus();
 	layer.add(bonus.model);
 	layer.add(bonus.display);
 	bonus.display.moveToTop();
@@ -69,6 +71,15 @@ function updateBonus(gunship) {
 					gunship.model.setFill(gunship.mainColor);
 		}
 	}
+	else if (currentBonus == "gunDisabled") {
+		for (var i = 0; i < gunships.length; i++) {
+				if (gunships[i] != gunship) {
+					gunships[i].gun.setRotation(gunships[i].model.getRotation());
+					gunships[i].gun.setX(gunships[i].model.getX());
+					gunships[i].gun.setY(gunships[i].model.getY());
+				}
+			}
+	}
 }
 
 function endOfBonus(gunship) {
@@ -77,8 +88,10 @@ function endOfBonus(gunship) {
 		gunship.isInvincible = false;
 	else if (currentBonus == "gunDisabled") {
 		for (var i = 0; i < gunships.length; i++) {
-			if (gunships[i] != gunship)
+			if (gunships[i] != gunship) {
 				gunships[i].gunEnabled = true;
+				gunships[i].gun.setVisible(false);
+			}
 		}
 	}
 }
@@ -106,13 +119,20 @@ function bonusPickedUp (gunship) {
 		gunship.isInvincible = true;
 		timeLeftForCurrentBonus = 4000;
 	}
-	else if (currentBonus = "gunDisabled") {
+	else if (currentBonus == "gunDisabled") {
 		for (var i = 0; i < gunships.length;i++) {
-			if (gunships[i] != gunship)
+			if (gunships[i] != gunship) {
+				gunships[i].gun.setRotation(gunships[i].model.getRotation());
+				gunships[i].gun.setX(gunships[i].model.getX());
+				gunships[i].gun.setY(gunships[i].model.getY());
 				gunships[i].gunEnabled = false;
+				gunships[i].gun.setVisible(true);
+			}
 		}
 		timeLeftForCurrentBonus = 4000;
 	}
+	else if (currentBonus == "life")
+		incrementLives(gunship);
 }
 
 function isPlacementOK (bonus) {
@@ -227,4 +247,26 @@ function GunDisabledBonus () {
 	this.display.add(gunship);
 	this.display.add(line1);
 	this.display.add(line2);
+}
+
+function LifeBonus () {
+	var randomX = Math.floor(Math.random() * (stage.getWidth() - 100) + 50);
+    var randomY = Math.floor(Math.random() * (stage.getHeight() - 100) + 50);
+	
+	this.name = "life";
+
+    this.relativeOffsetX = 0;
+    this.relativeOffsetY = 0;
+	
+	this.model = bonusModelDisplay(randomX, randomY);
+	
+	this.display = new Kinetic.Text({
+		x: randomX + 5,
+		y: randomY + 5,
+		text: "+1",
+		fontSize:40,
+		stroke: 'pink',
+		fill: 'pink'
+	});
+	
 }
