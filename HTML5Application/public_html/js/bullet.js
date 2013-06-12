@@ -9,7 +9,7 @@ function Bullet(shooter){
     this.shooter = shooter;
     this.speed = shooter.bulletSpeed;
     this.hasHit = false;
-	this.anim = null;
+	this.anim;
     
     var bulletHeight = 8;
     var bulletWidth = 20;
@@ -91,9 +91,9 @@ function removeObjectWithModel(object) {
 	object = null;
 }
 
-function inBounds(bullet) {
-    return !(bullet.getX() < -bullet.getWidth() ||
-            bullet.getY() < -bullet.getHeight() ||
-            bullet.getX() > stage.getWidth() || 
-            bullet.getY() > stage.getHeight());
+function inBounds(model) {
+    return !(model.getX() < -model.getWidth() ||
+            model.getY() < -model.getHeight() ||
+            model.getX() > stage.getWidth() || 
+            model.getY() > stage.getHeight());
 }

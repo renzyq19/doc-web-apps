@@ -25,7 +25,7 @@ function initGame(){
     for (var i = 0; i < gunships.length; i++)
         drawGunship(gunships[i]);
 	gunship2.isComputer = true;
-	gunship2.difficulty = 1;
+	gunship2.difficulty = 2;
     stage.add(layer);
     layer.add(backdrop);
     layer.moveToBottom();

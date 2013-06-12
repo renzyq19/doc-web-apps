@@ -24,8 +24,13 @@ function gunEndCoord (gunship) {
    return [x,y];
 }
 
+var clone = (function(){ 
+  return function (obj) { Clone.prototype=obj; return new Clone() };
+  function Clone(){}
+}());
+
 function willCollide(originalBullet, originalGunship) {
-	var bullet = new Bullet(gunship1);
+	/*var bullet = new Bullet(gunship1);
 	bullet.model = originalBullet.model.clone();
 	var gunship = new Gunship(0, 0, 0, 0);
 	gunship.speed = originalGunship.speed;
@@ -33,15 +38,22 @@ function willCollide(originalBullet, originalGunship) {
 	for (var i = 0; i < 10; i++) {
 		advance(bullet.model, 50);
 		advance(gunship.model, 50 * gunship.speed / bullet.speed);
+		if (!inBounds(bullet.model)) {
+			bullet.speed *= 2;
+			bullet.model.setRotationDeg((bullet.model.getRotationDeg() + 180) % 360);
+		}
+		boundaryCheck(gunship);
 		if (detectCollisionBetweenTwoRectangles(bullet, gunship))
 			return true;
-	}
+	}*/
 	return false;
 }
 
 function detectCollisionGunshipAndBullet (gunship, bullet) {
 	//Array of 4: [left, bottom, right, top]
 	if (detectCollisionBetweenTwoRectangles(gunship, bullet)) {
+		if (bullet == allBullets[0])
+			debugText.setText("YES");
 		hitByBullet(gunship);
 		hitAShip(bullet);
 	}
@@ -55,11 +67,11 @@ function detectCollisionBetweenTwoRectangles (r1, r2) {
 }
 
 //Arrays of 4: [left, bottom, right, top]
-function intersects (shipCoors, bulletCoors) {
-	return !(bulletCoors[0] > shipCoors[2]
-		  || bulletCoors[2] < shipCoors[0]
-		  || bulletCoors[3] > shipCoors[1]
-		  || bulletCoors[1] < shipCoors[3]);
+function intersects (coorsR1, coorsR2) {
+	return !(coorsR2[0] > coorsR1[2]
+		  || coorsR2[2] < coorsR1[0]
+		  || coorsR2[3] > coorsR1[1]
+		  || coorsR2[1] < coorsR1[3]);
 }
 
 //rectangle must be a variable containing a model and a relative offset on x and y
