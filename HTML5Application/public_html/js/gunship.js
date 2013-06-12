@@ -5,8 +5,9 @@
 
 var config = _default;
 
-function Gunship(_x,_y,playerNum, rotation) {
+function Gunship(_x, _y, playerNum, rotation) {
     this.playerNum    = playerNum;
+	this.speed        = config.spaceSpeed;
     this.gunEnabled   = config.gunEnabled;
     this.fireRate     = config.fireRate;
     this.timeToFire   = config.fireRate;
@@ -18,6 +19,12 @@ function Gunship(_x,_y,playerNum, rotation) {
     this.invincibleColor = colourInvincibleMappings[playerNum - 1];
     this.isInvincible = false;
     this.timeToNextChangeOfColour = 0;
+	
+	//The following are only used in case the gunship is controlled by an AI
+	this.isComputer = false;
+	this.difficulty = 0;
+	this.timeSinceLastMove = 0;
+	this.timeSinceLastCheck = 0;
 
     this.model = new Kinetic.Polygon({
         points:[_x,_y,
@@ -53,11 +60,7 @@ function Gunship(_x,_y,playerNum, rotation) {
             fontFamily: 'Calibri',
             fill: 'white'
     });
-    
-<<<<<<< HEAD
-    this.liveDisplay = liveDisplay;
 
-=======
 	this.gun = new Kinetic.Polygon({
 		points:[_x+40,_y+12,
         _x+69,_y+12,
@@ -71,11 +74,6 @@ function Gunship(_x,_y,playerNum, rotation) {
         offsetY: _y+20,
 		rotationDeg: rotation
 	});
-	
-    layer.add(this.model);
-    layer.add(this.liveDisplay);
-	
-    layer.draw();
 };
 
 function drawGunship(gunship) {

@@ -91,27 +91,6 @@ function removeObjectWithModel(object) {
 	object = null;
 }
 
-function advance (model, speed) {
-    var rotation = model.getRotationDeg();
-    var x = model.getX();
-    var y = model.getY();
-    switch (rotation){
-        case 0:
-            model.setX(x+speed);
-            break;
-        case 90:
-            model.setY(y+speed);
-            break;
-        case 180:
-            model.setX(x-speed);
-            break;
-        case 270:
-            model.setY(y-speed);
-            break;
-
-    }
-}
-
 function inBounds(bullet) {
     return !(bullet.getX() < -bullet.getWidth() ||
             bullet.getY() < -bullet.getHeight() ||

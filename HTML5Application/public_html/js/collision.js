@@ -9,8 +9,8 @@ function boundaryCheck(gunship){
     var gunEndCoordY = gunEndCoord(gunship)[1];
     layer.draw();
     var rotation = gunship.model.getRotationDeg();
-    if (gunEndCoordX < 0 || gunEndCoordY <0
-        || gunEndCoordX >stage.getWidth() || gunEndCoordY >stage.getHeight())
+    if (gunEndCoordX < 0 || gunEndCoordY < 0
+        || gunEndCoordX > stage.getWidth() || gunEndCoordY > stage.getHeight())
               gunship.model.setRotationDeg((rotation + 180)%360);
 }
 
@@ -22,6 +22,21 @@ function gunEndCoord (gunship) {
    x += Math.round(Math.cos(rotation)) * gunLength;
    y += Math.round(Math.sin(rotation)) * gunLength;
    return [x,y];
+}
+
+function willCollide(originalBullet, originalGunship) {
+	var bullet = new Bullet(gunship1);
+	bullet.model = originalBullet.model.clone();
+	var gunship = new Gunship(0, 0, 0, 0);
+	gunship.speed = originalGunship.speed;
+	gunship.model = originalGunship.model.clone();
+	for (var i = 0; i < 10; i++) {
+		advance(bullet.model, 50);
+		advance(gunship.model, 50 * gunship.speed / bullet.speed);
+		if (detectCollisionBetweenTwoRectangles(bullet, gunship))
+			return true;
+	}
+	return false;
 }
 
 function detectCollisionGunshipAndBullet (gunship, bullet) {
