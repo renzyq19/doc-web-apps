@@ -35,9 +35,9 @@ var menuHeader = new Kinetic.Text({
     y: stage.getHeight()*0.25,
     width:stage.getWidth(),
     fontSize: 40,
-    fontFamily: 'Helvetica',
+    fontFamily: 'DicotBold',
     fill: "white",
-    text: "Gunship Galaxy!",
+    text: "Gunship Galaxy",
     align: "center"
 });
 
@@ -59,7 +59,7 @@ var menuPlayerNum = new Kinetic.Text({
     y:stage.getHeight()*0.4,
     width: stage.getWidth(),
     fontSize: 40,
-    fontFamily: 'Helvetica',
+    fontFamily: 'DicotBold',
     fill:"red",
     text: "Players: 1",
     align: "center"
@@ -70,7 +70,7 @@ var menuPlayButton = new Kinetic.Text({
     y: stage.getHeight()*0.75,
     width: stage.getWidth(),
     fontSize: 40,
-    fontFamily: 'Helvetica',
+    fontFamily: 'DicotBold',
     fill: "white",
     text: "Play",
     align: "center"

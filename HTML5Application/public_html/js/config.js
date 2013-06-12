@@ -4,7 +4,7 @@
  */
 
 var _default = {
-spaceSpeed: 150, //pixels per second
+spaceSpeed: 250, //pixels per second
 bulletSpeed: 300, // pixels per second
 fireRate: 500, //minimum ms between each shot
 gunEnabled: true,
