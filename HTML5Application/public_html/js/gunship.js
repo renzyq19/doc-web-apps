@@ -16,7 +16,7 @@ function Gunship(_x,_y,playerNum, rotation) {
     this.relativeOffsetY = 20;
     this.mainColor = colourMappings[playerNum - 1];
     this.invincibleColor = colourInvincibleMappings[playerNum - 1];
-    this.invincibleTimeLeft = 0;
+    this.isInvincible = false;
     this.timeToNextChangeOfColour = 0;
 
     var model = new Kinetic.Polygon({
@@ -62,15 +62,14 @@ function Gunship(_x,_y,playerNum, rotation) {
 };
 
 function hitByBullet(gunship) {
-        
-	if (gunship.invincibleTimeLeft == 0){
-                createjs.Sound.play("impact");
+	if (!gunship.isInvincible){
+        createjs.Sound.play("impact");
 		gunship.lives--;
-        }
+    }
 	if (gunship.lives == 0){
-                createjs.Sound.play("destruction");
+		createjs.Sound.play("destruction");
 		destroy(gunship);
-        }
+    }
 }
 
 function destroy (gunship) {
