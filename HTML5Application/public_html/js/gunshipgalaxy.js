@@ -12,30 +12,39 @@ var stage = new Kinetic.Stage({
 });
 var playerNum = 1;
 $(document).ready(function(){
-    
-
-  //  var menuInit();
-    
-    
-    if (true){
-        initGame();
-    }
+    initMenu();
     
 });
-
-
-
 
 function initGame(){
     for (var i = 1; i <= playerNum; i++)
         controlInit(i);
+    if (playerNum < 4)
+        gunships.splice(playerNum,4 - playerNum);
+    for (var i = 0; i < gunships.length; i++)
+        drawGunship(gunships[i]);
     stage.add(layer);
     layer.add(backdrop);
+    layer.moveToBottom();
     backdrop.moveToBottom();
     layer.draw();
     anim.start();
 }
 
+function initMenu(){
+    
+    stage.add(menu);
+    menu.add(menuBackdrop);
+    menu.add(menuHeader);
+    menu.add(menuAddButton);
+    menu.add(menuSubButton);
+    menu.add(menuPlayButton);
+    menu.add(menuPlayerNum);
+    setTimeout(function(){
+        addGunship(1);
+    }, 100);
+    menu.draw();
+}
 var menu = new Kinetic.Layer();
 var layer = new Kinetic.Layer();
 
@@ -48,6 +57,9 @@ var backdrop = new Kinetic.Rect({
     strokeWidth:"1",
     fill:"black"
 });
+
+
+
 var gunship1 = new Gunship(50,  50,  1, 0);
 var gunship2 = new Gunship(750, 50,  2, 180);
 var gunship3 = new Gunship(50,  550, 3, 0);
@@ -73,15 +85,6 @@ var debugText = new Kinetic.Text({
     fill: 'green'
 });
 
-function newGame() {
-	gunship1 = new Gunship(50,  50,  1, 0);
-	gunship2 = new Gunship(750, 50,  2, 180);
-	gunship3 = new Gunship(50,  550, 3, 0);
-	gunship4 = new Gunship(750, 550, 4, 180);
-
-	gunships = [gunship1, gunship2, gunship3, gunship4];
-}
-
 function goDirection(model, timeSinceLastFrame){
     var rotation = model.getRotation();
     var x = model.getX();
@@ -93,28 +96,17 @@ function goDirection(model, timeSinceLastFrame){
 var anim = new Kinetic.Animation(function(frame) {
     for (var i = 0; i < gunships.length;i++)
 	updateShip(gunships[i], frame.timeDiff);
-	if (!isThereABonus) {
-		timeSinceLastBonus += frame.timeDiff;
-		if (timeSinceLastBonus > config.minimumTimeBetweenBonuses) {
-				var randomNumber = Math.random() * 1000;
-				if (randomNumber < frame.timeDiff/6) {
-						debugText.setText("BONUS!");
-						timeSinceLastBonus = 0;
-						isThereABonus = true;
-						instantiateBonus();
-				}
-		}
-	}
+    bonusRandomise(frame.timeDiff);
     if (gameOver()) {
-            this.stop();
-            createjs.Sound.play("victory");
-			if (gunships.length == 1) {
-				finalDisplay.setText("GAME OVER!\nTHE WINNER IS... PLAYER " + gunships[0].playerNum + "!\nCONGRATULATIONS");
-				finalDisplay.setFill(gunships[0].model.getFill());
-			}
-			else
-				finalDisplay.setText("THIS IS A DRAW");
-            layer.add(finalDisplay);
+        createjs.Sound.play("victory");
+        if (gunships.length == 1) {
+            finalDisplay.setText("GAME OVER!\nTHE WINNER IS... PLAYER " + gunships[0].playerNum + "!\nCONGRATULATIONS");
+            finalDisplay.setFill(gunships[0].model.getFill());
+        }
+        else            finalDisplay.setText("THIS IS A DRAW");
+
+        layer.add(finalDisplay);
+        this.stop();
     }
 },layer);
 
@@ -129,5 +121,4 @@ function updateShip(gunship, timeSinceLastFrameMS){
     goDirection(gunship.model, timeSinceLastFrameMS/1000);
     boundaryCheck(gunship);
     drawLives(gunship);
-    checkLastBonus(gunship);
 }

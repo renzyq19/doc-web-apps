@@ -6,7 +6,7 @@
 var config = _default;
 
 function Gunship(_x,_y,playerNum, rotation) {
-	this.playerNum    = playerNum;
+    this.playerNum    = playerNum;
     this.gunEnabled   = config.gunEnabled;
     this.fireRate     = config.fireRate;
     this.timeToFire   = config.fireRate;
@@ -34,6 +34,8 @@ function Gunship(_x,_y,playerNum, rotation) {
         _x,_y+40],
         x: _x,
         y: _y,
+        id: playerNum,
+        name: "gunship" + playerNum,
         fill: this.mainColor,
         strokeWidth:0,
         offsetX: _x+20,
@@ -55,11 +57,13 @@ function Gunship(_x,_y,playerNum, rotation) {
     
     this.liveDisplay = liveDisplay;
 
-    layer.add(model);
-    layer.add(liveDisplay);
-    layer.draw();
-	
 };
+
+function drawGunship(gunship) {
+    layer.add(gunship.model);
+    layer.add(gunship.liveDisplay);
+    layer.draw();
+}
 
 function hitByBullet(gunship) {
 	if (!gunship.isInvincible){
