@@ -19,7 +19,7 @@ function Gunship(_x,_y,playerNum, rotation) {
     this.isInvincible = false;
     this.timeToNextChangeOfColour = 0;
 
-    var model = new Kinetic.Polygon({
+    this.model = new Kinetic.Polygon({
         points:[_x,_y,
         _x+56,_y,
         _x+56,_y+8,
@@ -42,9 +42,8 @@ function Gunship(_x,_y,playerNum, rotation) {
         height:40,
 		rotationDeg: rotation
     });
-    
-    this.model = model;
-    var liveDisplay = new Kinetic.Text({
+	
+    this.liveDisplay = new Kinetic.Text({
             x: _x - 4,
             y: _y - 7,
             text: this.lives,
@@ -53,10 +52,24 @@ function Gunship(_x,_y,playerNum, rotation) {
             fill: 'white'
     });
     
-    this.liveDisplay = liveDisplay;
-
-    layer.add(model);
-    layer.add(liveDisplay);
+	this.gun = new Kinetic.Polygon({
+		points:[_x+40,_y+12,
+        _x+69,_y+12,
+        _x+69,_y+28,
+        _x+40,_y+28],
+		x: _x,
+        y: _y,
+		fill: "black",
+        strokeWidth:0,
+        offsetX: _x+20,
+        offsetY: _y+20,
+		rotationDeg: rotation
+	});
+	
+    layer.add(this.model);
+    layer.add(this.liveDisplay);
+	layer.add(this.gun);
+	this.gun.setVisible(false);
     layer.draw();
 	
 };
@@ -70,6 +83,10 @@ function hitByBullet(gunship) {
 		createjs.Sound.play("destruction");
 		destroy(gunship);
     }
+}
+
+function incrementLives(gunship) {
+	gunship.lives++;
 }
 
 function destroy (gunship) {

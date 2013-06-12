@@ -3,14 +3,13 @@
  * and open the template in the editor.
  */
 
-var timeSinceLastBonus = 0;
-var isThereABonus = false;
+
 var stage = new Kinetic.Stage({
     container: 'container',
     width: 800,
     height: 600
 });
-var playerNum = 1;
+var playerNum = 4;
 $(document).ready(function(){
     
 
@@ -32,6 +31,7 @@ function initGame(){
     stage.add(layer);
     layer.add(backdrop);
     backdrop.moveToBottom();
+	layer.add(debugText);
     layer.draw();
     anim.start();
 }
@@ -93,20 +93,8 @@ function goDirection(model, timeSinceLastFrame){
 var anim = new Kinetic.Animation(function(frame) {
     for (var i = 0; i < gunships.length;i++)
 	updateShip(gunships[i], frame.timeDiff);
-	if (!isThereABonus) {
-		timeSinceLastBonus += frame.timeDiff;
-		if (timeSinceLastBonus > config.minimumTimeBetweenBonuses) {
-				var randomNumber = Math.random() * 1000;
-				if (randomNumber < frame.timeDiff/6) {
-						debugText.setText("BONUS!");
-						timeSinceLastBonus = 0;
-						isThereABonus = true;
-						instantiateBonus();
-				}
-		}
-	}
+	bonusRandomise(frame.timeDiff);
     if (gameOver()) {
-            this.stop();
             createjs.Sound.play("victory");
 			if (gunships.length == 1) {
 				finalDisplay.setText("GAME OVER!\nTHE WINNER IS... PLAYER " + gunships[0].playerNum + "!\nCONGRATULATIONS");
@@ -115,6 +103,7 @@ var anim = new Kinetic.Animation(function(frame) {
 			else
 				finalDisplay.setText("THIS IS A DRAW");
             layer.add(finalDisplay);
+			this.stop();
     }
 },layer);
 
@@ -129,5 +118,4 @@ function updateShip(gunship, timeSinceLastFrameMS){
     goDirection(gunship.model, timeSinceLastFrameMS/1000);
     boundaryCheck(gunship);
     drawLives(gunship);
-    checkLastBonus(gunship);
 }
