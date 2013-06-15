@@ -1,0 +1,17 @@
+TARGETS=PMsgInbound.class RoomList.class PtclConstants.class PlayerInfo.class
+PACKAGE_DIR=roomutils/
+XLIB_DIR=lib/
+XLIBS=$(shell echo $(XLIB_DIR)*.jar | tr -s [:blank:] :)
+EXTRAS_CLASSPATH = $(CLASSPATH):$(XLIBS)
+
+
+.SUFFIXES: .class .java
+
+all: $(addprefix $(PACKAGE_DIR), $(TARGETS))
+
+%.class: %.java
+	javac -cp $(EXTRAS_CLASSPATH) $^
+
+clean:
+	rm -f $(addprefix $(PACKAGE_DIR), $(TARGETS))
+

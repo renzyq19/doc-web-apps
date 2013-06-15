@@ -1,19 +1,18 @@
-CONTEXT = ../webapps/ROOT
-CLASS_DIR = $(CONTEXT)/WEB-INF/classes
+CONTEXT = ../webapps/ROOT/
+CLASS_DIR = $(CONTEXT)WEB-INF/classes/
 #LIB_DIR = $(CONTEXT)/WEB-INF/lib
-CLASSES = ArrayListSpaceTracker.class PsqlQuery.class AuthServlet.class LogoutServlet.class RegisterServlet.class TimeoutListener.class
-#JARS = UserInfo.jar
+PACKAGE_DIRS = containers/ database/ misc/ roomutils/ servlet/
 
-.SUFFIXES: .class .java
+export CLASS_DIR
 
-all: $(CLASSES)
+.PHONY: all clean install
 
-install: $(CLASSES)
-	install -m600 $(CLASSES) $(CLASS_DIR)
+all: 
+	$(foreach dir,$(PACKAGE_DIRS), make -f $(dir).mksrc &&) echo "Done"
+
+install:
+	install -d $(addprefix $(CLASS_DIR), $(PACKAGE_DIRS)) && $(foreach dir, $(PACKAGE_DIRS), install -m600  $(dir)*.class $(CLASS_DIR)$(dir) &&) echo "Done" 
 
 clean:
-	rm -f $(CLASSES) $(JARS)
-
-%.class : %.java
-	javac $^
+	$(foreach dir,$(PACKAGE_DIRS), make -f $(dir).mksrc clean &&) echo "Done"
 

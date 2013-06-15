@@ -1,0 +1,13 @@
+TARGETS=TimeoutListener.class
+PACKAGE_DIR=misc/
+
+.SUFFIXES: .class .java
+
+all: $(addprefix $(PACKAGE_DIR), $(TARGETS))
+	
+%.class: %.java
+	javac $^
+
+clean:
+	rm -f $(addprefix $(PACKAGE_DIR), $(TARGETS))
+

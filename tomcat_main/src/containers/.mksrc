@@ -1,0 +1,13 @@
+TARGETS=ReuseList.class SpaceTrack.class Function.class
+PACKAGE_DIR=containers/
+
+.SUFFIXES: .class .java
+
+all: $(addprefix $(PACKAGE_DIR), $(TARGETS))
+	
+%.class: %.java
+	javac $^
+
+clean:
+	rm -f $(addprefix $(PACKAGE_DIR), $(TARGETS))
+

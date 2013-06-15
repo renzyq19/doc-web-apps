@@ -1,3 +1,5 @@
+package misc;
+import database.PsqlQuery;
 import javax.servlet.http.HttpSessionListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionEvent;

@@ -6,24 +6,30 @@
 
 
     <listener>
-      <listener-class>TimeoutListener</listener-class>
+      <listener-class>misc.TimeoutListener</listener-class>
     </listener>
 
     <servlet>
       <servlet-name>auth</servlet-name>
-      <servlet-class>AuthServlet</servlet-class>
+      <servlet-class>servlet.AuthServlet</servlet-class>
       <load-on-startup>5</load-on-startup>
     </servlet>
 
     <servlet>
       <servlet-name>logout</servlet-name>
-      <servlet-class>LogoutServlet</servlet-class>
+      <servlet-class>servlet.LogoutServlet</servlet-class>
       <load-on-startup>5</load-on-startup>
     </servlet>
 
     <servlet>
       <servlet-name>register</servlet-name>
-      <servlet-class>RegisterServlet</servlet-class>
+      <servlet-class>servlet.RegisterServlet</servlet-class>
+      <load-on-startup>5</load-on-startup>
+    </servlet>
+
+    <servlet>
+      <servlet-name>websocks</servlet-name>
+      <servlet-class>servlet.BroadSocket</servlet-class>
       <load-on-startup>5</load-on-startup>
     </servlet>
 
@@ -43,6 +49,11 @@
     <servlet-mapping>
       <servlet-name>register</servlet-name>
       <url-pattern>/reg</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+      <servlet-name>websocks</servlet-name>
+      <url-pattern>/websocks</url-pattern>
     </servlet-mapping>
 
     <security-constraint>
