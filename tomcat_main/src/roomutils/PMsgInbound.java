@@ -53,7 +53,7 @@ public class PMsgInbound extends MessageInbound {
         } else {/*junk ignored*/ }
       } catch (Exception e) {
         if(tokens[0].equals(PtclConstants.HANDSHAKE)) {
-          throw new IOException("Processing failed");
+          session.getServletContext().log("Processing failed -"+ e.getMessage());
         } 
       }
     }

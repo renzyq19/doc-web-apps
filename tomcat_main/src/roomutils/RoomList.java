@@ -46,19 +46,19 @@ class RoomList {
     });
   }
 
-  private String createRoomInfo(int roomID) throws Exception {
+  private String createRoomInfo(int roomID) {
     final CharBuffer info = CharBuffer.allocate(512);
     Function<PlayerInfo> acc = new Function<PlayerInfo>() {
       @Override
       public void apply(PlayerInfo player) {
         info.put(String.format(
-            PtclConstants.INFO_CURRENT + "%d-%s" + PtclConstants.DELIM, 
+            PtclConstants.INFO_CURRENT + "%d %s" + PtclConstants.DELIM, 
             player.getIndex(), player.getUsername()));
       }
     };
-    CharBuffer.put("");
+    info.put("ha");
     rooms.get(roomID).foreach(acc);
-    return String.format(PtclConstants.INFORM,acc.toString());
+    return String.format(PtclConstants.INFORM,info.toString());
   }
 
   //Warning! Assumes player is already connected
