@@ -24,10 +24,6 @@ class PlayerInfo {
     } catch (IOException e) {}
   }
 
-  void closeChannel() {
-    try {
-      out.close(0,null);
-    } catch (IOException e) {}
-  }
+  void closeChannel() {}
 
 }

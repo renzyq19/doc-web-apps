@@ -9,14 +9,14 @@ class RoomList {
   private final ReuseList<ReuseList<PlayerInfo> > rooms
       = new ReuseList<ReuseList<PlayerInfo> >();
 
-  synchronized void accept(PlayerInfo player, int roomID) throws Exception {
+  synchronized void accept(PlayerInfo player, int roomID) throws IndexOutOfBoundsException {
     String info = createRoomInfo(roomID);
     player.setIndex(rooms.get(roomID).add(player));
     player.receive(info);
     broadcast(getConnString(player), roomID);
   }
 
-  synchronized void ping(int roomID) throws Exception {
+  synchronized void ping(int roomID) throws IndexOutOfBoundsException {
     rooms.get(roomID);
   }
 
@@ -36,7 +36,7 @@ class RoomList {
     return rooms.add(new ReuseList<PlayerInfo>());
   }
 
-  synchronized void broadcast(final String msg, int roomID) throws Exception {
+  synchronized void broadcast(final String msg, int roomID) throws IndexOutOfBoundsException {
     rooms.get(roomID).foreach(new Function<PlayerInfo>() {
 
       @Override
@@ -46,13 +46,13 @@ class RoomList {
     });
   }
 
-  private String createRoomInfo(int roomID) {
+  private String createRoomInfo(int roomID) throws IndexOutOfBoundsException {
     final CharBuffer info = CharBuffer.allocate(512);
     Function<PlayerInfo> acc = new Function<PlayerInfo>() {
       @Override
       public void apply(PlayerInfo player) {
         info.put(String.format(
-            PtclConstants.INFO_CURRENT + "%d %s" + PtclConstants.DELIM, 
+            PtclConstants.INFO_CURRENT + "%d,%s" + PtclConstants.DELIM, 
             player.getIndex(), player.getUsername()));
       }
     };
@@ -61,17 +61,16 @@ class RoomList {
     return String.format(PtclConstants.INFORM,info.toString());
   }
 
-  //Warning! Assumes player is already connected
   private String getConnString(PlayerInfo player) {
     String notification = String.format(
-        PtclConstants.INFO_CONN + "%d-%s" + PtclConstants.DELIM,
+        PtclConstants.INFO_CONN + "%d,%s" + PtclConstants.DELIM,
         player.getIndex(), player.getUsername());
     return String.format(PtclConstants.INFORM, notification);
   }
 
   private String getDisconnString(PlayerInfo player) {
     String notification = String.format(
-        PtclConstants.INFO_DISCONN + "%d-%s" + PtclConstants.DELIM,
+        PtclConstants.INFO_DISCONN + "%d,%s" + PtclConstants.DELIM,
         player.getIndex(), player.getUsername());
     return String.format(PtclConstants.INFORM, notification);
   }

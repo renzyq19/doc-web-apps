@@ -51,10 +51,11 @@ public class PMsgInbound extends MessageInbound {
         } else if(tokens[0].equals(PtclConstants.MESSAGE)) {
           treatMessage(tokens);
         } else {/*junk ignored*/ }
+      } catch (IndexOutOfBoundsException e) {
+        session.getServletContext().log("WS Error - Room communication");
+        throw new IOException("Communication with room has failed");
       } catch (Exception e) {
-        if(tokens[0].equals(PtclConstants.HANDSHAKE)) {
-          session.getServletContext().log("Processing failed -"+ e.getMessage());
-        } 
+        throw new IOException(e.getMessage());
       }
     }
 
@@ -66,7 +67,8 @@ public class PMsgInbound extends MessageInbound {
       }
     }
 
-    private synchronized void treatHandShake(String[] tokens) throws Exception {
+    private synchronized void treatHandShake(String[] tokens)
+        throws IndexOutOfBoundsException {
       int reqRoomID = Integer.parseInt(tokens[1]);
       if(reqRoomID == PtclConstants.CREATE_ROOM) {
         roomID  = rooms.createRoom();
@@ -79,10 +81,11 @@ public class PMsgInbound extends MessageInbound {
       rooms.accept(playerInfo, roomID);
     }
 
-    private synchronized void treatMessage(String[] tokens) throws Exception {
+    private synchronized void treatMessage(String[] tokens)
+        throws IndexOutOfBoundsException {
       if(roomID != RoomList.NOT_ROOM_INDEX) {
         rooms.broadcast(
-            String.format(PtclConstants.MSGFORM, tokens[0], tokens[1]), roomID);
+            String.format(PtclConstants.MSGFORM, tokens[1], tokens[2]), roomID);
       }
     }
 
