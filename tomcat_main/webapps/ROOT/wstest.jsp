@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 
 <html>
+    <head>
+        <title>Websocket test</title>
+        <link rel='stylesheet' type='text/css' href='styles/wstest.css'>
+    </head>
   <body>
-    <div id="dump" style="width:600px;height:400px;"> 
-      <textarea readonly style="margin:0% auto 0% 0%;padding:0%;height:85%;width:95%;resize:none;display:block;" id="monitor"> </textarea>
-      <div id="response" style="margin:0% auto 0% 0%;padding:1%;display:block;width:95%;height:5%;">
+      <div id="dump" > 
+      <textarea readonly id="monitor"> </textarea>
+      <div id="response" >
         <textarea> </textarea>
         <button> Send </button>
       </div>
