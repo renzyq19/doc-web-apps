@@ -20,6 +20,7 @@ public class ReuseList<E> {
     if(free.size() != 0) {
       int pos = free.pop();
       used.get(pos).elem = elem;
+      used.get(pos).available = true;
       return pos;
     }
     used.add(new SpaceTrack<E>(elem, true));
@@ -29,7 +30,7 @@ public class ReuseList<E> {
   public E get(int pos) throws IndexOutOfBoundsException {
     SpaceTrack<E> space = used.get(pos);
     if(!space.available) {
-      throw new IndexOutOfBoundsException("");
+      throw new IndexOutOfBoundsException("Not found");
     }
     return space.elem;
   }
