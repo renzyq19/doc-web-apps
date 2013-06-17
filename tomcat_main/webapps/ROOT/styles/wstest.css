@@ -1,6 +1,7 @@
 div#dump {
     width:600px;
     height:400px;
+    margin: auto;
 }
 
 textarea#monitor {

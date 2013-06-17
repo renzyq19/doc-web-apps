@@ -30,7 +30,7 @@
         <div class='game-accordion'>
             <section id='join'>
             <h2>Join Game</h2>
-                <form>
+                <form method='post'>
                     <p><input id='join-game' type='text' name='join-game' value='' placeholder='Room Number'></p> 
                     <p><input id='submit' type='submit' value='Join'></p>
                 </form>

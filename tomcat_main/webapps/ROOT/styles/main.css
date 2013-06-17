@@ -59,7 +59,7 @@ input {
 }
 
 
-input#username,input#password,input#join-game {
+input#username,input#password,input#join-game, input#message {
     padding: 0 5px;
     width: 95%;
     height: 34px;
