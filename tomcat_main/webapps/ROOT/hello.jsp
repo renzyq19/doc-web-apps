@@ -17,7 +17,7 @@
     <button type="button" onclick="startRedir()">
       Play Game
     </button>
-    <button type="button" id='login' onclick="document.location.href='/login.jsp';">
+    <button type="button" id='login' onclick="document.location.href='/login.jsp';" <%= u_name==null ? "" : "style=\"display:none;\"" %> >
       Login
     </button>
     <button type="button" id='logout' onclick="document.location.href='/logout';">

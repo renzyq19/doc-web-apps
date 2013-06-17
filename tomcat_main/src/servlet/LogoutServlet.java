@@ -1,3 +1,5 @@
+package servlet;
+import database.PsqlQuery;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,10 +24,11 @@ public class LogoutServlet extends HttpServlet {
     try {
       if(!sessionAuthenticated(session)) {
         forwardTo(req,res, "/protected/guestLogout.jsp");
+        return;
       }
       dbUpdate((String)session.getAttribute("username"));
       resetSessionInfo(session);
-      forwardTo(req, res, "/hello.html");
+      forwardTo(req, res, "/hello.jsp");
     } catch (SQLException sqle) {
       sendMessage(res, sqle.getMessage(),
           HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
