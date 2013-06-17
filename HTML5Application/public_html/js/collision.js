@@ -30,7 +30,7 @@ var clone = (function(){
 }());
 
 function willCollide(originalBullet, originalGunship) {
-	/*var bullet = new Bullet(gunship1);
+	var bullet = new Bullet(gunship1);
 	bullet.model = originalBullet.model.clone();
 	var gunship = new Gunship(0, 0, 0, 0);
 	gunship.speed = originalGunship.speed;
@@ -45,15 +45,13 @@ function willCollide(originalBullet, originalGunship) {
 		boundaryCheck(gunship);
 		if (detectCollisionBetweenTwoRectangles(bullet, gunship))
 			return true;
-	}*/
+	}
 	return false;
 }
 
 function detectCollisionGunshipAndBullet (gunship, bullet) {
 	//Array of 4: [left, bottom, right, top]
 	if (detectCollisionBetweenTwoRectangles(gunship, bullet)) {
-		if (bullet == allBullets[0])
-			debugText.setText("YES");
 		hitByBullet(gunship);
 		hitAShip(bullet);
 	}

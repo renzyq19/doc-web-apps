@@ -6,12 +6,12 @@ var timeLeftForCurrentBonus = 0;
 function instantiateBonus () {
 	var random = Math.floor(Math.random() * 3);
 	var bonus;
-	//if (random == 0)
+	if (random == 0)
 		bonus = new GunDisabledBonus();
-	//else if (random == 1)
-	//	bonus = new InvincibilityBonus();
-	//else
-	//	bonus = new LifeBonus();
+	else if (random == 1)
+		bonus = new InvincibilityBonus();
+	else
+		bonus = new LifeBonus();
 	layer.add(bonus.model);
 	layer.add(bonus.display);
 	bonus.display.moveToTop();
@@ -121,15 +121,15 @@ function bonusPickedUp (gunship) {
 	}
 	else if (currentBonus == "gunDisabled") {
 		for (var i = 0; i < gunships.length;i++) {
-			gunships[i].gun.setRotation(gunships[i].model.getRotation());
-			gunships[i].gun.setX(gunships[i].model.getX());
-			gunships[i].gun.setY(gunships[i].model.getY());
-			gunships[i].gunEnabled = false;
-			gunships[i].gun.setVisible(true);
-			gunships[i].gun.moveToTop();
+			if (gunships[i] != gunship) {
+				gunships[i].gun.setRotation(gunships[i].model.getRotation());
+				gunships[i].gun.setX(gunships[i].model.getX());
+				gunships[i].gun.setY(gunships[i].model.getY());
+				gunships[i].gunEnabled = false;
+				gunships[i].gun.setVisible(true);
+				gunships[i].gun.moveToTop();
+			}
 		}
-		gunship.gunEnabled = true;
-		gunship.gun.setVisible(false);
 		timeLeftForCurrentBonus = 4000;
 	}
 	else if (currentBonus == "life")

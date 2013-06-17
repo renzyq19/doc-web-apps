@@ -35,7 +35,7 @@ var menuHeader = new Kinetic.Text({
     y: stage.getHeight()*0.25,
     width:stage.getWidth(),
     fontSize: 40,
-    fontFamily: 'DicotBold',
+    fontFamily: 'Arial',
     fill: "white",
     text: "Gunship Galaxy",
     align: "center"
@@ -59,7 +59,7 @@ var menuPlayerNum = new Kinetic.Text({
     y:stage.getHeight()*0.4,
     width: stage.getWidth(),
     fontSize: 40,
-    fontFamily: 'DicotBold',
+    fontFamily: 'Arial',
     fill:"red",
     text: "Players: 1",
     align: "center"
@@ -70,7 +70,7 @@ var menuPlayButton = new Kinetic.Text({
     y: stage.getHeight()*0.75,
     width: stage.getWidth(),
     fontSize: 40,
-    fontFamily: 'DicotBold',
+    fontFamily: 'Arial',
     fill: "white",
     text: "Play",
     align: "center"
@@ -87,10 +87,10 @@ menuPlayButton.on('mouseout', function(){
 });
 
 menuPlayButton.on('click', function(){
-    
     menu.remove();
     initGame();
 });
+
 menuAddButton.on('mouseover', function(){
     this.setFill("#222222");
     menu.draw();
