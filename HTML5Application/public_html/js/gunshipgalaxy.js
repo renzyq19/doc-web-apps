@@ -17,6 +17,21 @@ $(document).ready(function(){
     
 });
 
+function initMenu(){
+    stage.add(menu);
+    menu.add(menuBackdrop);
+    menu.add(menuHeader);
+    menu.add(menuAddButton);
+    menu.add(menuSubButton);
+    menu.add(menuPlayButton);
+    menu.add(menuPlayerNum);
+    setTimeout(function(){
+        addGunship(1);
+    }, 100);
+    menu.draw();
+}
+
+
 function initGame(){
     for (var i = 1; i <= playerNum; i++)
         controlInit(i);
@@ -35,20 +50,7 @@ function initGame(){
     anim.start();
 }
 
-function initMenu(){
-    
-    stage.add(menu);
-    menu.add(menuBackdrop);
-    menu.add(menuHeader);
-    menu.add(menuAddButton);
-    menu.add(menuSubButton);
-    menu.add(menuPlayButton);
-    menu.add(menuPlayerNum);
-    setTimeout(function(){
-        addGunship(1);
-    }, 100);
-    menu.draw();
-}
+
 var menu = new Kinetic.Layer();
 var layer = new Kinetic.Layer();
 

@@ -6,9 +6,8 @@
 var buttonSpacing = 40;
 var plusMinButtonSize = 40;
 
-//var menuSubText = 
 
-var menuSubButton = new Kinetic.Rect({
+var menuSubSquare = new Kinetic.Rect({
     x: stage.getWidth()/2-buttonSpacing/2 - plusMinButtonSize,
     y: stage.getHeight()*0.55,
     width: plusMinButtonSize,
@@ -19,7 +18,26 @@ var menuSubButton = new Kinetic.Rect({
     cornerRadius: 10
 });
 
-var menuAddButton = new Kinetic.Rect({
+var menuSubText = new Kinetic.Text({
+    x: menuSubSquare.getX(),
+    y: menuSubSquare.getY()+3,
+    width: menuSubSquare.getWidth(),
+    fontSize: 30,
+    fontFamily: "Helvetica",
+    fill: "White",
+    text: "-",
+    align: "center"
+});
+
+var menuSubButton = new Kinetic.Group({
+    x: 0,
+    y: 0
+});
+
+menuSubButton.add(menuSubSquare);
+menuSubButton.add(menuSubText);
+
+var menuAddSquare = new Kinetic.Rect({
     x: stage.getWidth()/2+buttonSpacing/2,
     y: stage.getHeight()*0.55,
     width: plusMinButtonSize,
@@ -29,6 +47,26 @@ var menuAddButton = new Kinetic.Rect({
     strokeWidth: 4,
     cornerRadius: 10
 });
+
+var menuAddText = new Kinetic.Text({
+    x: menuAddSquare.getX(),
+    y: menuAddSquare.getY()+4,
+    width: menuAddSquare.getWidth(),
+    fontSize: 30,
+    fontFamily: "Helvetica",
+    fill: "White",
+    text: "+",
+    align: "center"
+});
+
+var menuAddButton = new Kinetic.Group({
+    x: 0,
+    y: 0
+});
+
+menuAddButton.add(menuAddSquare);
+menuAddButton.add(menuAddText);
+
 
 var menuHeader = new Kinetic.Text({
     x: 0,
@@ -92,12 +130,12 @@ menuPlayButton.on('click', function(){
     initGame();
 });
 menuAddButton.on('mouseover', function(){
-    this.setFill("#222222");
+    this.get('Rect')[0].setFill("#222222");
     menu.draw();
 });
 
 menuAddButton.on('mouseout', function(){
-    this.setFill("#111111");
+    this.get('Rect')[0].setFill("#111111");
     menu.draw();
 });
 
@@ -113,12 +151,12 @@ menuAddButton.on('click',function(){
 
 
 menuSubButton.on('mouseover', function(){
-    this.setFill("#222222");
+    this.get('Rect')[0].setFill("#222222");
     menu.draw();
 });
 
 menuSubButton.on('mouseout', function(){
-    this.setFill("#111111");
+    this.get('Rect')[0].setFill("#111111");
     menu.draw();
 });
 
@@ -139,7 +177,7 @@ function addGunship(playerNum){
     var opX = gunship.model.getX();
     var opY = gunship.model.getY();
     var mpX = stage.getWidth()/2;
-    var mpY = stage.getHeight()/2
+    var mpY = stage.getHeight()/2;
     gunship.model.setScale(6);
     gunship.model.setPosition(mpX,mpY);
     menu.add(gunship.model);
