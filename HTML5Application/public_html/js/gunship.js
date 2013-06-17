@@ -101,7 +101,6 @@ function incrementLives(gunship) {
 
 function destroy (gunship) {
 	var index = gunships.indexOf(gunship);
-	debugText.setText(index);
 	gunships.splice(index, 1);
 	gunship.liveDisplay.destroy();
 	gunship.gunEnabled = false;

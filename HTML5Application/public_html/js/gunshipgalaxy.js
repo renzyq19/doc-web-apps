@@ -35,7 +35,6 @@ function initGame(){
     layer.add(backdrop);
     layer.moveToBottom();
     backdrop.moveToBottom();
-	layer.add(debugText);
     layer.draw();
     anim.start();
 }
@@ -51,7 +50,6 @@ function initMenu(){
 	while (gunships.length > 0)
 		destroy(gunships[0]);
 	initGunships();
-	//debugText.remove();
 	gunships = [gunship1, gunship2, gunship3, gunship4];
 	playersNum = 1;
 	menuPlayerNum.setFill(colourMappings[playerNum-1]);
@@ -81,8 +79,6 @@ function redrawMenu() {
 
 function initEndOfGame() {
 	stage.add(endMenu);
-	endMenu.add(debugText);
-	debugText.setText(gunship1.lives + "," + gunship2.lives + "/" + gunships.length);
 	endMenu.add(endHeader);
 	endMenu.add(winnerDisplay);
 	endMenu.add(backdrop);
@@ -127,15 +123,6 @@ var finalDisplay = new Kinetic.Text({
 	text: "THE GAME IS NOT DONE. THIS SHOULD NOT BE SHOWN"
 });
 
-var debugText = new Kinetic.Text({
-    x: 200,
-    y: 15,
-    text: "NOTHING TO SHOW",
-    fontSize: 30,
-    fontFamily: 'Calibri',
-    fill: 'green'
-});
-
 function advance (model, distance) {
     var rotation = model.getRotation();
     var x = model.getX();
@@ -147,8 +134,6 @@ function advance (model, distance) {
 var anim = new Kinetic.Animation(function(frame) {
     for (var i = 0; i < gunships.length;i++)
 		updateShip(gunships[i], frame.timeDiff);
-		debugText.setText(gunship1.lives + "," + gunship2.lives + "/" + gunships.length);
-	debugText.setFill("white");
     bonusRandomise(frame.timeDiff);
     if (gameOver()) {
 		this.stop();
@@ -167,7 +152,6 @@ function updateShip(gunship, timeSinceLastFrameMS){
     if (gunship.timeToFire > 0)
         gunship.timeToFire -= Math.min(timeSinceLastFrameMS, gunship.timeToFire);
 	advance(gunship.model, gunship.speed * timeSinceLastFrameMS/1000);
-	//debugText.setText(gunships.length);
 	if (gunship.isComputer) {
 		gunship.timeSinceLastMove += timeSinceLastFrameMS;
 		gunship.timeSinceLastCheck += timeSinceLastFrameMS;

@@ -27,7 +27,6 @@ function display() {
 function displayWinner() {
 	if (gunships.length == 1) {
 		winnerDisplay.setText("THE WINNER IS... PLAYER " + gunships[0].playerNum + "!\nCONGRATULATIONS");
-		winnerDisplay.setText("The number of player is " + playerNum);
 		winnerDisplay.setFill(gunships[0].model.getFill());
 	}
 	else
@@ -81,10 +80,7 @@ replayButton.on('mouseout', function(){
 });
 
 replayButton.on('click',function(){
-    endMenu.remove();
-	replayTextAnimation.stop();
-	playerNum = 1;
-	initMenu();
+    location.reload();
 });
 
 replayText.on('mouseover', function(){
@@ -98,8 +94,5 @@ replayText.on('mouseout', function(){
 });
 
 replayText.on('click',function(){
-    endMenu.remove();
-	replayTextAnimation.stop();
-	playerNum = 1;
-	initMenu();
+    location.reload();
 });
