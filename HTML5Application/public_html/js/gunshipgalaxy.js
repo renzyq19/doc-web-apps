@@ -48,10 +48,10 @@ function initGunships () {
 }
 
 function initMenu(){
-	for (var i = 0; i < gunships.length; i++)
-		destroy(gunships[i]);
+	while (gunships.length > 0)
+		destroy(gunships[0]);
 	initGunships();
-	debugText.remove();
+	//debugText.remove();
 	gunships = [gunship1, gunship2, gunship3, gunship4];
 	playersNum = 1;
 	menuPlayerNum.setFill(colourMappings[playerNum-1]);

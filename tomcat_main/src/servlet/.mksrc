@@ -1,0 +1,20 @@
+TARGETS=AuthServlet.class RegisterServlet.class LogoutServlet.class BroadSocket.class
+PACKAGE_DIR=servlet/
+XLIB_DIR=lib/
+XLIBS=$(shell echo $(XLIB_DIR)*.jar | tr -s [:blank:] :)
+EXTRAS_CLASSPATH = $(CLASSPATH):$(XLIBS)
+
+
+.SUFFIXES: .class .java
+
+all: $(addprefix $(PACKAGE_DIR), $(TARGETS))
+
+$(PACKAGE_DIR)BroadSocket.class: $(PACKAGE_DIR)BroadSocket.java
+	javac -cp $(EXTRAS_CLASSPATH) $^
+
+%.class: %.java
+	javac $^
+
+clean:
+	rm -f $(addprefix $(PACKAGE_DIR), $(TARGETS))
+

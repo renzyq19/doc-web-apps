@@ -1,0 +1,13 @@
+TARGETS=PsqlQuery.class
+PACKAGE_DIR=database/
+
+.SUFFIXES: .class .java
+
+all: $(addprefix $(PACKAGE_DIR), $(TARGETS))
+	
+%.class: %.java
+	javac $^
+
+clean:
+	rm -f $(addprefix $(PACKAGE_DIR), $(TARGETS))
+
