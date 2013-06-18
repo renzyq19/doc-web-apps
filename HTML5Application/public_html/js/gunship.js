@@ -11,7 +11,7 @@ function Gunship(_x, _y, playerNum, rotation) {
     this.gunEnabled   = config.gunEnabled;
     this.fireRate     = config.fireRate;
     this.timeToFire   = config.fireRate;
-    this.lives        = config.lives;
+    this.lives        = 3;
     this.bulletSpeed  = config.bulletSpeed;
     this.relativeOffsetX = 20;
     this.relativeOffsetY = 20;

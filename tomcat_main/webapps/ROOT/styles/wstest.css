@@ -1,0 +1,25 @@
+div#dump {
+    width:600px;
+    height:400px;
+    margin: auto;
+}
+
+textarea#monitor {
+    margin:0%
+    auto 0% 0%;
+    padding:0%;
+    height:85%;
+    width:95%;
+    resize:none;
+    display:block; 
+}
+
+div#response {
+    margin:0% 
+    auto 0% 0%;
+    padding:1%;
+    display:block;
+    width:95%;
+    height:5%;
+}
+

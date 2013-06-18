@@ -4,15 +4,15 @@
  */
 
 var _default = {
-spaceSpeed: 250, //pixels per second
+spaceSpeed: 150, //pixels per second
 bulletSpeed: 300, // pixels per second
 fireRate: 500, //minimum ms between each shot
 gunEnabled: true,
-lives: 5,
+lives: 2,
 minimumTimeBetweenBonuses: 1000 // minimum ms between 2 bonuses
 };
 
-
+var difficultyCheckTimes = [800, 500, 200];
 
 var colourMappings = ["#FF0000", "#339933", "#FF9900", "#0000CC"];
 var colourInvincibleMappings = ["#FF9999", "#00CC00", "#FFC266", "#6666E0"];

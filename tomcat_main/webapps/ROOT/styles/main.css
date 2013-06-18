@@ -3,10 +3,12 @@ body {
     font-family: Tahoma, Verdana, sans-serif;
     background: #0ca3d2;
     font-size: 14px;
-    color: white;
+    color: #cce7fa;
     text-align: center;
 }
-
+a {
+    text-decoration:none;
+}
 .container {
     margin:auto;
     width:640px;
@@ -43,22 +45,21 @@ body {
     font-size: 11px;
 }
 
-body a {
-    color: #cce7fa;
+.container a {
     text-decoration:none;
 }
 
-body a:hover{
+.container a:hover{
     text-decoration:underline;
 }
 
-.login input {
+input {
       font-family: Tahoma, Verdana, sans-serif;
       font-size: 14px;
 }
 
 
-.login input#username,.login input#password {
+input#username,input#password,input#join-game, input#message {
     padding: 0 5px;
     width: 95%;
     height: 34px;
@@ -68,20 +69,83 @@ body a:hover{
     border-radius : 2px;
 }
 
-.login input#username{
+input#username{
     margin-top:25px;
 }
 
-.login input#password{
+input#password{
     margin:auto;
 }
 
-.login input#submit{
+input#submit{
     padding: 0 18px;
     height: 29px;
     font-size:12px;
     font-weight:bold;
 }
+
 .container #after-password2 {
     margin: 5px 0 0;
+}
+
+.navbar {
+    text-align: right;
+    padding-bottom: 10px;
+    border-bottom: solid #cce7fa 1px;
+}
+
+.navbar a {
+    padding: 10px 15px;
+    margin: 1px;
+    block: inline;
+    background: #4479BA;
+    text-decoration: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -user-select:none;
+    cursor: pointer;
+}
+
+.navbar a:hover, .navbar a:focus { 
+    background: #356094;
+}
+
+.game-accordion {
+    margin:auto;
+    margin-top: 50px;
+    width:640px;
+    position: relative;
+    border-radius: 3px;
+} 
+.game-accordion h2{
+    line-height: 40px;
+    font-size:   15px;
+    font-weight: bold;
+    color:      #555;
+    text-align: center;
+    background: #f3f3f3;
+    border-bottom: 1px solid #cfcfcf;
+} 
+
+.game-accordion section {
+    float: left;
+    cursor: pointer;
+    margin: 3px;
+    width: 100%;
+    border-radius: 3px;
+    background: white;
+}
+
+.game-accordion section h2{
+    position: relative;
+    left: 0;
+    top: -15px;
+    border-radius: 3px 3px 0 0;
+}
+
+.game-accordion section#create h2{
+    border-radius:3px;
+}
+.game-accordion section#create{
+    background: none;
 }

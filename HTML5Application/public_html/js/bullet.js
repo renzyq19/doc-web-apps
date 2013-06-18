@@ -21,8 +21,8 @@ function Bullet(shooter){
 	 * prevent from exploding rightaway due to the collision with
 	 * the shooter
 	 */
-	var actualX = gunEndCoordX + (bulletWidth * 3/5 * Math.cos(shooter.model.getRotation()));
-	var actualY = gunEndCoordY + (bulletWidth * 3/5 * Math.sin(shooter.model.getRotation()));
+	var actualX = gunEndCoordX + (bulletWidth * 5/5 * Math.cos(shooter.model.getRotation()));
+	var actualY = gunEndCoordY + (bulletWidth * 5/5 * Math.sin(shooter.model.getRotation()));
 	
 	this.relativeOffsetX = bulletWidth/2;
 	this.relativeOffsetY = bulletHeight/2;
@@ -66,6 +66,7 @@ function updateBullet (bullet){
                 bullet.hasHit = true;
                 bullet.model.setRotationDeg((bullet.model.getRotationDeg() + 180) % 360);
                 bullet.model.setFill("#5F5F5F");
+				advance(bullet.model, 50);
                 bullet.speed *= 2;
             }
         }

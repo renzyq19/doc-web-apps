@@ -2,7 +2,7 @@ function whatAreTheThreats (gunship) {
 	var result = new Array();
 	for (var i = 0;i < allBullets.length;i++) {
 		if (willCollide(allBullets[i], gunship)) {
-			//result.push(allBullets[i]);
+			result.push(allBullets[i]);
 		}
 	}
 	return result;
@@ -80,15 +80,8 @@ function indexMin(array) {
 }
 
 function workOutMove (gunship) {
-	if (gunship.difficulty == 0 && gunship.timeSinceLastCheck > 800) {
+	if (gunship.timeSinceLastCheck > difficultyCheckTimes[gunship.difficulty])
 		checkGunship(gunship);
-	}
-	else if (gunship.difficulty == 1 && gunship.timeSinceLastCheck > 500) {
-		checkGunship(gunship);
-	}
-	else if (gunship.difficulty == 2 && gunship.timeSinceLastCheck > 50) {
-		checkGunship(gunship);
-	}
 }
 
 function checkGunship(gunship) {

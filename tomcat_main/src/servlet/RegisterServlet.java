@@ -28,6 +28,7 @@ public class RegisterServlet extends HttpServlet {
       }
       PsqlQuery regQuery = new PsqlQuery();
       if(!checkInput(regQuery, user, pass1, pass2)) {
+        this.log(user + ""+pass1+"" + pass2);
         forwardTo(req, res, "/protected/invalidReg.jsp");
         return;
       }
@@ -65,7 +66,7 @@ public class RegisterServlet extends HttpServlet {
     return user != null && pass1 != null && pass2!=null
         && inRange(user,6,15) && user.matches("[a-zA-z](\\w*)")
         && inRange(pass1,6,15) && pass1.equals(pass2)
-        && query.executeQuery(String.format(QUERY_FORM, user)).next();
+        && !query.executeQuery(String.format(QUERY_FORM, user)).next();
   }
 
   private boolean inRange(String credential, int low, int high) {

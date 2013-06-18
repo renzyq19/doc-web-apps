@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script src="jquery-1.7.2.js">
+    </script>
+  </head>
+  <body>
+  <script>
+    $(document).ready(function(){
+      $("#load").click(function(){
+        $("#game").css("visibility","visible").fadeTo(900,0.8,function(){
+          $("#window").attr("src","index.html");
+          $(document).on("keydown",function(evt){
+            $("#window").contents().find("body").trigger('keydown',evt.which);
+          });
+        });
+      });
+    });
+  </script>
+    <button id="load" >Load game</button>
+
+    <div id="game" style="position:absolute;left:0;top:0;z-index:30;width:100%;
+height:100%;margin:0%;padding:0%;background-color:#000000;opacity:0;visibility:hidden;">
+      <iframe id="window" style="position:absolute;margin:0%;padding:0%;left:25%;top:15%;width:50%;height:70%;z-index:31;background-color:#000000;"></iframe>
+    </div>
+  </body>
+</html>

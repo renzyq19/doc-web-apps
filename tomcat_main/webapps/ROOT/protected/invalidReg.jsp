@@ -17,7 +17,7 @@
         <p>
           Sorry, your registration was not accepted. Either a duplicate was 
           found or the input was not formatted correctly. In any case, you can
-          <a href='/register.html'>try again here.</a>
+          <a href='/register.jsp'>try again here.</a>
         </p>
     </body>
 </html>
