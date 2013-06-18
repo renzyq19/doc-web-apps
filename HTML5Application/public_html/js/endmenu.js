@@ -15,23 +15,18 @@ var winnerDisplay = new Kinetic.Text({
     width: stage.getWidth(),
     fontSize: 40,
     fontFamily: 'Arial',
-    fill: "white",
-    text: "GAME WITH A WINNER LENGTH DIFFERENT FROM 0 OR 1!!",
+    fill: gunship1.model.getFill(),
+    text: "CONGRATULATIONS! YOU SCORED " + getBestScore(),
     align: "center"
 });
 
-function display() {
-	displayWinner();
-	replayTextAnimation.start();
-}
-
-function displayWinner() {
-	if (gunships.length == 1) {
-		winnerDisplay.setText("THE WINNER IS... PLAYER " + gunships[0].playerNum + "!\nCONGRATULATIONS");
-		winnerDisplay.setFill(gunships[0].model.getFill());
+function getBestScore() {
+	var result = 0;
+	for (var i = 0; i < gunships.length;i++) {
+		if (gunships[i].lives > result)
+			result = gunships[i].lives;
 	}
-	else
-		winnerDisplay.setText("THIS IS A DRAW");
+	return result;
 }
 
 var replaySquare = new Kinetic.Rect({

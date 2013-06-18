@@ -87,16 +87,28 @@ function drawGunship(gunship) {
 function hitByBullet(gunship) {
 	if (!gunship.isInvincible){
         createjs.Sound.play("impact");
-		gunship.lives--;
+		if (!gunship.isComputer)
+			gunship.lives--;
+		else
+			gunship.lives++;
     }
-	if (gunship.lives == 0){
+	if (gunship.lives == 0 && !gunship.isComputer){
 		createjs.Sound.play("destruction");
 		destroy(gunship);
     }
 }
 
+function makeComputer(gunship, difficulty) {
+	gunship.lives = 0;
+	gunship.isComputer = true;
+	gunship.difficulty = difficulty;
+}
+
 function incrementLives(gunship) {
-	gunship.lives++;
+	if (!gunship.isComputer)
+		gunship.lives++;
+	else
+		gunship.lives--;
 }
 
 function destroy (gunship) {

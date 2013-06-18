@@ -20,10 +20,11 @@ $(document).ready(function(){
 function initGame(){
 	while (gunships.length > 0)
 		destroy(gunships[0]);
-	gunship2.isComputer = true;
-	gunship2.difficulty = 2;
+	gunships = [];
 	initGunships();
 	gunships = [gunship1, gunship2, gunship3, gunship4];
+	for (var i = 1;i < gunships.length;i++)
+		makeComputer(gunships[i], 2);
     if (playerNum < 4 && gunships.length == 4)
         gunships.splice(playerNum, 4 - playerNum);
     for (var i = 0; i < gunships.length; i++) {
@@ -47,8 +48,6 @@ function initGunships () {
 }
 
 function initMenu(){
-	while (gunships.length > 0)
-		destroy(gunships[0]);
 	initGunships();
 	gunships = [gunship1, gunship2, gunship3, gunship4];
 	playersNum = 1;
@@ -68,6 +67,7 @@ function initMenu(){
 }
 
 function initEndOfGame() {
+	//sendDataToTheServer();
 	layer.remove();
 	stage.add(endMenu);
 	endMenu.add(endHeader);
@@ -75,7 +75,7 @@ function initEndOfGame() {
 	endMenu.add(backdrop);
 	backdrop.moveToBottom();
 	endMenu.add(replayButton);
-	display();
+	replayTextAnimation.start();
 	endMenu.draw();
 }
 
@@ -132,7 +132,7 @@ var anim = new Kinetic.Animation(function(frame) {
 },layer);
 
 function gameOver () {
-	return gunships.length <= 1;
+	return (gunship1.lives <= 0);
 }
 
 
