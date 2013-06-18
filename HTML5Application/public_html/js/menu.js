@@ -6,7 +6,6 @@
 var buttonSpacing = 40;
 var plusMinButtonSize = 40;
 
-
 var menuSubSquare = new Kinetic.Rect({
     x: stage.getWidth()/2-buttonSpacing/2 - plusMinButtonSize,
     y: stage.getHeight()*0.55,
@@ -140,7 +139,7 @@ menuAddButton.on('mouseout', function(){
 });
 
 menuAddButton.on('click',function(){
-    if(playerNum<4){
+    if(playerNum < 4){
         playerNum++;
         menuPlayerNum.setFill(colourMappings[playerNum-1]);
         menuPlayerNum.setText("Players: " + playerNum);
@@ -195,6 +194,7 @@ function addGunship(playerNum){
     });
     tween.play();
     createjs.Sound.play("ship_add");
+	addExtraDisplay(playerNum);
 }
 
 menu.setOffset(400,300);

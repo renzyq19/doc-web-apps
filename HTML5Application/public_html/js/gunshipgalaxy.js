@@ -67,27 +67,15 @@ function initMenu(){
     menu.draw();
 }
 
-function redrawMenu() {
-	initGunships();
-	gunships = [gunship1, gunship2, gunship3, gunship4];
-	stage.add(menu);
-	setTimeout(function(){
-        addGunship(1);
-    }, 100);
-	menu.draw();
-}
-
 function initEndOfGame() {
+	layer.remove();
 	stage.add(endMenu);
 	endMenu.add(endHeader);
 	endMenu.add(winnerDisplay);
 	endMenu.add(backdrop);
 	backdrop.moveToBottom();
 	endMenu.add(replayButton);
-	endMenu.add(replayText);
 	display();
-	layer.remove();
-	replayTextAnimation.start();
 	endMenu.draw();
 }
 

@@ -22,6 +22,7 @@ var winnerDisplay = new Kinetic.Text({
 
 function display() {
 	displayWinner();
+	replayTextAnimation.start();
 }
 
 function displayWinner() {
@@ -33,7 +34,7 @@ function displayWinner() {
 		winnerDisplay.setText("THIS IS A DRAW");
 }
 
-var replayButton = new Kinetic.Rect({
+var replaySquare = new Kinetic.Rect({
     x: stage.getWidth() / 2 - 100,
     y: stage.getHeight() * 3/4,
 	width: 200,
@@ -45,8 +46,8 @@ var replayButton = new Kinetic.Rect({
 });
 
 var replayText = new Kinetic.Text({
-	x: replayButton.getX(),
-	y: replayButton.getY() + 6,
+	x: replaySquare.getX(),
+	y: replaySquare.getY() + 6,
 	width: 200,
 	heigh: 50,
 	text: 'REPLAY',
@@ -55,6 +56,14 @@ var replayText = new Kinetic.Text({
 	fontFamily: 'Arial',
 	fontSize: 40,
 });
+
+var replayButton = new Kinetic.Group({
+	x: 0,
+	y: 0
+});
+
+replayButton.add(replaySquare);
+replayButton.add(replayText);
 
 var replayTextTime = 0;
 var replayTextAnimation = new Kinetic.Animation(function (frame) {
@@ -70,29 +79,15 @@ var replayTextAnimation = new Kinetic.Animation(function (frame) {
 }, endMenu);
 
 replayButton.on('mouseover', function(){
-    this.setFill("#222222");
+    this.get('Rect')[0].setFill("#222222");
     endMenu.draw();
 });
 
 replayButton.on('mouseout', function(){
-    this.setFill("#111111");
+    this.get('Rect')[0].setFill("#111111");
     endMenu.draw();
 });
 
 replayButton.on('click',function(){
-    location.reload();
-});
-
-replayText.on('mouseover', function(){
-    replayButton.setFill("#222222");
-    endMenu.draw();
-});
-
-replayText.on('mouseout', function(){
-    replayButton.setFill("#111111");
-    endMenu.draw();
-});
-
-replayText.on('click',function(){
     location.reload();
 });
