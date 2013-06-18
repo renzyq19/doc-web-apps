@@ -3,9 +3,10 @@ var timeSinceLastBonus = 0;
 var isThereABonus = false;
 var timeLeftForCurrentBonus = 0;
 
+var bonus;
+
 function instantiateBonus () {
 	var random = Math.floor(Math.random() * 3);
-	var bonus;
 	if (random == 0)
 		bonus = new GunDisabledBonus();
 	else if (random == 1)
