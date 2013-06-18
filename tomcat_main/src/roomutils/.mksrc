@@ -13,5 +13,5 @@ all: $(addprefix $(PACKAGE_DIR), $(TARGETS))
 	javac -cp $(EXTRAS_CLASSPATH) $^
 
 clean:
-	rm -f $(addprefix $(PACKAGE_DIR), $(TARGETS))
+	rm -f $(PACKAGE_DIR)*.class
 
