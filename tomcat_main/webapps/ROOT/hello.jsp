@@ -33,10 +33,11 @@
                     <form id='join-form' method='get' action='/game/wstest1.jsp'>
                         <p><input id='join-game' type='text' name='join-game' value='' placeholder='Room Number'></p> 
                         <p><input id='submit' type='submit' name='join' value='Join'></p>
+                        <input type='hidden' name='real-data' value=''>
                     </form>
             </section>
             <section id='create'>
-                <a><h2>Create Game</h2></a>
+                <a onclick='reqCreation();'><h2>Create Game</h2></a>
             </section>
 
         </div>
@@ -69,6 +70,10 @@
                 toggleJoinForm = showJoinForm;
             };
 
+            function reqCreation() {
+                form.elements["real-data"].value="-1";
+                form.submit();
+            }
        </script>
   </body>
 </html>

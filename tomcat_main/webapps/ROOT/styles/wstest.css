@@ -7,12 +7,14 @@ div#chat {
     top: 0;
 }
 
-div#monitor {
+textarea#monitor {
     margin: auto;
     padding:0%;
     height:75%;
     width:95%;
     display:block; 
+    overflow-y: scroll;
+    resize: none;
 }
 
 div#response {
