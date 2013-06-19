@@ -83,6 +83,7 @@ function Gunship(_x, _y, playerNum, rotation) {
 //            fontFamily: 'Calibri',
 //            fill: 'white'
 //    });
+
     this.liveDisplay = new Kinetic.Sprite({
         x: _x - 4,
         y: _y - 7,
