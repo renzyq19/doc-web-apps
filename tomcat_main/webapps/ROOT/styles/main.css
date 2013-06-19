@@ -61,7 +61,7 @@ input {
 
 input#username,input#password,input#join-game, input#message {
     padding: 0 5px;
-    width: 95%;
+    width: 90%;
     height: 34px;
     color: #404040;
     background: white;
@@ -106,14 +106,19 @@ input#submit{
     cursor: pointer;
 }
 
+
 .navbar a:hover, .navbar a:focus { 
     background: #356094;
+}
+
+.navbar div#u_info{
+    block:inline;
 }
 
 .game-accordion {
     margin:auto;
     margin-top: 50px;
-    width:640px;
+    width:300px;
     position: relative;
     border-radius: 3px;
 } 
