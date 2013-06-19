@@ -58,7 +58,7 @@ input {
 }
 
 
-input#username,input#password,input#join-game, input#message {
+#username,#password,#join-game, #message {
     padding: 0 5px;
     width: 90%;
     height: 34px;
@@ -68,15 +68,15 @@ input#username,input#password,input#join-game, input#message {
     border-radius : 2px;
 }
 
-input#username{
+#username{
     margin-top:25px;
 }
 
-input#password{
+#password{
     margin:auto;
 }
 
-input#submit{
+#submit{
     padding: 0 18px;
     height: 29px;
     font-size:12px;
@@ -97,7 +97,7 @@ input#submit{
 .navbar a {
     padding: 10px 15px;
     margin: 1px;
-    block: inline;
+    display: inline;
     background: #4479BA;
     text-decoration: none;
     -webkit-user-select:none;
@@ -111,7 +111,7 @@ input#submit{
     background: #356094;
 }
 
-.navbar div#u_info{
-    block:inline;
+#logo {
+    backgrounm-image: url();
 }
 

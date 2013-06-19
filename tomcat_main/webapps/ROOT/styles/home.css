@@ -57,3 +57,7 @@
 .game-accordion section#create h2{
     border-radius:3px;
 }
+
+.navbar #u_info{
+    display:inline;
+}
