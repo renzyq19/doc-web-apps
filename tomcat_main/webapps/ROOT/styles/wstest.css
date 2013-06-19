@@ -35,12 +35,8 @@ div#response {
 }
 
 div#container{
-    position:relative;
-    background: red;
-    left: 200px;
-    top: 0;
-    width: 80%;
-    height: 500px;
-    margin: auto;
-    display: inline;
+    width:800px;
+    height:600px;
+    display: block;
 }
+

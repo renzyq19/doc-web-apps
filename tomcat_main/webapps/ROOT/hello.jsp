@@ -31,7 +31,7 @@
         <div class='game-accordion'>
             <section id='joinclosed'>
                 <a onclick='toggleJoinForm();'><h2>Join Game</h2></a>
-                    <form id='join-form' method='get' action='/game/wstest1.jsp'>
+                    <form id='join-form' method='get' action='/wstest1.jsp'>
                         <p><input id='join-game' type='text' name='join-game' value='' placeholder='Room Number'></p> 
                         <p><input id='submit' type='submit' name='join' value='Join'></p>
                     </form>
