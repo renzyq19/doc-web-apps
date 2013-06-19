@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html>
-    
     <head>
         <title>Gunship Galaxy</title>
         <link rel='stylesheet' type='text/css' href='styles/main.css'>
@@ -11,8 +10,8 @@
     <body>
         <div id="chat"> 
             <div id='display'>
-                <textarea readonly id="monitor"></textarea>
-                <div id='connected'></div>
+                <textarea readonly class='display' id="monitor"></textarea>
+                <textarea readonly class='display' id='connected'></textarea>
             </div>
             <div id="response">
                 <form onsubmit='return sendResponse();'>

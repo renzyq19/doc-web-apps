@@ -7,14 +7,10 @@
     top: 0;
 }
 
-#monitor {
+.display {
     font-family: Tahoma, Verdana, sans-serif;
-    margin: auto;
-    margin-top: 10px;
     padding:5px 10px;
-    height:75%;
-    width:80%;
-    display:block; 
+    display:inline-block; 
     overflow-y: scroll;
     resize: none;
     overflow:auto;
@@ -24,6 +20,16 @@
     border-radius : 2px;
 }
 
+#monitor{
+    margin-top: 10px;
+    height:75%;
+    width:80%;
+}
+#connected{
+    display:inline-block;
+    width: 80%;
+    height: 20%;
+}
 #response {
     resize:none;
     margin:0% 
@@ -38,11 +44,6 @@
     display: block;
 }
 
-#connected{
-    display:inline-block;
-    width: 80%;
-    height: 20%;
-}
 
 #display{
     width:100%;
