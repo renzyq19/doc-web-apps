@@ -75,15 +75,24 @@ function Gunship(_x, _y, playerNum, rotation) {
         width:28,
         height: 28
     });
-    this.liveDisplay = new Kinetic.Text({
-            x: _x - 4,
-            y: _y - 7,
-            text: this.lives,
-            fontSize: 14,
-            fontFamily: 'Calibri',
-            fill: 'white'
+//    this.liveDisplay = new Kinetic.Text({
+//            x: _x - 4,
+//            y: _y - 7,
+//            text: this.lives,
+//            fontSize: 14,
+//            fontFamily: 'Calibri',
+//            fill: 'white'
+//    });
+    this.liveDisplay = new Kinetic.Sprite({
+        x: _x - 4,
+        y: _y - 7,
+        image: numSprite,
+        animation: "num",
+        animations: numAnimations,
+        frameRate: 1,
+        index: this.lives
     });
-
+    
     this.gun = new Kinetic.Polygon({
         points:[_x+40,_y+12,
             _x+69,_y+12,
@@ -131,7 +140,7 @@ function makeComputer(gunship, difficulty) {
 }
 
 function incrementLives(gunship) {
-	if (!gunship.isComputer)
+	if (!gunship.isComputer && gunship.lives<10)
 		gunship.lives++;
 	else
 		gunship.lives--;
@@ -149,7 +158,7 @@ function destroy (gunship) {
 function drawLives(gunship) {
 	gunship.liveDisplay.setX(gunship.model.getX() - 4);
 	gunship.liveDisplay.setY(gunship.model.getY() - 7);
-	gunship.liveDisplay.setText(gunship.lives);
+	gunship.liveDisplay.setIndex(gunship.lives);
         gunship.square.setX(gunship.model.getX());
         gunship.square.setY(gunship.model.getY());
         
