@@ -18,29 +18,29 @@
             </div>
         </div>
         <div id="container"></div>
-        <script src="packages/jquery.js"></script>
-        <script src="packages/kineticjs.js"></script>
-        <script src="packages/createjs.js"></script>
-        <script src="js/bonusrandomise.js"></script>
-        <script src="js/config.js"></script>
-        <script src="js/gunship.js"></script>
-        <script src="js/controller.js"></script>
-        <script src="js/collision.js"></script>
-        <script src="js/bullet.js"></script>
-        <script src="js/gunshipgalaxy.js"></script>
-        <script src="js/sound.js"></script>
-        <script src="js/menu.js"></script>
-        <script src="js/ai.js"></script>
-        <script src="js/endmenu.js"></script>
+        <script src="game/packages/jquery.js"></script>
+        <script src="game/packages/kineticjs.js"></script>
+        <script src="game/packages/createjs.js"></script>
+        <script src="game/js/bonusrandomise.js"></script>
+        <script src="game/js/config.js"></script>
+        <script src="game/js/gunship.js"></script>
+        <script src="game/js/controller.js"></script>
+        <script src="game/js/collision.js"></script>
+        <script src="game/js/bullet.js"></script>
+        <script src="game/js/gunshipgalaxy.js"></script>
+        <script src="game/js/sound.js"></script>
+        <script src="game/js/menu.js"></script>
+        <script src="game/js/ai.js"></script>
+        <script src="game/js/endmenu.js"></script>
         <script>
             var handshake=false;
             var serverSideName;
             var connection = new WebSocket("ws://"+window.location.host+"/websocks");
             connection.onopen = function() {
-                this.send("HELLO>-1");
+                this.send("HELLO\n"+<%="\""+request.getParameter("real-data")+"\""%>);
             }
             connection.onmessage = function(evt) {
-                var message = evt.data.split(">");
+                var message = evt.data.split("\n");
                 if(message.length<1 || (!handshake && (message[0] != "HELLO"))) {
                     this.close();
                     writeToMonitor("Sorry, an unpredictable error occured. Maybe you should try again later?");
@@ -57,7 +57,7 @@
             }
 
             function writeToMonitor(message) {
-                document.getElementById("monitor").innerHTML+=message+"<br>";
+                document.getElementById("monitor").innerHTML+=message+"\n";
             }
 
             function treatHandshake(message) {
@@ -119,8 +119,7 @@
 
             function sendResponse() {
                 var responseBox = document.getElementById("message");
-                console.log(responseBox.value);
-                if(responseBox.value != '') connection.send("MSG>"+serverSideName+">"+responseBox.value);
+                if(responseBox.value != '') connection.send("MSG\n"+serverSideName+"\n"+responseBox.value);
                 responseBox.value = "";
                 responseBox.focus();
                 return false;
