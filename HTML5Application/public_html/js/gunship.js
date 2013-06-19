@@ -26,7 +26,7 @@ function Gunship(_x, _y, playerNum, rotation) {
 	this.timeSinceLastMove = 0;
 	this.timeSinceLastCheck = 0;
 
-    this.model = new Kinetic.Polygon({
+    /*this.model = new Kinetic.Polygon({
         points:[_x,_y,
         _x+56,_y,
         _x+56,_y+8,
@@ -49,9 +49,31 @@ function Gunship(_x, _y, playerNum, rotation) {
         offsetY: _y+20,
         width: 68,
         height:40,
-		rotationDeg: rotation
+        rotationDeg: rotation
     });
-	
+	*/  
+    this.model = new Kinetic.Image({
+        image: models[playerNum-1],
+        x: _x,
+        y: _y,
+        id: playerNum,
+        name: "gunship" + playerNum,
+        offsetX: 20,
+        offsetY: 20,
+        width: 68,
+        height:40,
+        rotationDeg: rotation
+    });
+    
+    this.square = new Kinetic.Rect({
+        x:_x,
+        y:_y,
+        offsetX: 14,
+        offsetY: 14,
+        fill: "black",
+        width:28,
+        height: 28
+    });
     this.liveDisplay = new Kinetic.Text({
             x: _x - 4,
             y: _y - 7,
@@ -61,24 +83,27 @@ function Gunship(_x, _y, playerNum, rotation) {
             fill: 'white'
     });
 
-	this.gun = new Kinetic.Polygon({
-		points:[_x+40,_y+12,
-        _x+69,_y+12,
-        _x+69,_y+28,
-        _x+40,_y+28],
-		x: _x,
+    this.gun = new Kinetic.Polygon({
+        points:[_x+40,_y+12,
+            _x+69,_y+12,
+            _x+69,_y+28,
+            _x+40,_y+28],
+        x: _x,
         y: _y,
-		fill: "black",
+        fill: "black",
         strokeWidth:0,
         offsetX: _x+20,
         offsetY: _y+20,
-		rotationDeg: rotation
-	});
+        rotationDeg: rotation
+    });
 };
 
 function drawGunship(gunship) {
     layer.add(gunship.model);
     layer.add(gunship.liveDisplay);
+    layer.add(gunship.square);
+    gunship.square.moveToTop();
+    gunship.liveDisplay.moveToTop();
     layer.add(gunship.gun);
     gunship.gun.setVisible(false);
     layer.draw();
@@ -115,6 +140,7 @@ function destroy (gunship) {
 	var index = gunships.indexOf(gunship);
 	gunships.splice(index, 1);
 	gunship.liveDisplay.destroy();
+        gunship.square.destroy();
 	gunship.gunEnabled = false;
 	removeObjectWithModel(gunship);
 }
@@ -123,4 +149,7 @@ function drawLives(gunship) {
 	gunship.liveDisplay.setX(gunship.model.getX() - 4);
 	gunship.liveDisplay.setY(gunship.model.getY() - 7);
 	gunship.liveDisplay.setText(gunship.lives);
+        gunship.square.setX(gunship.model.getX());
+        gunship.square.setY(gunship.model.getY());
+        
 }

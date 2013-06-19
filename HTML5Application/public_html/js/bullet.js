@@ -47,8 +47,9 @@ function shootBullet (gunship) {
     var bullet = new Bullet(gunship);
     layer.add(bullet.model);
     gunship.model.moveToTop();
-	gunship.liveDisplay.moveToTop();
-	allBullets.push(bullet);
+    gunship.square.moveToTop();
+    gunship.liveDisplay.moveToTop();
+    allBullets.push(bullet);
     updateBullet(bullet);
 }
 

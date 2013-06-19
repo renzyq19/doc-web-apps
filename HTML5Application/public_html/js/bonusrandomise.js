@@ -65,10 +65,10 @@ function updateBonus(gunship) {
 					gunship.timeToNextChangeOfColour--;
 		else {
 			gunship.timeToNextChangeOfColour = 5;
-			if (gunship.model.getFill() == gunship.mainColor)
-					gunship.model.setFill(gunship.invincibleColor);
+			if (gunship.square.getFill() == gunship.mainColor)
+					gunship.square.setFill(gunship.invincibleColor);
 			else
-					gunship.model.setFill(gunship.mainColor);
+					gunship.square.setFill(gunship.mainColor);
 		}
 	}
 	else if (currentBonus == "gunDisabled") {
@@ -83,7 +83,7 @@ function updateBonus(gunship) {
 }
 
 function endOfBonus(gunship) {
-	gunship.model.setFill(gunship.mainColor);
+	gunship.square.setFill("black");
 	if (currentBonus == "invincibility")
 		gunship.isInvincible = false;
 	else if (currentBonus == "gunDisabled") {

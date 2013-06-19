@@ -14,7 +14,7 @@ minimumTimeBetweenBonuses: 1000 // minimum ms between 2 bonuses
 
 var difficultyCheckTimes = [800, 500, 200];
 
-var colourMappings = ["#FF0000", "#339933", "#FF9900", "#0000CC"];
+var colourMappings = ["red", "#00FF00", "yellow", "blue"];
 var colourInvincibleMappings = ["#FF9999", "#00CC00", "#FFC266", "#6666E0"];
 
 //var controlxMappings = [shoot,left,right,up,down];
@@ -27,3 +27,15 @@ var controlMappings = [control1Mappings,
                        control2Mappings,
                        control3Mappings,
                        control4Mappings];
+                   
+var model1 = new Image();
+var model2 = new Image();
+var model3 = new Image();
+var model4 = new Image();
+
+model1.src = "graphics/model1.png";
+model2.src = "graphics/model2.png";
+model3.src = "graphics/model3.png";
+model4.src = "graphics/model4.png";
+
+var models = [model1,model2,model3,model4];

@@ -194,7 +194,6 @@ function addGunship(playerNum){
     });
     tween.play();
     createjs.Sound.play("ship_add");
-	addExtraDisplay(playerNum);
 }
 
 menu.setOffset(400,300);
