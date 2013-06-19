@@ -1,25 +1,38 @@
-div#dump {
-    width:600px;
-    height:400px;
-    margin: auto;
+div#chat {
+    width:20%;
+    height:100%;
+    position:absolute; 
+    display: inline;
+    background: white;
+    left: 0;
+    top: 0;
 }
 
-textarea#monitor {
-    margin:0%
-    auto 0% 0%;
+div#monitor {
+    margin: auto;
     padding:0%;
     height:85%;
     width:95%;
-    resize:none;
     display:block; 
 }
 
 div#response {
+    resize:none;
     margin:0% 
     auto 0% 0%;
     padding:1%;
-    display:block;
+    display:inline;
     width:95%;
     height:5%;
 }
 
+div#container{
+    position:relative;
+    background: red;
+    left: 200px;
+    top: 0;
+    width: 80%;
+    height: 500px;
+    margin: auto;
+    display: inline;
+}
