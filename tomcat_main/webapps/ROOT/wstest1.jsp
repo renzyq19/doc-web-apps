@@ -57,6 +57,9 @@
                     treatMessage(message); break;
                 }
             }
+            connection.onClose = function() {
+                document.getElementById("connected").innerHTML = "";
+            }
 
             function writeToMonitor(message) {
                 document.getElementById("monitor").innerHTML+=message+"\n";
@@ -82,21 +85,35 @@
                     index = parseInt(pair[0].substring(1));
                     name = pair[1];
                     switch(type) {
-                        case "#":
-                        writeToMonitor(name+" is playing with index "+index+".");
-                        break;
+                        case "#": addPlayer(name,index);break;
                         case "+":
-                        if(isServerSideName(name)) {
-                            writeToMonitor("You have connected with index "+index+".");
-                        } else {
-                            writeToMonitor(name+" has connected and has index "+index+".");
-                        }
-                        break;
+                          if(isServerSideName(name)) {
+                            writeToMonitor("You have connected.");
+                          } else {
+                            addPlayer(name,index);
+                          }
+                          break;
                         case "-":
-                            writeToMonitor(name+" with index "+index+" has disconnected.");
+                          removePlayer(name,index);
                         break;
                     }
                 }
+            }
+
+            var currentPlayers = document.getElementById("connected");
+
+            function addPlayer(name, index) {
+              var p = document.createElement("p");
+              p.id = "_p"+index;
+              p.innerHTML = name;
+              currentPlayers.appendChild(p);
+              writeToMonitor(name+" has connected.");
+            }
+
+            function removePlayer(name, index) {
+              var p =document.getElementById("_p"+index);
+              p.parentNode.removeChild(p);
+              writeToMonitor(name+" has disconnected.");
             }
 
             function treatMessage(message) {
