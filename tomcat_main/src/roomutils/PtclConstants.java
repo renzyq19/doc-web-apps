@@ -7,7 +7,7 @@ class PtclConstants {
                       INFO_CONN    = "+",
                       INFO_DISCONN = "-",
                       INFO_CURRENT = "#",
-                      DELIM        = ">",
+                      DELIM        = "\n",
                       HSFORM       = HANDSHAKE + DELIM + "%s"
                                      + DELIM + "%d",
                       INFORM       = INFO + DELIM + "%s",
