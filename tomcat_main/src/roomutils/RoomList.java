@@ -56,8 +56,8 @@ class RoomList {
             player.getIndex(), player.getUsername()));
       }
     };
-    info.put("ha");
     rooms.get(roomID).foreach(acc);
+    info.position(0);
     return String.format(PtclConstants.INFORM,info.toString());
   }
 
