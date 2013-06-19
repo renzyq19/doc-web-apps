@@ -15,8 +15,8 @@ var winnerDisplay = new Kinetic.Text({
     width: stage.getWidth(),
     fontSize: 40,
     fontFamily: 'Arial',
-    fill: gunship1.model.getFill(),
-    text: "CONGRATULATIONS! YOU SCORED " + getBestScore(),
+    fill: "red",
+    text: "THIS SHOULD NEVER APPEAR (endmenujs@winnerDisplay)",
     align: "center"
 });
 

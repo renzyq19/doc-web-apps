@@ -169,6 +169,62 @@ menuSubButton.on('click',function(){
     }
 });
 
+var menuDifficultyButtonSquare = new Kinetic.Rect({
+    x: stage.getWidth() / 2 - 100,
+    y: 380,
+    width: 200,
+    height: 50,
+    fill: '#111111',
+    stroke: '#777777',
+    strokeWidth: 4,
+    cornerRadius: 10
+});
+
+var menuDifficultyButtonText = new Kinetic.Text({
+    x: menuDifficultyButtonSquare.getX(),
+    y: menuDifficultyButtonSquare.getY() + 11,
+    width: menuDifficultyButtonSquare.getWidth(),
+    fontSize: 30,
+    fontFamily: "Helvetica",
+    fill: "White",
+    text: "EASY",
+    align: "center"
+});
+
+var menuDifficultyButton = new Kinetic.Group({
+    x: 0,
+    y: 0
+});
+
+menuDifficultyButton.add(menuDifficultyButtonSquare);
+menuDifficultyButton.add(menuDifficultyButtonText);
+
+menuDifficultyButton.on('mouseover', function(){
+    this.get('Rect')[0].setFill("#222222");
+    menu.draw();
+});
+
+menuDifficultyButton.on('mouseout', function(){
+    this.get('Rect')[0].setFill("#111111");
+    menu.draw();
+});
+
+menuDifficultyButton.on('click', function(){
+	if (gameDifficulty == 0) {
+		gameDifficulty = 1;
+		menuDifficultyButtonText.setText("MEDIUM");
+	}
+	else if (gameDifficulty == 1) {
+		gameDifficulty = 2;
+		menuDifficultyButtonText.setText("HARD");
+	}
+	else if (gameDifficulty == 2) {
+		gameDifficulty = 0;
+		menuDifficultyButtonText.setText("EASY");
+	}
+    menu.draw();
+});
+
 var shudder_rotation = [5,2,-2,-4,-3,-1,0,1,2,1,0];
 
 function addGunship(playerNum){

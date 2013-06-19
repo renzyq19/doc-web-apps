@@ -23,10 +23,10 @@ function initGame(){
 	gunships = [];
 	initGunships();
 	gunships = [gunship1, gunship2, gunship3, gunship4];
-	for (var i = 1;i < gunships.length;i++)
-		makeComputer(gunships[i], 2);
     if (playerNum < 4 && gunships.length == 4)
         gunships.splice(playerNum, 4 - playerNum);
+	for (var i = 1;i < gunships.length;i++)
+		makeComputer(gunships[i], gameDifficulty);
     for (var i = 0; i < gunships.length; i++) {
 		if (!gunships[i].isComputer)
 			controlInit(i+1);
@@ -60,6 +60,7 @@ function initMenu(){
     menu.add(menuSubButton);
     menu.add(menuPlayButton);
     menu.add(menuPlayerNum);
+	menu.add(menuDifficultyButton);
     setTimeout(function(){
         addGunship(1);
     }, 100);
@@ -67,7 +68,6 @@ function initMenu(){
 }
 
 function initEndOfGame() {
-	//sendDataToTheServer();
 	layer.remove();
 	stage.add(endMenu);
 	endMenu.add(endHeader);
@@ -75,6 +75,9 @@ function initEndOfGame() {
 	endMenu.add(backdrop);
 	backdrop.moveToBottom();
 	endMenu.add(replayButton);
+	var score = getBestScore();
+	winnerDisplay.setText("CONGRATULATIONS!! YOU SCORED " + score);
+	//sendDataToTheServer(score, id, numberOfOpponents);
 	replayTextAnimation.start();
 	endMenu.draw();
 }
@@ -127,14 +130,12 @@ var anim = new Kinetic.Animation(function(frame) {
 		this.stop();
         createjs.Sound.play("victory");
 		initEndOfGame();
-        
 	}
 },layer);
 
 function gameOver () {
 	return (gunship1.lives <= 0);
 }
-
 
 function updateShip(gunship, timeSinceLastFrameMS){
     if (gunship.timeToFire > 0)

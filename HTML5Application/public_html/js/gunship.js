@@ -151,7 +151,7 @@ function destroy (gunship) {
 	var index = gunships.indexOf(gunship);
 	gunships.splice(index, 1);
 	gunship.liveDisplay.destroy();
-        gunship.square.destroy();
+    gunship.square.destroy();
 	gunship.gunEnabled = false;
 	removeObjectWithModel(gunship);
 }
