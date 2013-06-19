@@ -9,6 +9,7 @@
     <head>
         <title>WebApps Home</title>
         <link rel='stylesheet' type='text/css' href='styles/main.css'>
+        <link rel='stylesheet' type='text/css' href='styles/home.css'>
     </head>
     
     <body>
@@ -16,27 +17,24 @@
             <div id="u_info">
                 User: <%= u_name==null ? "Guest" : u_name %>
             </div>
-            <a id=' ' onclick="startRedir();">
-                Play Game
-            </a>
             <a id='login' 
                 onclick="document.location.href='/login.jsp';"<%= u_name==null ? "" : "style=\"display:none;\"" %>> 
                 Login
             </a>
-            <a id='logout' onclick="document.location.href='/logout';">
+            <a id='logout' onclick="document.location.href='/logout';"<%= u_name==null ? "style=\"display:none;\"" : "" %>>
                 Logout
             </a>
         </div>
         <div class='game-accordion'>
             <section id='joinclosed'>
                 <a onclick='toggleJoinForm();'><h2>Join Game</h2></a>
-                    <form id='join-form' method='get' action='/game/wstest1.jsp'>
+                    <form id='join-form' method='get' action='/wstest1.jsp'>
                         <p><input id='join-game' type='text' name='join-game' value='' placeholder='Room Number'></p> 
                         <p><input id='submit' type='submit' name='join' value='Join'></p>
                     </form>
             </section>
             <section id='create'>
-                <a><h2>Create Game</h2></a>
+                <a onclick='reqCreation();'><h2>Create Game</h2></a>
             </section>
 
         </div>
@@ -69,6 +67,17 @@
                 toggleJoinForm = showJoinForm;
             };
 
+            function reqCreation() {
+                var form = document.createElement('form');
+                var input= document.createElement('input');
+                input.type='hidden';
+                input.name='real-data';
+                input.value='-1';
+                form.appendChild(input);
+                form.method='get';
+                form.action='/game/wstest1.jsp';
+                form.submit();
+            }
        </script>
   </body>
 </html>

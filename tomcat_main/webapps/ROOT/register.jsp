@@ -21,11 +21,11 @@
             <div class='login'>
                 <form name='register' action='/reg' method='post' onsubmit='return checkForm(this);'>
                     <h2>Register</h2>
-                    <p><input id='username' type='text' name='username' value='' placeholder='Username' required></p>
+                    <p><input id='username' type='text' name='username' value='' placeholder='Username' required pattern='^.{6,}$'></p>
                     <div id='after-username'></div>
-                    <p><input id='password' type='password' name='password1' value='' placeholder='Password' required></p>
+                    <p><input id='password' type='password' name='password1' value='' placeholder='Password' required pattern='^.{6,}$'></p>
                     <div id='after-password'></div>
-                    <p><input id='password' type='password' name='password2' value='' placeholder='Confirm Password' required pattern'></p>
+                    <p><input id='password' type='password' name='password2' value='' placeholder='Confirm Password' required pattern='^.{6,}$'></p>
                     <div id='after-password2'></div>
                     <p><input id='submit' type='submit' value='Register'></p>
                 </form>

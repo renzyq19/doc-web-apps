@@ -1,0 +1,63 @@
+.game-accordion {
+    margin:auto;
+    margin-top: 50px;
+    width:300px;
+    position: relative;
+    border-radius: 3px;
+} 
+.game-accordion h2{
+    line-height: 40px;
+    font-size:   15px;
+    font-weight: bold;
+    color:      #555;
+    text-align: center;
+    background: #f3f3f3;
+    border-bottom: 1px solid #cfcfcf;
+} 
+
+.game-accordion section {
+    float: left;
+    cursor: pointer;
+    margin: 3px;
+    width: 100%;
+    border-radius: 3px;
+    background: white;
+    -webkit-transition:height 0.2s ease;
+}
+
+.game-accordion section#joinopen{
+    height: 180px;
+}
+
+.game-accordion section#joinclosed, .game-accordion section#create{
+    height: 37px;
+    margin-bottom: 5px;
+}
+.game-accordion section#joinclosed h2,.game-accordion section#create h2{
+    border-radius: 3px;
+}
+
+.game-accordion section#joinclosed form{
+   opacity: 0; 
+}
+
+.game-accordion section#joinopen form{
+   opacity: 1; 
+}
+
+.game-accordion section h2{
+    position: relative;
+    left: 0;
+    top: -15px;
+    border-radius: 3px 3px 0 0;
+    -webkit-user-select:none;
+}
+
+
+.game-accordion section#create h2{
+    border-radius:3px;
+}
+
+.navbar #u_info{
+    display:inline;
+}
