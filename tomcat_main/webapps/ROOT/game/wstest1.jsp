@@ -2,15 +2,17 @@
 
 <html>
   <body>
-    <div id="chat"> 
+  <div>
+    <div id="chat" style="display:inline-block;"> 
       <div id="monitor" style="width:400px;height:300px;border:2px solid;overflow-y:scroll;"></div>
       <div id="response">
         <textarea id="res" autocomlete="off" placeholder="Type something in!" oninput="setResButton()"></textarea>
         <button id="res_button" disabled="true" onclick="sendResponse()">Send</button>
       </div>
     </div>
-        <div id="container"></div>
-        
+  
+     <div id="container" style="display:inline-block;" ></div>
+  </div>      
         <script
 			src="packages/jquery.js">
         </script>

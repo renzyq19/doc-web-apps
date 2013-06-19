@@ -1,0 +1,48 @@
+<html>
+  <body>
+   <form id="game-form" style="width:20%;margin-left:auto;margin-right:auto;"
+         onsubmit="return testPrint()">
+     <button id="join" onClick="showJoinForm()">Join</button>
+     <button id="create" style="float:right;"onClick="reqCreation()">Create</button>
+     <div id="join-form" style="display:none;" >
+       <input id="data" type=text" style="margin-left:5%;" placeholder="Type your number here!">
+        <button id="join" onClick="reqJoin()">Go!</button>
+        <button id="create" onClick="closeJoinForm()">Cancel</button>
+     </div>
+     <input type="hidden" name="real-data" value="">
+
+   </form>
+
+   <div id="a"> </div>
+  </body>
+
+  <script>
+    function showJoinForm(){
+      document.getElementById("join-form").style.display="block";
+      document.getElementById("join").disabled=true;
+      document.getElementById("create").disabled=true;
+    }
+
+    function closeJoinForm(){
+      document.getElementById("join-form").style.display="none";
+      document.getElementById("join").disabled=false;
+      document.getElementById("create").disabled=false;
+    }
+
+    var form = document.getElementById("game-form");
+    function reqCreation() {
+      form.elements["real-data"].value="-1";
+      form.submit();
+    }
+
+    function reqJoin() {
+      form.elements["real-data"].value=document.getElementById("data").value;
+      form.submit();
+    }
+
+    function testPrint() {
+      document.getElementById("a").innerHTML = form.elements["real-data"].value;
+      return false;
+    }
+  </script>
+</html>

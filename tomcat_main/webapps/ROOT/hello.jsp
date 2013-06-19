@@ -8,7 +8,7 @@
 <html>
     <head>
         <title>WebApps Home</title>
-        <link rel='stylesheet' type='text/css' href='styles/main.css'>
+       <!--" <link rel='stylesheet' type='text/css' href='styles/main.css'>" -->
     </head>
     
     <body>
@@ -30,9 +30,8 @@
         <div class='game-accordion'>
             <section id='join'>
             <h2>Join Game</h2>
-                <form method='post'>
+                <form method='get' action='/game/wstest1.jsp'>
                     <p><input id='join-game' type='text' name='join-game' value='' placeholder='Room Number'></p> 
-                    <p><input id='submit' type='submit' value='Join'></p>
                 </form>
             </section>
             <section id='create'>
