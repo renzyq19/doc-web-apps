@@ -17,14 +17,11 @@
             <div id="u_info">
                 User: <%= u_name==null ? "Guest" : u_name %>
             </div>
-            <a id=' ' onclick="startRedir();">
-                Play Game
-            </a>
             <a id='login' 
                 onclick="document.location.href='/login.jsp';"<%= u_name==null ? "" : "style=\"display:none;\"" %>> 
                 Login
             </a>
-            <a id='logout' onclick="document.location.href='/logout';">
+            <a id='logout' onclick="document.location.href='/logout';"<%= u_name==null ? "style=\"display:none;\"" : "" %>>
                 Logout
             </a>
         </div>
