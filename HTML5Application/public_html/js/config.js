@@ -41,3 +41,60 @@ model3.src = "graphics/model3.png";
 model4.src = "graphics/model4.png";
 
 var models = [model1,model2,model3,model4];
+
+var numSprite = new Image();
+numSprite.src = "graphics/text.png";
+
+var numAnimations = {
+        num: [{
+          x: 0,
+          y: 0,
+          width: 10,
+          height: 14
+        }, {
+          x: 10,
+          y: 0,
+          width: 10,
+          height: 14
+        }, {
+          x: 20,
+          y: 0,
+          width: 10,
+          height: 14
+        }, {
+          x: 30,
+          y: 0,
+          width: 10,
+          height: 14
+        }, {
+          x: 40,
+          y: 0,
+          width: 10,
+          height: 14
+        }, {
+          x: 50,
+          y: 0,
+          width: 10,
+          height: 14
+        }, {
+          x: 60,
+          y: 0,
+          width: 10,
+          height: 14
+        }, {
+          x: 70,
+          y: 0,
+          width: 10,
+          height: 14
+        }, {
+          x: 80,
+          y: 0,
+          width: 10,
+          height: 14
+        }, {
+          x: 90,
+          y: 0,
+          width: 10,
+          height: 14
+        }]
+      };
