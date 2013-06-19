@@ -12,8 +12,9 @@
         <div id="chat"> 
             <div id="monitor"></div>
             <div id="response">
-                <textarea id="res" autocomlete="off" placeholder="Type something in!" oninput="setResButton()"></textarea>
-                <button id="res_button" disabled="true" onclick="sendResponse()">Send</button>
+                <form onsubmit='return sendResponse();'>
+                    <p><input type='text' autocomplete='false' id='message' placeholder='Say something!'></p>
+                </form>
             </div>
         </div>
         <div id="container"></div>
@@ -117,10 +118,12 @@
             }
 
             function sendResponse() {
-                var responseBox = document.getElementById("res");
-                connection.send("MSG>"+serverSideName+">"+responseBox.value);
+                var responseBox = document.getElementById("message");
+                console.log(responseBox.value);
+                if(responseBox.value != '') connection.send("MSG>"+serverSideName+">"+responseBox.value);
                 responseBox.value = "";
-                responseBox.oninput();
+                responseBox.focus();
+                return false;
             }
         </script>
     </body>
