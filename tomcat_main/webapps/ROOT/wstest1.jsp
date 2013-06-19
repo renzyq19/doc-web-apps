@@ -10,7 +10,10 @@
 
     <body>
         <div id="chat"> 
-            <textarea readonly id="monitor"></textarea>
+            <div id='display'>
+                <textarea readonly id="monitor"></textarea>
+                <div id='connected'></div>
+            </div>
             <div id="response">
                 <form onsubmit='return sendResponse();'>
                     <p><input type='text' autocomplete='off' id='message' placeholder='Say something!'></p>
