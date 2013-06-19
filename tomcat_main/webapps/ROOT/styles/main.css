@@ -134,6 +134,27 @@ input#submit{
     width: 100%;
     border-radius: 3px;
     background: white;
+    -webkit-transition:height 0.2s ease;
+}
+
+.game-accordion section#joinopen{
+    height: 180px;
+}
+
+.game-accordion section#joinclosed, .game-accordion section#create{
+    height: 37px;
+    margin-bottom: 5px;
+}
+.game-accordion section#joinclosed h2,.game-accordion section#create h2{
+    border-radius: 3px;
+}
+
+.game-accordion section#joinclosed form{
+   opacity: 0; 
+}
+
+.game-accordion section#joinopen form{
+   opacity: 1; 
 }
 
 .game-accordion section h2{
@@ -143,9 +164,7 @@ input#submit{
     border-radius: 3px 3px 0 0;
 }
 
+
 .game-accordion section#create h2{
     border-radius:3px;
-}
-.game-accordion section#create{
-    background: none;
 }
