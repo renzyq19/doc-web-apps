@@ -14,6 +14,7 @@ minimumTimeBetweenBonuses: 1000 // minimum ms between 2 bonuses
 
 var difficultyCheckTimes = [1500, 1000, 500];
 var shootCheckTimes = [3000, 2500, 1800];
+var gameDifficulty = 0;
 
 var colourMappings = ["red", "#00FF00", "yellow", "blue"];
 var colourInvincibleMappings = ["#FF9999", "#00CC00", "#FFC266", "#6666E0"];
