@@ -9,6 +9,7 @@
     <head>
         <title>WebApps Home</title>
         <link rel='stylesheet' type='text/css' href='styles/main.css'>
+        <link rel='stylesheet' type='text/css' href='styles/home.css'>
     </head>
     
     <body>
@@ -33,7 +34,6 @@
                     <form id='join-form' method='get' action='/game/wstest1.jsp'>
                         <p><input id='join-game' type='text' name='join-game' value='' placeholder='Room Number'></p> 
                         <p><input id='submit' type='submit' name='join' value='Join'></p>
-                        <input type='hidden' name='real-data' value=''>
                     </form>
             </section>
             <section id='create'>
@@ -71,7 +71,14 @@
             };
 
             function reqCreation() {
-                form.elements["real-data"].value="-1";
+                var form = document.createElement('form');
+                var input= document.createElement('input');
+                input.type='hidden';
+                input.name='real-data';
+                input.value='-1';
+                form.appendChild(input);
+                form.method='get';
+                form.action='/game/wstest1.jsp';
                 form.submit();
             }
        </script>

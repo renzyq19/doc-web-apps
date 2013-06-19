@@ -8,14 +8,20 @@ div#chat {
 }
 
 textarea#monitor {
+    font-family: Tahoma, Verdana, sans-serif;
     margin: auto;
-    padding:0%;
+    margin-top: 10px;
+    padding:5px 10px;
     height:75%;
-    width:95%;
+    width:85%;
     display:block; 
     overflow-y: scroll;
     resize: none;
     overflow:auto;
+    color: #404040;
+    background: white;
+    border: 1px solid;
+    border-radius : 2px;
 }
 
 div#response {
