@@ -98,21 +98,21 @@ function endOfBonus(gunship) {
 }
 
 function startAnimationToPickUp(bonus) {
-	var animation = new Kinetic.Animation(function (frame) {
-		for (var i = 0; i < gunships.length; i++) {
-			if (detectCollisionBetweenTwoRectangles(gunships[i], bonus)) {
-				isThereABonus = false;
-				currentBonus = bonus.name;
-				bonus.display.destroy();
-				removeObjectWithModel(bonus);
-				bonusPickedUp(gunships[i]);
-				bonusInProgress(gunships[i]);
-				this.stop();
-			}
-		}
-	}, layer);
-	
-	animation.start();
+    var animation = new Kinetic.Animation(function (frame) {
+        for (var i = 0; i < gunships.length; i++) {
+            if (detectCollisionBetweenTwoRectangles(gunships[i], bonus)) {
+                isThereABonus = false;
+                currentBonus = bonus.name;
+                bonus.display.destroy();
+                removeObjectWithModel(bonus);
+                bonusPickedUp(gunships[i]);
+                bonusInProgress(gunships[i]);
+                this.stop();
+            }
+        }
+    }, layer);
+
+    animation.start();
 }
 
 function bonusPickedUp (gunship) {
@@ -252,23 +252,23 @@ function GunDisabledBonus () {
 }
 
 function LifeBonus () {
-	var randomX = Math.floor(Math.random() * (stage.getWidth() - 100) + 50);
+    var randomX = Math.floor(Math.random() * (stage.getWidth() - 100) + 50);
     var randomY = Math.floor(Math.random() * (stage.getHeight() - 100) + 50);
 	
-	this.name = "life";
+    this.name = "life";
 
     this.relativeOffsetX = 0;
     this.relativeOffsetY = 0;
 	
-	this.model = bonusModelDisplay(randomX, randomY);
-	
-	this.display = new Kinetic.Text({
-		x: randomX + 5,
-		y: randomY + 5,
-		text: "+1",
-		fontSize:40,
-		stroke: 'pink',
-		fill: 'pink'
-	});
+    this.model = bonusModelDisplay(randomX, randomY);
+
+    this.display = new Kinetic.Text({
+            x: randomX + 5,
+            y: randomY + 5,
+            text: "+1",
+            fontSize:40,
+            stroke: 'pink',
+            fill: 'pink'
+    });
 	
 }
