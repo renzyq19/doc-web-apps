@@ -3,7 +3,7 @@
     height:100%;
     position:absolute; 
     display: inline;
-    left: 0;
+    right: 0;
     top: 0;
 }
 
@@ -40,13 +40,15 @@
     height:5%;
 }
 
-#container{
+#game-frame{
     position:absolute;
     display: inline;
-    width: 800px;
-    height: 600px;
-    left: -100px;
-    z-index:-2;
+    left:300px;
+    width: 850px;
+    height: 650px;
+    margin:0%;
+    padding:0%;
+    z-index:2;
 }
 
 

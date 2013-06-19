@@ -8,6 +8,7 @@
     </head>
 
     <body>
+                <iframe src="index.html" seamless="seamless" id="game-frame"></iframe>
         <div id="chat"> 
             <div id='display'>
                 <textarea readonly class='display' id="monitor"></textarea>
@@ -19,24 +20,11 @@
                 </form>
             </div>
         </div>
-        <div id="container"></div>
-        <script src="packages/jquery.js"></script>
-        <script src="packages/kineticjs.js"></script>
-        <script src="packages/createjs.js"></script>
-        <script src="js/bonusrandomise.js"></script>
-        <script src="js/config.js"></script>
-        <script src="js/gunship.js"></script>
-        <script src="js/controller.js"></script>
-        <script src="js/collision.js"></script>
-        <script src="js/bullet.js"></script>
-        <script src="js/gunshipgalaxy.js"></script>
-        <script src="js/sound.js"></script>
-        <script src="js/menu.js"></script>
-        <script src="js/ai.js"></script>
-        <script src="js/endmenu.js"></script>
+
         <script>
             var handshake=false;
             var serverSideName;
+            var gameFrame = document.getElementById("game-frame");
             var connection = new WebSocket("ws://"+window.location.host+"/websocks");
             connection.onopen = function() {
                 this.send("HELLO\n" + <%="\""+request.getParameter("real-data")+"\""%>);
@@ -143,6 +131,17 @@
                 responseBox.focus();
                 return false;
             }
+
+            document.onkeydown = function(evt) {
+              var gameKeys = ["32","37","38","39","40"];
+              console.log(gameFrame.contentDocument);
+              if(gameKeys.indexOf(evt.keyCode) != -1
+                  && document.activeElement 
+                         != document.getElementById("message")) {
+                gameFrame.contentDocument.body.dispatchEvent(evt);
+              }
+            }
+
         </script>
     </body>
 </html>
