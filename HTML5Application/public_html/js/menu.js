@@ -103,9 +103,8 @@ var menuPlayerNum = new Kinetic.Text({
 });
 
 var menuPlayButton = new Kinetic.Text({
-    x: 0,
+    x: 365,
     y: stage.getHeight()*0.75,
-    width: stage.getWidth(),
     fontSize: 40,
     fontFamily: 'Arial',
     fill: "white",
@@ -124,8 +123,10 @@ menuPlayButton.on('mouseout', function(){
 });
 
 menuPlayButton.on('click', function(){
-    menu.remove();
-    initGame();
+    if (playerNum>1){
+        menu.remove();
+        initGame();
+    }
 });
 
 menuAddButton.on('mouseover', function(){

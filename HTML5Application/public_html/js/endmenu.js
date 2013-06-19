@@ -62,15 +62,15 @@ replayButton.add(replayText);
 
 var replayTextTime = 0;
 var replayTextAnimation = new Kinetic.Animation(function (frame) {
-	if (replayTextTime > 200) {
-		replayTextTime = 0;
-		if (replayText.getFill() == 'white')
-			replayText.setFill('black');
-		else
-			replayText.setFill('white');
-	}
-	else
-		replayTextTime += frame.timeDiff;
+    if (replayTextTime > 200) {
+        replayTextTime = 0;
+        if (replayText.getFill() == 'white')
+            replayText.setFill('black');
+        else
+            replayText.setFill('white');
+    }
+    else
+        replayTextTime += frame.timeDiff;
 }, endMenu);
 
 replayButton.on('mouseover', function(){

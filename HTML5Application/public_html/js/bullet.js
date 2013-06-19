@@ -7,7 +7,7 @@ var allBullets = new Array();
 
 function Bullet(shooter){
     this.shooter = shooter;
-    this.speed = shooter.bulletSpeed;
+    this.speed = _default.spaceSpeed + _default.bulletSpeed;
     this.hasHit = false;
 	this.anim;
     
