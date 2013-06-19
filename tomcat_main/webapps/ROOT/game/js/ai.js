@@ -52,8 +52,8 @@ function changeRotation (gunship) {
 					i++;
 			}
 			if (possibleRotations.length > 0) {
-				var toTurn = possibleRotations[Math.floor(Math.random() * possibleRotations.length)];
-				turnGunship(gunship, toTurn);
+				random = Math.floor(Math.random() * possibleRotations.length);
+				turnGunship(gunship, possibleRotations[random]);
 			}
 			else {
 				var index = indexMin(threatsLengths);
@@ -63,35 +63,11 @@ function changeRotation (gunship) {
 		}
 	}
 	// No else because of the "stupid" easy AI that can "move" without changing rotation
-	if (gunship.timeSinceLastMove > 2000 || (isThereABonus && gunship.timeSinceLastMove > 500)) {
+	if (gunship.timeSinceLastMove > 2000) {
 		rotation += (Math.floor(Math.random() * 3) + 1) * 90;
 		rotation = rotation % 360;
-		if (isThereABonus) {
-			rotation = workOutDirectionFrom(gunship, bonus);
-		}
 		turnGunship(gunship, rotation);
 	}
-}
-
-function workOutDirectionFrom(gunship, bonus) {
-	var upDown = 90;
-	var leftRight = 0;
-	if (gunship.model.getX() < bonus.model.getX())
-		leftRight = 0;
-	else if (gunship.model.getX() > bonus.model.getX())
-		leftRight = 180;
-	if (gunship.model.getY() < bonus.model.getY())
-		upDown = 90;
-	else if (gunship.model.getY() > bonus.model.getY())
-		upDown = 270;
-	var distanceOnX = 0;
-	var distanceOnY = 0;
-	distanceOnX = Math.abs(gunship.model.getX() - bonus.model.getX());
-	distanceOnY = Math.abs(gunship.model.getY() - bonus.model.getY());
-	if (distanceOnX > distanceOnY)
-		return leftRight;
-	else
-		return upDown;
 }
 
 function indexMin(array) {
@@ -106,24 +82,11 @@ function indexMin(array) {
 function workOutMove (gunship) {
 	if (gunship.timeSinceLastCheck > difficultyCheckTimes[gunship.difficulty])
 		checkGunship(gunship);
-	if (gunship.timeSinceLastShootCheck > shootCheckTimes[gunship.difficulty])
-		checkShoot(gunship);
 }
 
 function checkGunship(gunship) {
 	gunship.timeSinceLastCheck = 0;
 	changeRotation(gunship);
-}
-
-function checkShoot(gunship) {
-	gunship.timeSinceLastShootCheck = 0;
-	shoot(gunship);
-}
-
-function shoot(gunship) {
-	if (gunship.gunEnabled && (gunship.timeToFire == 0)) {
-		shootBullet(gunship);
-	}
 }
 
 function turnGunship(gunship, rotation) {

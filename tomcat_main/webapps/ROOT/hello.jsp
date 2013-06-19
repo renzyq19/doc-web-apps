@@ -28,15 +28,15 @@
             </a>
         </div>
         <div class='game-accordion'>
-            <section id='join'>
-            <h2>Join Game</h2>
-                <form method='post'>
-                    <p><input id='join-game' type='text' name='join-game' value='' placeholder='Room Number'></p> 
-                    <p><input id='submit' type='submit' value='Join'></p>
-                </form>
+            <section id='joinclosed'>
+                <a onclick='toggleJoinForm();'><h2>Join Game</h2></a>
+                    <form id='join-form' method='get' action='/game/wstest1.jsp'>
+                        <p><input id='join-game' type='text' name='join-game' value='' placeholder='Room Number'></p> 
+                        <p><input id='submit' type='submit' name='join' value='Join'></p>
+                    </form>
             </section>
             <section id='create'>
-                <h2><a href='#create'>Create Game</a></h2>
+                <a><h2>Create Game</h2></a>
             </section>
 
         </div>
@@ -48,7 +48,7 @@
           function startRedir() {
             //checks if the "username" is set
             //and changes page location accordingly
-            var login = <%= u_name==null ? "null" : u_name_arg %> ;
+            var login;// =<%= u_name==null ? "null" : u_name_arg %> ;
             if(login == null) {
               document.location.href="/login.jsp"; 
             }
@@ -57,6 +57,18 @@
                   = "Username set to " + login + "<br>";
             }
           }
-        </script>
+          var toggleJoinForm = showJoinForm;
+            function showJoinForm(){
+                document.getElementById("joinclosed").id = 'joinopen';
+                document.getElementById('join-game').focus();
+                toggleJoinForm = closeJoinForm;
+            };
+
+            function closeJoinForm(){
+                document.getElementById("joinopen").id = 'joinclosed';
+                toggleJoinForm = showJoinForm;
+            };
+
+       </script>
   </body>
 </html>
