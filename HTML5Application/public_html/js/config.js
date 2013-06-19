@@ -9,7 +9,7 @@ bulletSpeed: 300, // pixels per second
 fireRate: 500, //minimum ms between each shot
 gunEnabled: true,
 lives: 2,
-minimumTimeBetweenBonuses: 1000 // minimum ms between 2 bonuses
+minimumTimeBetweenBonuses: 6000 // minimum ms between 2 bonuses
 };
 
 var difficultyCheckTimes = [1500, 1000, 500];
