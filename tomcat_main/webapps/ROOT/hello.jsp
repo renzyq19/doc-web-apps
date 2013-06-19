@@ -46,7 +46,7 @@
           function startRedir() {
             //checks if the "username" is set
             //and changes page location accordingly
-            var login;// =<%= u_name==null ? "null" : u_name_arg %> ;
+            var login =<%= u_name==null ? "null" : u_name_arg %> ;
             if(login == null) {
               document.location.href="/login.jsp"; 
             }

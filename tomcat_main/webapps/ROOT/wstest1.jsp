@@ -11,7 +11,7 @@
         <div id="chat"> 
             <div id='display'>
                 <textarea readonly class='display' id="monitor"></textarea>
-                <textarea readonly class='display' id='connected'></textarea>
+                <div readonly class='display' id='connected'></div>
             </div>
             <div id="response">
                 <form onsubmit='return sendResponse();'>
@@ -20,26 +20,26 @@
             </div>
         </div>
         <div id="container"></div>
-        <script src="game/packages/jquery.js"></script>
-        <script src="game/packages/kineticjs.js"></script>
-        <script src="game/packages/createjs.js"></script>
-        <script src="game/js/bonusrandomise.js"></script>
-        <script src="game/js/config.js"></script>
-        <script src="game/js/gunship.js"></script>
-        <script src="game/js/controller.js"></script>
-        <script src="game/js/collision.js"></script>
-        <script src="game/js/bullet.js"></script>
-        <script src="game/js/gunshipgalaxy.js"></script>
-        <script src="game/js/sound.js"></script>
-        <script src="game/js/menu.js"></script>
-        <script src="game/js/ai.js"></script>
-        <script src="game/js/endmenu.js"></script>
+        <script src="public_html/packages/jquery.js"></script>
+        <script src="public_html/packages/kineticjs.js"></script>
+        <script src="public_html/packages/createjs.js"></script>
+        <script src="public_html/js/bonusrandomise.js"></script>
+        <script src="public_html/js/config.js"></script>
+        <script src="public_html/js/gunship.js"></script>
+        <script src="public_html/js/controller.js"></script>
+        <script src="public_html/js/collision.js"></script>
+        <script src="public_html/js/bullet.js"></script>
+        <script src="public_html/js/gunshipgalaxy.js"></script>
+        <script src="public_html/js/sound.js"></script>
+        <script src="public_html/js/menu.js"></script>
+        <script src="public_html/js/ai.js"></script>
+        <script src="public_html/js/endmenu.js"></script>
         <script>
             var handshake=false;
             var serverSideName;
             var connection = new WebSocket("ws://"+window.location.host+"/websocks");
             connection.onopen = function() {
-                this.send("HELLO\n"+<%="\""+request.getParameter("real-data")+"\""%>);
+                this.send("HELLO\n" + <%="\""+request.getParameter("real-data")+"\""%>);
             }
             connection.onmessage = function(evt) {
                 var message = evt.data.split("\n");
