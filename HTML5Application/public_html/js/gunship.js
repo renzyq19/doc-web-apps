@@ -25,6 +25,7 @@ function Gunship(_x, _y, playerNum, rotation) {
 	this.difficulty = 0;
 	this.timeSinceLastMove = 0;
 	this.timeSinceLastCheck = 0;
+	this.timeSinceLastShootCheck = 0;
 
     /*this.model = new Kinetic.Polygon({
         points:[_x,_y,

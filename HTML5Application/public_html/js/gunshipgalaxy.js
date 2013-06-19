@@ -143,6 +143,7 @@ function updateShip(gunship, timeSinceLastFrameMS){
 	if (gunship.isComputer) {
 		gunship.timeSinceLastMove += timeSinceLastFrameMS;
 		gunship.timeSinceLastCheck += timeSinceLastFrameMS;
+		gunship.timeSinceLastShootCheck += timeSinceLastFrameMS;
 		workOutMove(gunship);
 	}
     boundaryCheck(gunship);

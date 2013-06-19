@@ -106,11 +106,24 @@ function indexMin(array) {
 function workOutMove (gunship) {
 	if (gunship.timeSinceLastCheck > difficultyCheckTimes[gunship.difficulty])
 		checkGunship(gunship);
+	if (gunship.timeSinceLastShootCheck > shootCheckTimes[gunship.difficulty])
+		checkShoot(gunship);
 }
 
 function checkGunship(gunship) {
 	gunship.timeSinceLastCheck = 0;
 	changeRotation(gunship);
+}
+
+function checkShoot(gunship) {
+	gunship.timeSinceLastShootCheck = 0;
+	shoot(gunship);
+}
+
+function shoot(gunship) {
+	if (gunship.gunEnabled && (gunship.timeToFire == 0)) {
+		shootBullet(gunship);
+	}
 }
 
 function turnGunship(gunship, rotation) {
