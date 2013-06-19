@@ -1,0 +1,12 @@
+.login input#username:focus:invalid ,
+.login input#password:focus {
+    border-color: #b03535;
+    box-shadow: 0 0 8px #d45252;
+    outline:none;
+}
+.login input#username:valid ,
+.login input#password:valid {
+    border-color: #28921f;
+    box-shadow: 0 0 8px #5cd053;
+    outline:none;
+}
