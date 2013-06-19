@@ -3,8 +3,8 @@
 <html>
     <head>
         <title>Gunship Galaxy</title>
-        <link rel='stylesheet' type='text/css' href='styles/main.css'>
-        <link rel='stylesheet' type='text/css' href='styles/wstest.css'>
+        <link rel='stylesheet' type='text/css' href='../styles/main.css'>
+        <link rel='stylesheet' type='text/css' href='../styles/wstest.css'>
     </head>
 
     <body>
@@ -20,20 +20,20 @@
             </div>
         </div>
         <div id="container"></div>
-        <script src="public_html/packages/jquery.js"></script>
-        <script src="public_html/packages/kineticjs.js"></script>
-        <script src="public_html/packages/createjs.js"></script>
-        <script src="public_html/js/bonusrandomise.js"></script>
-        <script src="public_html/js/config.js"></script>
-        <script src="public_html/js/gunship.js"></script>
-        <script src="public_html/js/controller.js"></script>
-        <script src="public_html/js/collision.js"></script>
-        <script src="public_html/js/bullet.js"></script>
-        <script src="public_html/js/gunshipgalaxy.js"></script>
-        <script src="public_html/js/sound.js"></script>
-        <script src="public_html/js/menu.js"></script>
-        <script src="public_html/js/ai.js"></script>
-        <script src="public_html/js/endmenu.js"></script>
+        <script src="packages/jquery.js"></script>
+        <script src="packages/kineticjs.js"></script>
+        <script src="packages/createjs.js"></script>
+        <script src="js/bonusrandomise.js"></script>
+        <script src="js/config.js"></script>
+        <script src="js/gunship.js"></script>
+        <script src="js/controller.js"></script>
+        <script src="js/collision.js"></script>
+        <script src="js/bullet.js"></script>
+        <script src="js/gunshipgalaxy.js"></script>
+        <script src="js/sound.js"></script>
+        <script src="js/menu.js"></script>
+        <script src="js/ai.js"></script>
+        <script src="js/endmenu.js"></script>
         <script>
             var handshake=false;
             var serverSideName;

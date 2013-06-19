@@ -28,7 +28,7 @@
         <div class='game-accordion'>
             <section id='joinclosed'>
                 <a onclick='toggleJoinForm();'><h2>Join Game</h2></a>
-                    <form id='join-form' method='get' action='/wstest1.jsp'>
+                    <form id='join-form' method='get' action='game/wstest1.jsp'>
                         <p><input id='join-game' type='text' value='' placeholder='Room Number'></p> 
                         <p><input id='submit-btn' type='button' onClick='reqJoin();' value='Join'></p>
                         <input type='hidden' name='real-data' value=''>
