@@ -14,5 +14,5 @@ install:
 	install -d $(addprefix $(CLASS_DIR), $(PACKAGE_DIRS)) && $(foreach dir, $(PACKAGE_DIRS), install -m600  $(dir)*.class $(CLASS_DIR)$(dir) &&) echo "Done" 
 
 clean:
-	$(foreach dir,$(PACKAGE_DIRS), make -f $(dir).mksrc clean &&) echo "Done"
+	$(foreach dir,$(PACKAGE_DIRS), make -f $(dir).mksrc clean &&) rm -Rf $(CLASS_DIR)* && echo "Done"
 
