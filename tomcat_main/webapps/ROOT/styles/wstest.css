@@ -15,6 +15,7 @@ textarea#monitor {
     display:block; 
     overflow-y: scroll;
     resize: none;
+    overflow:auto;
 }
 
 div#response {

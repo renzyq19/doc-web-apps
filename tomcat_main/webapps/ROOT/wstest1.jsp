@@ -13,7 +13,7 @@
             <textarea id="monitor"></textarea>
             <div id="response">
                 <form onsubmit='return sendResponse();'>
-                    <p><input type='text' autocomplete='false' id='message' placeholder='Say something!'></p>
+                    <p><input type='text' autocomplete='off' id='message' placeholder='Say something!'></p>
                 </form>
             </div>
         </div>
