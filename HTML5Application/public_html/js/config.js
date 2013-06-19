@@ -5,7 +5,7 @@
 
 var _default = {
 spaceSpeed: 150, //pixels per second
-bulletSpeed: 300, // pixels per second
+bulletSpeed: 150, // pixels per second
 fireRate: 500, //minimum ms between each shot
 gunEnabled: true,
 lives: 2,
@@ -16,8 +16,8 @@ var difficultyCheckTimes = [1500, 1000, 500];
 var shootCheckTimes = [3000, 2500, 1800];
 var gameDifficulty = 0;
 
-var colourMappings = ["red", "#00FF00", "yellow", "blue"];
-var colourInvincibleMappings = ["#FF9999", "#00CC00", "#FFC266", "#6666E0"];
+var colourMappings = ["red", "#00FF00", "00FF00", "00FF00"];
+var colourInvincibleMappings = ["#FF9999", "#00CC00", "#00CC00", "#00CC00"];
 
 //var controlxMappings = [shoot,left,right,up,down];
 var control1Mappings = [32,37,39,38,40];
@@ -37,64 +37,7 @@ var model4 = new Image();
 
 model1.src = "graphics/model1.png";
 model2.src = "graphics/model2.png";
-model3.src = "graphics/model3.png";
-model4.src = "graphics/model4.png";
+model3.src = "graphics/model2.png";
+model4.src = "graphics/model2.png";
 
 var models = [model1,model2,model3,model4];
-
-var numSprite = new Image();
-numSprite.src = "graphics/text.png";
-
-var numAnimations = {
-        num: [{
-          x: 0,
-          y: 0,
-          width: 10,
-          height: 14
-        }, {
-          x: 10,
-          y: 0,
-          width: 10,
-          height: 14
-        }, {
-          x: 20,
-          y: 0,
-          width: 10,
-          height: 14
-        }, {
-          x: 30,
-          y: 0,
-          width: 10,
-          height: 14
-        }, {
-          x: 40,
-          y: 0,
-          width: 10,
-          height: 14
-        }, {
-          x: 50,
-          y: 0,
-          width: 10,
-          height: 14
-        }, {
-          x: 60,
-          y: 0,
-          width: 10,
-          height: 14
-        }, {
-          x: 70,
-          y: 0,
-          width: 10,
-          height: 14
-        }, {
-          x: 80,
-          y: 0,
-          width: 10,
-          height: 14
-        }, {
-          x: 90,
-          y: 0,
-          width: 10,
-          height: 14
-        }]
-      };

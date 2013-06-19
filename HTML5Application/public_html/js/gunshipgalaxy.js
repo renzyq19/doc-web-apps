@@ -11,7 +11,7 @@ var stage = new Kinetic.Stage({
 });
 
 var playerNum = 1;
-
+var level = 1;
 $(document).ready(function(){
     initMenu();
     
@@ -37,6 +37,7 @@ function initGame(){
     layer.moveToBottom();
     backdrop.moveToBottom();
     layer.draw();
+    initLevelTimer();
     anim.start();
 }
 
@@ -77,7 +78,7 @@ function initEndOfGame() {
 	endMenu.add(replayButton);
 	var score = getBestScore();
 	winnerDisplay.setText("CONGRATULATIONS!! YOU SCORED " + score);
-	//sendDataToTheServer(score, id, numberOfOpponents);
+	//sendDataToTheServer(score, id, numberOfOpponents, difficulty);
 	replayTextAnimation.start();
 	endMenu.draw();
 }
@@ -85,6 +86,7 @@ function initEndOfGame() {
 var endMenu = new Kinetic.Layer();
 var menu = new Kinetic.Layer();
 var layer = new Kinetic.Layer();
+
 
 var backdrop = new Kinetic.Rect({
     x:0,
@@ -122,6 +124,17 @@ function advance (model, distance) {
     model.setY(y + Math.round(Math.sin(rotation) * distance));
 }
 
+function initLevelTimer(){
+    setTimeout(function(){
+        levelUp(level);
+        initLevelTimer();
+    }, 2000);
+}
+
+function levelUp(level){
+    level++;
+    _default.spaceSpeed+=20;
+}
 var anim = new Kinetic.Animation(function(frame) {
     for (var i = 0; i < gunships.length;i++)
 		updateShip(gunships[i], frame.timeDiff);
