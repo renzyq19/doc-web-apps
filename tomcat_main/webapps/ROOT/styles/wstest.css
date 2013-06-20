@@ -3,7 +3,7 @@
     height:100%;
     position:absolute; 
     display: inline;
-    right: 0;
+    left: 0;
     top: 0;
 }
 
@@ -21,7 +21,7 @@
 }
 
 #monitor{
-    margin-top: 8px;
+    margin-top: 15px;
     height:75%;
     width:80%;
 }
@@ -32,12 +32,10 @@
 }
 #response {
     resize:none;
-    margin:0% 
-    auto 0% 0%;
-    padding:1%;
-    display:inline;
+    margin: auto;
+    margin-top: 20px;
+    display:inline-block;
     width:95%;
-    height:5%;
 }
 
 #game-frame{
