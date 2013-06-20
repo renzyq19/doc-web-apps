@@ -26,9 +26,10 @@
         <div class='game-accordion'>
             <section id='joinclosed'>
                 <a onclick='toggleJoinForm();'><h2>Join Game</h2></a>
-                    <form id='join-form' method='get' action='/wstest1.jsp'>
-                        <p><input id='join-game' type='text' name='join-game' value='' placeholder='Room Number'></p> 
-                        <p><input id='submit' type='submit' name='join' value='Join'></p>
+                    <form id='join-form' method='get' action='game/wstest1.jsp'>
+                        <p><input id='join-game' type='text' value='' placeholder='Room Number'></p> 
+                        <p><input id='submit-btn' type='button' onClick='reqJoin();' value='Join'></p>
+                        <input type='hidden' name='real-data' value=''>
                     </form>
             </section>
             <section id='create'>
@@ -41,18 +42,8 @@
 
         <div id="test"></div>
         <script>
-          function startRedir() {
-            //checks if the "username" is set
-            //and changes page location accordingly
-            var login =<%= u_name==null ? "null" : u_name_arg %> ;
-            if(login == null) {
-              document.location.href="/login.jsp"; 
-            }
-            else {
-              document.getElementById("test").innerHTML 
-                  = "Username set to " + login + "<br>";
-            }
-          }
+          var joinForm = document.getElementById("join-form");
+
           var toggleJoinForm = showJoinForm;
             function showJoinForm(){
                 document.getElementById("joinclosed").id = 'joinopen';
@@ -66,15 +57,16 @@
             };
 
             function reqCreation() {
-                var form = document.createElement('form');
-                var input= document.createElement('input');
-                input.type='hidden';
-                input.name='real-data';
-                input.value='-1';
-                form.appendChild(input);
-                form.method='get';
-                form.action='/game/wstest1.jsp';
-                form.submit();
+                joinForm.elements["real-data"].value="-1";
+                joinForm.submit();
+            }
+
+            function reqJoin() {
+                var joinField = document.getElementById('join-game');
+                joinForm.elements["real-data"].value
+                    =joinField.value;
+                joinField.value="";
+                joinForm.submit();
             }
        </script>
   </body>

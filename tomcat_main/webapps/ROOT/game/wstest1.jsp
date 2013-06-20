@@ -3,11 +3,12 @@
 <html>
     <head>
         <title>Gunship Galaxy</title>
-        <link rel='stylesheet' type='text/css' href='styles/main.css'>
-        <link rel='stylesheet' type='text/css' href='styles/wstest.css'>
+        <link rel='stylesheet' type='text/css' href='../styles/main.css'>
+        <link rel='stylesheet' type='text/css' href='../styles/wstest.css'>
     </head>
 
     <body>
+                <iframe src="index.html" seamless="seamless" id="game-frame"></iframe>
         <div id="chat"> 
             <div id='display'>
                 <textarea readonly class='display' id="monitor"></textarea>
@@ -19,24 +20,11 @@
                 </form>
             </div>
         </div>
-        <div id="container"></div>
-        <script src="public_html/packages/jquery.js"></script>
-        <script src="public_html/packages/kineticjs.js"></script>
-        <script src="public_html/packages/createjs.js"></script>
-        <script src="public_html/js/bonusrandomise.js"></script>
-        <script src="public_html/js/config.js"></script>
-        <script src="public_html/js/gunship.js"></script>
-        <script src="public_html/js/controller.js"></script>
-        <script src="public_html/js/collision.js"></script>
-        <script src="public_html/js/bullet.js"></script>
-        <script src="public_html/js/gunshipgalaxy.js"></script>
-        <script src="public_html/js/sound.js"></script>
-        <script src="public_html/js/menu.js"></script>
-        <script src="public_html/js/ai.js"></script>
-        <script src="public_html/js/endmenu.js"></script>
+
         <script>
             var handshake=false;
             var serverSideName;
+            var gameFrame = document.getElementById("game-frame");
             var connection = new WebSocket("ws://"+window.location.host+"/websocks");
             connection.onopen = function() {
                 this.send("HELLO\n" + <%="\""+request.getParameter("real-data")+"\""%>);
@@ -56,6 +44,9 @@
                     case "MSG":
                     treatMessage(message); break;
                 }
+            }
+            connection.onClose = function() {
+                document.getElementById("connected").innerHTML = "";
             }
 
             function writeToMonitor(message) {
@@ -82,21 +73,35 @@
                     index = parseInt(pair[0].substring(1));
                     name = pair[1];
                     switch(type) {
-                        case "#":
-                        writeToMonitor(name+" is playing with index "+index+".");
-                        break;
+                        case "#": addPlayer(name,index);break;
                         case "+":
-                        if(isServerSideName(name)) {
-                            writeToMonitor("You have connected with index "+index+".");
-                        } else {
-                            writeToMonitor(name+" has connected and has index "+index+".");
-                        }
-                        break;
+                          if(isServerSideName(name)) {
+                            writeToMonitor("You have connected.");
+                          } else {
+                            addPlayer(name,index);
+                          }
+                          break;
                         case "-":
-                            writeToMonitor(name+" with index "+index+" has disconnected.");
+                          removePlayer(name,index);
                         break;
                     }
                 }
+            }
+
+            var currentPlayers = document.getElementById("connected");
+
+            function addPlayer(name, index) {
+              var p = document.createElement("p");
+              p.id = "_p"+index;
+              p.innerHTML = name;
+              currentPlayers.appendChild(p);
+              writeToMonitor(name+" has connected.");
+            }
+
+            function removePlayer(name, index) {
+              var p =document.getElementById("_p"+index);
+              p.parentNode.removeChild(p);
+              writeToMonitor(name+" has disconnected.");
             }
 
             function treatMessage(message) {
@@ -126,6 +131,17 @@
                 responseBox.focus();
                 return false;
             }
+
+            document.onkeydown = function(evt) {
+              var gameKeys = ["32","37","38","39","40"];
+              console.log(gameFrame.contentDocument);
+              if(gameKeys.indexOf(evt.keyCode) != -1
+                  && document.activeElement 
+                         != document.getElementById("message")) {
+                gameFrame.contentDocument.body.dispatchEvent(evt);
+              }
+            }
+
         </script>
     </body>
 </html>

@@ -1,3 +1,4 @@
 tomcat_main/logs/*
 HTML5Application/nbproject/*
 tomcat_main/conf/PID
+tomcat_main/work/*
