@@ -8,6 +8,20 @@
     </head>
 
     <body>
+        <div class='navbar'>
+            <div id="u_info">
+                User: <%= u_name==null ? "Guest" : u_name %>
+            </div>
+            <a id='login' 
+                onclick="document.location.href='/login.jsp';"<%= u_name==null ? "" : "style=\"display:none;\"" %>> 
+                Login
+            </a>
+            <a id='logout' onclick="document.location.href='/logout';"<%= u_name==null ? "style=\"display:none;\"" : "" %>>
+                Logout
+            </a>
+        </div>
+        <div id='rest'>
+
         <div id="chat"> 
             <div id='display'>
                 <textarea readonly class='display' id="monitor"></textarea>
@@ -26,7 +40,7 @@
             var gameFrame = document.getElementById("game-frame");
             var connection = new WebSocket("ws://"+window.location.host+"/websocks");
             connection.onopen = function() {
-                this.send("HELLO\n" + <%="\""+request.getParameter("real-data")+"\""%>);
+                this.send("HELLO\n" );// <%="\""+request.getParameter("real-data")+"\""%>);
             }
             connection.onmessage = function(evt) {
                 var message = evt.data.split("\n");
@@ -137,7 +151,7 @@
               if(gameKeys.indexOf(evt.keyCode) != -1
                   && document.activeElement 
                          != document.getElementById("message")) {
-                gameFrame.contentDocument.body.dispatchEvent(evt);
+                gameFrame.dispatchEvent(evt);
               }
             }
 

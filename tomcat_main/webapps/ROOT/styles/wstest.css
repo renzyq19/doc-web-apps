@@ -4,7 +4,12 @@
     position:absolute; 
     display: inline;
     left: 0;
-    top: 0;
+    top: 50px;
+}
+
+#rest{
+    padding:0;
+    margin:0;
 }
 
 .display {
@@ -41,6 +46,7 @@
 #game-frame{
     position:absolute;
     display: inline;
+    top: 30px;
     left:300px;
     width: 850px;
     height: 650px;
