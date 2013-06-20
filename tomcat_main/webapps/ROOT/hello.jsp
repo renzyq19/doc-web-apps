@@ -3,8 +3,6 @@
   final String u_name = (String)session.getAttribute("username"),
                u_name_arg = u_name==null ? null : "\"" + u_name + "\"";
 %> 
-
-
 <html>
     <head>
         <title>WebApps Home</title>
