@@ -84,5 +84,8 @@ replayButton.on('mouseout', function(){
 });
 
 replayButton.on('click',function(){
-    location.reload();
+    endMenu.remove();
+    menu.remove();
+    layer.remove();
+    initMenu();
 });

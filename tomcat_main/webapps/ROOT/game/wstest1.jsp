@@ -8,7 +8,6 @@
     </head>
 
     <body>
-                <iframe src="index.html" seamless="seamless" id="game-frame"></iframe>
         <div id="chat"> 
             <div id='display'>
                 <textarea readonly class='display' id="monitor"></textarea>
@@ -20,7 +19,7 @@
                 </form>
             </div>
         </div>
-
+        <iframe src="index.html" seamless="seamless" id="game-frame"></iframe>
         <script>
             var handshake=false;
             var serverSideName;

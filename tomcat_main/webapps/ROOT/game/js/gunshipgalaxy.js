@@ -18,8 +18,9 @@ $(document).ready(function(){
 });
 
 function initGame(){
+    menu.remove();
 	while (gunships.length > 0)
-		destroy(gunships[0]);
+		destroy(gunships.pop());
 	gunships = [];
 	initGunships();
 	gunships = [gunship1, gunship2, gunship3, gunship4];
@@ -51,7 +52,7 @@ function initGunships () {
 function initMenu(){
 	initGunships();
 	gunships = [gunship1, gunship2, gunship3, gunship4];
-	playersNum = 1;
+	playerNum = 1;
 	menuPlayerNum.setFill(colourMappings[playerNum-1]);
 	menuPlayerNum.setText("Players: " + playerNum);
     stage.add(menu);

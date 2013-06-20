@@ -152,5 +152,4 @@ function drawLives(gunship) {
 	gunship.liveDisplay.setText(gunship.lives);
     gunship.square.setX(gunship.model.getX());
     gunship.square.setY(gunship.model.getY());
-        
 }
