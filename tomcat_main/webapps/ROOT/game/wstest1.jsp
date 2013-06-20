@@ -40,7 +40,7 @@
             var gameFrame = document.getElementById("game-frame");
             var connection = new WebSocket("ws://"+window.location.host+"/websocks");
             connection.onopen = function() {
-                this.send("HELLO\n" );// <%="\""+request.getParameter("real-data")+"\""%>);
+                this.send("HELLO\n" ) <%="\""+request.getParameter("real-data")+"\""%>);
             }
             connection.onmessage = function(evt) {
                 var message = evt.data.split("\n");
