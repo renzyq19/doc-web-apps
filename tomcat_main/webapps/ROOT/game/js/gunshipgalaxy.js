@@ -18,7 +18,6 @@ $(document).ready(function(){
 });
 
 function initGame(){
-    menu.remove();
 	while (gunships.length > 0)
 		destroy(gunships.pop());
 	gunships = [];
@@ -134,7 +133,7 @@ function initLevelTimer(){
 
 function levelUp(level){
     level++;
-    _default.spaceSpeed+=20;
+    //_default.spaceSpeed+=20;
 }
 var anim = new Kinetic.Animation(function(frame) {
     for (var i = 0; i < gunships.length;i++)

@@ -86,6 +86,7 @@ replayButton.on('mouseout', function(){
 replayButton.on('click',function(){
     endMenu.remove();
     menu.remove();
+    while(gunships.length > 0) destroy(gunships.pop());
     layer.remove();
     initMenu();
 });
